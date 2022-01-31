@@ -1,18 +1,11 @@
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import { Topnav } from "../../components/Topnav/Topnav";
 
 function LoginLayout() {
     return (
       <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-          </ul>
-        </nav>
-  
+        <Topnav />
         <hr />
-  
         <Outlet />
       </div>
     );

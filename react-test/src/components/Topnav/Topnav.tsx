@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
+import { useAppSelector } from "../../hooks/state/appStateHook";
 
 function Topnav() {
-    return (
+      const isLoggedIn = useAppSelector((state) => state.user.isLogged);
+      console.log("isLoggedIn", isLoggedIn)
+      
+      return (
       <>
         <nav>
           <ul>
