@@ -1,16 +1,17 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { combineReducers, createStore } from '@reduxjs/toolkit'
 import { UserState } from './user/models/appUser.state'
-import UserReducer from './user/user.reducer'
+import { userReducer } from './user/user.reducer'
 
 export interface AppRootState {
     user: UserState;
 }
 
-export const store = configureStore({
-  reducer: {
-      user: UserReducer
-  },
+const combinedReducers = combineReducers({
+  user: userReducer
 })
+export const store = createStore(
+  combinedReducers,
+)
 
 
 // Inferred type: {user: UserState}

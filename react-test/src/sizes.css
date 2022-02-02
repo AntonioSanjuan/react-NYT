@@ -1,0 +1,12 @@
+:root {
+    --app-topnav-desktop-height: 80px;
+    --app-topnav-mobile-height: 50px;
+
+    --app-sidenav-desktop-height: 70%;
+    --app-sidenav-mobile-height: 100%;
+
+    --app-sidenav-desktop-width: 200px;
+
+    --app-width: 85%;
+
+}

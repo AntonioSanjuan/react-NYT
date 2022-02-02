@@ -1,0 +1,21 @@
+:root {
+--font-color: #ffff;
+
+--app-main-color: #0d6efd;
+
+--app-content-background-color: #f7f7f7;
+--app-card-background-color: #eaecf7;
+
+--app-sidenav-background-color: #eaecf7;
+--app-sidenav-section-hover-color: #d0d3e4;
+
+--app-error-color: #dd1f1f;
+--app-topnav-mobile-background: #000000;
+
+
+/*fonts*/
+--big-fontColor: #2b2b2b;
+--small-fontColor: #888;
+--normal-fontColor: #545454;
+--error-fontColor: $app-error-color;
+}

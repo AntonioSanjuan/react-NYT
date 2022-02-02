@@ -1,0 +1,47 @@
+.Layout_MainContainer {
+    flex-direction: column;
+    box-sizing: border-box;
+    display: flex;
+    place-content: flex-start;
+    align-items: flex-end;
+    height: 100%;
+}
+
+.Login_HeaderContainer {
+    flex-direction: column;
+    box-sizing: border-box;
+    display: flex;
+    place-content: flex-start;
+    align-items: center;
+  
+    min-height: var(--app-topnav-desktop-height);
+    height: var(--app-topnav-desktop-height);
+  }
+  
+  .Login_ContentContainer {
+    flex-direction: column;
+    box-sizing: border-box;
+    display: flex;
+    place-content: flex-start;
+    align-items: center;
+  
+    min-height: calc(100vh - #{var(--app-topnav-desktop-height)});
+  }
+  
+  /* Smartphones (portrait and landscape) ----------- */
+  @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    .Login_HeaderContainer {
+      order: 2;
+  
+      min-height: var(--app-topnav-mobile-height);
+      height: var(--app-topnav-mobile-height);
+      position: fixed;
+      bottom: 0;
+    }
+    .Login_ContentContainer {
+      order: 1;
+  
+      min-height: calc(100vh - #{var(--app-topnav-mobile-height)});
+  
+    }
+  }
