@@ -4,44 +4,82 @@
     display: flex;
     place-content: flex-start;
     align-items: flex-end;
+
+    overflow-x: hidden;
     height: 100%;
 }
 
-.Login_HeaderContainer {
+.Layout_HeaderContainer {
     flex-direction: column;
     box-sizing: border-box;
     display: flex;
     place-content: flex-start;
     align-items: center;
+  
+    position: fixed;
+    top: 0;
+    bottom: auto;
   
     min-height: var(--app-topnav-desktop-height);
     height: var(--app-topnav-desktop-height);
-  }
   
-  .Login_ContentContainer {
-    flex-direction: column;
+    z-index: 9999;
+}
+  
+.Layout_ContentContainer {
+    flex-direction: row;
     box-sizing: border-box;
     display: flex;
     place-content: flex-start;
     align-items: center;
   
-    min-height: calc(100vh - #{var(--app-topnav-desktop-height)});
+    margin-top: var(--app-topnav-desktop-height);
   }
+
+.Layout_ContentSidenav {
+  height: 100%;
+  width: var(--app-sidenav-desktop-width);
+  min-width: var(--app-sidenav-desktop-width);
+  background-color: var(--app-sidenav-background-color);
+}
+
+.Layout_Content {
+  flex-direction: column;
+  box-sizing: border-box;
+  display: flex;
+  place-content: flex-start;
+  align-items: center;
+
+  min-width: 100%;
+  width: 100%;
+}
   
-  /* Smartphones (portrait and landscape) ----------- */
-  @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
-    .Login_HeaderContainer {
-      order: 2;
-  
-      min-height: var(--app-topnav-mobile-height);
-      height: var(--app-topnav-mobile-height);
-      position: fixed;
-      bottom: 0;
-    }
-    .Login_ContentContainer {
-      order: 1;
-  
-      min-height: calc(100vh - #{var(--app-topnav-mobile-height)});
-  
-    }
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  .Layout_MainContainer {
+    // overflow-x: hidden;
   }
+  .Layout_HeaderContainer {
+    order: 2;
+
+    position: fixed;
+    top: auto;
+    bottom: 0;
+
+    min-height: var(--app-topnav-mobile-height);
+    height: var(--app-topnav-mobile-height);
+
+  }
+  .Layout_ContentContainer {
+    order: 1;
+    margin-top: 0;
+  }
+
+  .Layout_Content {
+    place-content: center;
+  }
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+}

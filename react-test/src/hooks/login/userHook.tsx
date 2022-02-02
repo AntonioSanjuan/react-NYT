@@ -1,7 +1,7 @@
 import { useCallback } from "react"
 import { UserResponseDto } from "../../models/dtos/user/user.model";
 import { useAppDispatch } from "../state/appStateHook";
-import * as actions from './../../state/user/user.actions'
+import * as actions from '../../state/user/user.actions'
 
 export default function useUser () {
     const dispatch = useAppDispatch();

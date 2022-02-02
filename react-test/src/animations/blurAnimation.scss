@@ -1,0 +1,29 @@
+@keyframes inBlurAnimationKeyframe {
+    0% {
+        // color: red;
+        // transform: 'translateX(-100%)';
+        // margin-left: '-200px';
+        filter: blur(0px);
+    }
+    100% {
+        // color: blue;
+        // transform: 'translateX(0%)';
+        // margin-left: '0px';
+        filter: blur(10px);
+    }
+  }
+  
+  @keyframes outBlurAnimationKeyframe {
+    0% {
+        // color: blue;
+        // transform: 'translateX(0%)';
+        // margin-left: '0px';
+        filter: blur(10px);
+    }
+    100% {
+        // color:red;  
+        // transform: 'translateX(-100%)';
+        // margin-left: '-200px';
+        filter: blur(0px);
+    }
+  }

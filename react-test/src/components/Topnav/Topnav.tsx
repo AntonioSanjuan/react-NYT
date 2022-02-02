@@ -2,16 +2,16 @@ import './Topnav.scss';
 import logo from "../../assets/images/Logo.png"
 import { useAppSelector } from '../../hooks/state/appStateHook';
 import { Link } from 'react-router-dom';
-import useUser from '../../hooks/login/loginHook';
 import { useEffect, useState } from 'react';
 import { selectUserIsLogged } from '../../state/user/user.selectors';
+import useLayer from '../../hooks/sidenav/sidenavHook';
 
 function Topnav({displayLoginButton} : {displayLoginButton: boolean | undefined}) {
 
       const [loginButtonHidden, setLoginButtonHidden] = useState(!displayLoginButton);
 
       const isLoggedIn = useAppSelector<boolean>(selectUserIsLogged);
-      const { logout } = useUser()
+      const { switchSidenavStatus } = useLayer()
 
       useEffect(() => {
         if (displayLoginButton) {
@@ -20,11 +20,10 @@ function Topnav({displayLoginButton} : {displayLoginButton: boolean | undefined}
         }
       }, [displayLoginButton, isLoggedIn])
 
-      const handleClick = (e: any) => {
+      const handleSidenavChange = (e: any) => {
         e.preventDefault();
-        logout()
+        switchSidenavStatus()
       };
-
 
 
       return (
@@ -33,7 +32,7 @@ function Topnav({displayLoginButton} : {displayLoginButton: boolean | undefined}
         <div className="TopNav_Maincontainer">
         <div className="TopNav_Subcontainer">
           <div className="TopNav_Leftcontainer">
-            <button type="button" className="btn btn-dark" onClick={handleClick}>
+            <button type="button" className="btn btn-dark" onClick={handleSidenavChange}>
               <i className="bi bi-list"></i>
             </button>
           </div>
