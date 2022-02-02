@@ -17,7 +17,7 @@ function Topnav({displayLoginButton} : {displayLoginButton: boolean | undefined}
         if (displayLoginButton) {
           setLoginButtonHidden(isLoggedIn);
         }
-      }, [isLoggedIn])
+      }, [displayLoginButton, isLoggedIn])
 
       const handleClick = (e: any) => {
         e.preventDefault();
