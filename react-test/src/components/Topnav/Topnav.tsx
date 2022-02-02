@@ -4,17 +4,18 @@ import { useAppSelector } from '../../hooks/state/appStateHook';
 import { Link } from 'react-router-dom';
 import useUser from '../../hooks/login/loginHook';
 import { useEffect, useState } from 'react';
+import { selectUserIsLogged } from '../../state/user/user.selectors';
 
 function Topnav({displayLoginButton} : {displayLoginButton: boolean | undefined}) {
 
       const [loginButtonHidden, setLoginButtonHidden] = useState(!displayLoginButton);
 
-      const isLoggedIn = useAppSelector<boolean>((state) => state.user.isLogged);
+      const isLoggedIn = useAppSelector<boolean>(selectUserIsLogged);
       const { logout } = useUser()
 
       useEffect(() => {
-        console.log("isLoggedIn updated from store: ", isLoggedIn)
         if (displayLoginButton) {
+          console.log("TOPNAV isLoggedIn updated from store: ", isLoggedIn)
           setLoginButtonHidden(isLoggedIn);
         }
       }, [displayLoginButton, isLoggedIn])
