@@ -1,27 +1,26 @@
 import './BaseLayout.scss'
-import './../../animations/blurAnimation.scss'
 
 import { Outlet } from "react-router-dom";
 import { Topnav } from "../../components/Topnav/Topnav";
 import { Sidenav } from '../../components/Sidenav/Sidenav';
 import { useAppSelector } from '../../hooks/state/appStateHook';
 import { selectLayoutIsSidenavOpened } from '../../state/layout/layout.selectors';
-import { useEffect } from 'react';
-
-export const inBlurAnimation = { 
-  animation: "inBlurAnimationKeyframe 800ms ease-in",
-  animationFillMode: "forwards"
-};
-
-export const outBlurAnimation = {
-  animation: "outBlurAnimationKeyframe 800ms ease-out",
-};
+import { useEffect, useState } from 'react';
+import { inBlurAnimation, outBlurAnimation } from '../../animations/blurAnimation';
 
 function Layout() { 
   const isSidenavOpened = useAppSelector<boolean>(selectLayoutIsSidenavOpened)
+  const [showBlur, setShowBlur] = useState<boolean|undefined>(undefined);
+  let showBlur2: undefined | boolean = undefined;
+
   useEffect(() => {
     console.log("BASELAYOUT isSidenavOpened updated from store: ", isSidenavOpened)
+    if(!(showBlur === undefined && !isSidenavOpened)) {
+      setShowBlur(isSidenavOpened)
+    }
     //to-do
+    //once isSidenavOpened === true
+    //now we can set the animation condition { showBlur ?  inBlurAnimation : outBlurAnimation }
   }, [isSidenavOpened])
 
   return (
@@ -33,7 +32,7 @@ function Layout() {
         <div className='Layout_ContentSidenav'>
           <Sidenav />
         </div>
-        <div className='Layout_Content' style={ isSidenavOpened ?  outBlurAnimation : inBlurAnimation}>
+        <div className='Layout_Content' style={ showBlur || showBlur ?  inBlurAnimation : outBlurAnimation }>
           <Outlet />
         </div>
       </div>
