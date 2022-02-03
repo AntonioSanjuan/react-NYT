@@ -5,23 +5,21 @@ import { Topnav } from "../../components/Topnav/Topnav";
 import { Sidenav } from '../../components/Sidenav/Sidenav';
 import { useAppSelector } from '../../hooks/state/appStateHook';
 import { selectLayoutIsSidenavOpened } from '../../state/layout/layout.selectors';
-import { useEffect, useState } from 'react';
-import { inBlurAnimation, outBlurAnimation } from '../../animations/blurAnimation';
+import { useEffect } from 'react';
+import { inBlurAnimation, outBlurAnimation } from '../../animations/blur/blurAnimation';
+import useAnimationByStateTransition from '../../hooks/animation/animationHook';
+import { inSlideAnimation, outSlideAnimation } from '../../animations/slide/slideAnimation';
 
 function Layout() { 
   const isSidenavOpened = useAppSelector<boolean>(selectLayoutIsSidenavOpened)
-  const [showBlur, setShowBlur] = useState<boolean|undefined>(undefined);
-  let showBlur2: undefined | boolean = undefined;
+  const useAnimation = useAnimationByStateTransition(isSidenavOpened);
+  
 
   useEffect(() => {
     console.log("BASELAYOUT isSidenavOpened updated from store: ", isSidenavOpened)
-    if(!(showBlur === undefined && !isSidenavOpened)) {
-      setShowBlur(isSidenavOpened)
-    }
+    console.log("BASELAYOUT useAnimation updated ", useAnimation)
     //to-do
-    //once isSidenavOpened === true
-    //now we can set the animation condition { showBlur ?  inBlurAnimation : outBlurAnimation }
-  }, [isSidenavOpened])
+  }, [isSidenavOpened, useAnimation])
 
   return (
     <div className="Layout_MainContainer">
@@ -29,10 +27,10 @@ function Layout() {
         <Topnav displayLoginButton={true}/>
       </div>
       <div className='Layout_ContentContainer'>
-        <div className='Layout_ContentSidenav'>
+        <div className='Layout_ContentSidenav' style={useAnimation ? (isSidenavOpened ? inSlideAnimation : outSlideAnimation ) : undefined }>
           <Sidenav />
         </div>
-        <div className='Layout_Content' style={ showBlur || showBlur ?  inBlurAnimation : outBlurAnimation }>
+        <div className='Layout_Content' style={useAnimation ? (isSidenavOpened ? inBlurAnimation : outBlurAnimation) : undefined }>
           <Outlet />
         </div>
       </div>

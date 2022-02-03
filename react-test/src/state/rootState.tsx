@@ -1,4 +1,5 @@
 import { combineReducers, createStore } from '@reduxjs/toolkit'
+import { composeWithDevTools } from 'redux-devtools-extension'
 import { layoutReducer } from './layout/layout.reducer'
 import { LayoutState } from './layout/models/appLayout.state'
 import { UserState } from './user/models/appUser.state'
@@ -14,7 +15,8 @@ const combinedReducers = combineReducers({
   layout: layoutReducer
 })
 export const store = createStore(
-  combinedReducers
+  combinedReducers,
+  composeWithDevTools()
 )
 
 

@@ -15,7 +15,6 @@ function Topnav({displayLoginButton} : {displayLoginButton: boolean | undefined}
 
       useEffect(() => {
         if (displayLoginButton) {
-          console.log("TOPNAV isLoggedIn updated from store: ", isLoggedIn)
           setLoginButtonHidden(isLoggedIn);
         }
       }, [displayLoginButton, isLoggedIn])
