@@ -24,6 +24,8 @@ export function useMostPopularArticles ({periodOfTime}: {periodOfTime: number}) 
             setError(true);
             setLoading(true)
             dispatch(actions.unsetMostPopularViewedArticles())
+
+            
         })
     }, [periodOfTime])
 
