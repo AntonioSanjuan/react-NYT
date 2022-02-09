@@ -7,7 +7,8 @@ function LoginLayout() {
     return (
       <div className="LoginLayout_MainContainer">
         <div className='LoginLayout_HeaderContainer'>
-          <Topnav displayLoginButton={false}/>
+          <Topnav displayLoginButton={false}
+          displaySidenavButton={false}/>
         </div>
         <div className='LoginLayout_ContentContainer'>
           <Outlet />
