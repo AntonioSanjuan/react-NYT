@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import useUser from '../../hooks/login/userHook';
-import useLayer from '../../hooks/sidenav/sidenavHook';
+import { useUser } from '../../hooks/login/userHook';
+import { useSidenavLayer } from '../../hooks/sidenav/sidenavHook';
 import { useAppSelector } from '../../hooks/state/appStateHook';
 import { selectUserIsLogged } from '../../state/user/user.selectors';
 import { ProfileSection } from '../common/profileSection/profileSection';
@@ -12,10 +12,9 @@ function Sidenav() {
     const navigate = useNavigate();
 
     const { logout } = useUser()
-    const { switchSidenavStatus } = useLayer()
+    const { switchSidenavStatus } = useSidenavLayer()
     
     const handleNavigation = (dest: string) => {
-        console.log("destination: ", dest)
         navigate(dest)
         switchSidenavStatus();
     }
@@ -32,7 +31,7 @@ function Sidenav() {
                         </div>
                         <div className="sidenav_Section" onClick={() => {handleNavigation('/')}}>
                             <Section 
-                            sectionName={'Most Popular Articles'}>
+                                sectionName={'Most Popular Articles'}>
                                 <i className="bi bi-bar-chart-line-fill"></i>
                             </Section>
                         </div>
@@ -44,13 +43,15 @@ function Sidenav() {
                     </div>
                 <div className="sidenav_FooterSection">
                     <div className="sidenav_Section" onClick={() => {handleNavigation('/contact')}}>
-                        <Section sectionName={"Contact"}>
+                        <Section 
+                            sectionName={"Contact"}>
                             <i className="bi bi-chat-left-dots-fill"></i>
                         </Section>
                     </div>
                     <div style={{visibility: isLoggedIn ? 'visible': 'hidden'}} onClick={logout} className="sidenav_Section" id="exitSection">
-                        <Section sectionName={"'Exit'"}>
-                        <i className="bi bi-box-arrow-right"></i>
+                        <Section 
+                            sectionName={"Exit"}>
+                            <i className="bi bi-box-arrow-right"></i>
                         </Section>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function useAnimationByStateTransition(newAnimationState: boolean|undefined): boolean {
+export function useAnimationByStateTransition(newAnimationState: boolean|undefined) {
   const [currentAnimationState, setCurrentAnimationState] = useState<boolean|undefined>(newAnimationState);
 
   const [stateTransition, setStateTransition] = useState<boolean>(false);
@@ -19,5 +19,5 @@ export default function useAnimationByStateTransition(newAnimationState: boolean
 
   }, [currentAnimationState, newAnimationState])
 
-  return stateTransition
+  return {stateTransition}
 }

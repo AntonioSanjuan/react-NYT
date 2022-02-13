@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
-import getMostPopularViewedArticles from "../../services/NYTdataSupplier/mostPopular/nytMostPupukar.service";
+import {getMostPopularViewedArticles} from "../../services/NYTdataSupplier/mostPopular/nytMostPupukar.service";
 import { useAppDispatch } from "../state/appStateHook";
 import * as actions from '../../state/data/data.actions'
+import { MostPopularViewedArticlesResponseDto } from "../../models/dtos/mostPopularViewedArticles/mostPopularViewedArticlesResponseDto.model";
 
 export function useMostPopularArticles ({periodOfTime}: {periodOfTime: number}) {
     const dispatch = useAppDispatch();
 
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
-    const [mostPopularArticles, setMostPopularArticles] = useState(undefined)
+    const [mostPopularArticles, setMostPopularArticles] = useState<MostPopularViewedArticlesResponseDto|undefined>(undefined)
     
     useEffect(() => {
         setLoading(true)
@@ -19,15 +20,15 @@ export function useMostPopularArticles ({periodOfTime}: {periodOfTime: number}) 
             setMostPopularArticles(mostPopularArticles)
             setLoading(false)
             dispatch(actions.setMostPopularViewedArticles(mostPopularArticles))
-            console.log("dispatched")
         }).catch((e) => {
+            setMostPopularArticles(undefined)
             setError(true);
-            setLoading(true)
+            setLoading(false)
             dispatch(actions.unsetMostPopularViewedArticles())
 
             
         })
-    }, [periodOfTime])
+    }, [dispatch, periodOfTime])
 
     return {loading, error, mostPopularArticles}
 }

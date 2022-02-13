@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import './Login.scss'
 import logo from "../../assets/images/Logo.png"
-import useUser from "../../hooks/login/userHook";
+import { useUser } from "../../hooks/login/userHook";
 import { useNavigate } from 'react-router-dom';
 
 function LoginPage() {

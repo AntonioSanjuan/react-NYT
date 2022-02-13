@@ -6,7 +6,7 @@ import { Sidenav } from '../../components/Sidenav/Sidenav';
 import { useAppSelector } from '../../hooks/state/appStateHook';
 import { selectLayoutIsSidenavOpened } from '../../state/layout/layout.selectors';
 import { inBlurAnimation, outBlurAnimation } from '../../animations/blur/blurAnimation';
-import useAnimationByStateTransition from '../../hooks/animation/animationHook';
+import {useAnimationByStateTransition} from '../../hooks/animation/animationHook';
 import { inSlideAnimation, outSlideAnimation } from '../../animations/slide/slideAnimation';
 
 function Layout() { 
