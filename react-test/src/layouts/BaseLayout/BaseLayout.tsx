@@ -11,9 +11,7 @@ import { inSlideAnimation, outSlideAnimation } from '../../animations/slide/slid
 
 function Layout() { 
   const isSidenavOpened = useAppSelector<boolean>(selectLayoutIsSidenavOpened)
-  console.log('isSidenavOpened', isSidenavOpened)
   const useAnimation = useAnimationByStateTransition(isSidenavOpened);
-  console.log('useAnimation', useAnimation)
 
   return (
     <div className="Layout_MainContainer">

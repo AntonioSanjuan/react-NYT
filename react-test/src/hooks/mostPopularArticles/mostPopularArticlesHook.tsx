@@ -16,7 +16,6 @@ export function useMostPopularArticles ({periodOfTime}: {periodOfTime: PeriodOfT
     useEffect(() => {
         setLoading(true)
         setError(false);
-        console.log("here we are", storedData)
         if(!storedData.mostPopularViewedArticles || storedData.mostPopularViewedArticlesRequestedPage !== periodOfTime) {
             getMostPopularViewedArticles({periodOfTime: periodOfTime})
             .then(mostPopularArticles => {
