@@ -1,8 +1,7 @@
 import { useMostPopularArticles } from "../../hooks/mostPopularArticles/mostPopularArticlesHook";
 
 function HomePage() {
-  const mostPopularArticles = useMostPopularArticles({periodOfTime: 1})
-  console.log(mostPopularArticles)
+  const {mostPopularArticles} = useMostPopularArticles({periodOfTime: 1})
     return (
       <>
         <main>

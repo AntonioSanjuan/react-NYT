@@ -9,14 +9,14 @@ import * as sidenavHooks from '../../hooks/sidenav/sidenavHook'
 import * as userHooks from '../../hooks/login/userHook' 
 
 describe('Sidenav', () => {
-    let topnavStore: any;
+    let sidenavStore: any;
     let history: any;
 
     const switchSidenavStatusMock = jest.fn(() => {})
     const logoutMock = jest.fn(() => {})
 
     beforeEach(() => {
-        topnavStore = {...store};
+        sidenavStore = {...store};
         history = createMemoryHistory();
 
         const useLayerMock = jest.spyOn(sidenavHooks, 'useSidenavLayer');
@@ -28,7 +28,7 @@ describe('Sidenav', () => {
 
     it('should create', () => {
         const { container } = render(
-            <Provider store={topnavStore}>
+            <Provider store={sidenavStore}>
                 <Router location={history.location} navigator={history}>
                     <Sidenav/>
                 </Router>
@@ -40,7 +40,7 @@ describe('Sidenav', () => {
 
     it('Sidenav `navigateToHomeAction` secction should trigger navigation to home', () => {
         render(
-            <Provider store={topnavStore}>
+            <Provider store={sidenavStore}>
                 <Router location={history.location} navigator={history}>
                     <Sidenav/>
                 </Router>
@@ -59,7 +59,7 @@ describe('Sidenav', () => {
 
     it('Sidenav `navigateToContactAction` secction should trigger navigation to contact', () => {
         render(
-            <Provider store={topnavStore}>
+            <Provider store={sidenavStore}>
                 <Router location={history.location} navigator={history}>
                     <Sidenav/>
                 </Router>
@@ -73,12 +73,12 @@ describe('Sidenav', () => {
         )
 
         expect(history.location.pathname).toEqual('/contact')
-        expect(switchSidenavStatusMock).toHaveBeenCalled()
+        expect(switchSidenavStatusMock).toHaveBeenCalledWith()
     });
 
     it('Sidenav `exit` secction should trigger logout from useUser', () => {
         render(
-            <Provider store={topnavStore}>
+            <Provider store={sidenavStore}>
                 <Router location={history.location} navigator={history}>
                     <Sidenav/>
                 </Router>

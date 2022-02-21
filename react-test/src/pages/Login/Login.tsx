@@ -5,8 +5,8 @@ import { useUser } from "../../hooks/login/userHook";
 import { useNavigate } from 'react-router-dom';
 
 function LoginPage() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState<string|undefined>(undefined);
+  const [password, setPassword] = useState<string|undefined>(undefined);
   
   const { login } = useUser()
   const navigate = useNavigate();
@@ -38,7 +38,7 @@ function LoginPage() {
             />
           </div>
           <div className="Login_ActionContainer">
-              <button disabled={!!!username && !!!password} className="btn btn-primary w-100" type="submit">
+              <button disabled={!!!username || !!!password} className="btn btn-primary w-100" type="submit">
                 Login
               </button>
           </div>
