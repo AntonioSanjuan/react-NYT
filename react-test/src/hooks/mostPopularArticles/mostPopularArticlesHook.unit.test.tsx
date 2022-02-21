@@ -36,16 +36,17 @@ describe('<useMostPopularArticles />', () => {
     })
 
     it('initially should request getMostPopularViewedArticles if success...', async() => {
+        const input = 8
         const response = { results: [ {}]} as MostPopularViewedArticlesResponseDto
         service_getMostPopularViewedArticlesSpy = jest.spyOn(services, 'getMostPopularViewedArticles').mockResolvedValue(response);        
             
-        const {result, waitForNextUpdate} = renderHook(() => useMostPopularArticles({ periodOfTime: 8}))
+        const {result, waitForNextUpdate} = renderHook(() => useMostPopularArticles({ periodOfTime: input}))
         await waitForNextUpdate();
 
         expect(result.current.mostPopularArticles).toEqual(response)
         expect(result.current.loading).toEqual(false)
         expect(result.current.error).toEqual(false)
-        expect(useAppDispatchMockResponse).toHaveBeenCalledWith(actions.setMostPopularViewedArticles(response))
+        expect(useAppDispatchMockResponse).toHaveBeenCalledWith(actions.setMostPopularViewedArticles(response, input))
 
     })
 

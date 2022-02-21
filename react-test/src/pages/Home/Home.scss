@@ -1,0 +1,50 @@
+.MostPopularArticles_MainContainer {
+    flex-direction: column;
+    box-sizing: border-box;
+    display: flex;
+    place-content: center;
+    align-items: center;
+    height: inherit;
+    width: 100vw;
+}
+
+.MostPopularArticles_SubContainer {
+    width: var(--app-width);
+}
+.MostPopularArticles_News {
+    flex-direction: row;
+    box-sizing: border-box;
+    display: flex;
+    place-content: center;
+    align-items: center;
+
+    height: inherit;
+    flex-wrap: wrap;
+}
+
+.MostPopularArticles_New {
+    flex-direction: column;
+    box-sizing: border-box;
+    display: flex;
+    place-content: center;
+    align-items: center;
+
+    width: 25%;
+    padding: 1%;
+}
+
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    .MostPopularArticles_SubContainer {
+      width: 100%;
+    }
+  
+    .MostPopularArticles_News {
+      padding: 5%;
+    }
+  
+    .MostPopularArticles_New {
+      width: 100%;
+    }
+  }

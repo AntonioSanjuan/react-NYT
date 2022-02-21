@@ -7,12 +7,14 @@ const dataReducer = (state: DataState = dataInitialState, action: any ) => {
     case DataActions.setMostPopularViewedArticles:
       return {
         ...state,
-        mostPopularViewedArticles: action.payload
+        mostPopularViewedArticles: action.payload.mostPopularViewedArticles,
+        mostPopularViewedArticlesRequestedPage: action.payload.mostPopularViewedArticlesRequestedPage
       }
     case DataActions.unsetMostPopularViewedArticles:
       return {
         ...state,
-        mostPopularViewedArticles: undefined
+        mostPopularViewedArticles: undefined,
+        mostPopularViewedArticlesRequestedPage: undefined 
       }
     default: 
       return state;

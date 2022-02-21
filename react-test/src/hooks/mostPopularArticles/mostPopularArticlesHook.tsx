@@ -1,34 +1,34 @@
 import { useEffect, useState } from "react";
 import {getMostPopularViewedArticles} from "../../services/NYTdataSupplier/mostPopular/nytMostPupukar.service";
-import { useAppDispatch } from "../state/appStateHook";
+import { useAppDispatch, useAppSelector } from "../state/appStateHook";
 import * as actions from '../../state/data/data.actions'
-import { MostPopularViewedArticlesResponseDto } from "../../models/dtos/mostPopularViewedArticles/mostPopularViewedArticlesResponseDto.model";
+import { selectData } from "../../state/data/data.selectors";
+import { DataState } from "../../state/data/models/appData.state";
+import { PeriodOfTimes } from "../../models/internal/types/PeriodOfTimeEnum.model";
 
-export function useMostPopularArticles ({periodOfTime}: {periodOfTime: number}) {
+export function useMostPopularArticles ({periodOfTime}: {periodOfTime: PeriodOfTimes}) {
     const dispatch = useAppDispatch();
+    const storedData = useAppSelector<DataState>(selectData);
 
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
-    const [mostPopularArticles, setMostPopularArticles] = useState<MostPopularViewedArticlesResponseDto|undefined>(undefined)
     
     useEffect(() => {
         setLoading(true)
         setError(false);
+        console.log("here we are", storedData)
+        if(!storedData.mostPopularViewedArticles || storedData.mostPopularViewedArticlesRequestedPage !== periodOfTime) {
+            getMostPopularViewedArticles({periodOfTime: periodOfTime})
+            .then(mostPopularArticles => {
+                setLoading(false)
+                dispatch(actions.setMostPopularViewedArticles(mostPopularArticles, periodOfTime))
+            }).catch((e) => {
+                setError(true);
+                setLoading(false)
+                dispatch(actions.unsetMostPopularViewedArticles())
+            })
+        }
+    }, [dispatch, periodOfTime, storedData])
 
-        getMostPopularViewedArticles({periodOfTime: periodOfTime})
-        .then(mostPopularArticles => {
-            setMostPopularArticles(mostPopularArticles)
-            setLoading(false)
-            dispatch(actions.setMostPopularViewedArticles(mostPopularArticles))
-        }).catch((e) => {
-            setMostPopularArticles(undefined)
-            setError(true);
-            setLoading(false)
-            dispatch(actions.unsetMostPopularViewedArticles())
-
-            
-        })
-    }, [dispatch, periodOfTime])
-
-    return {loading, error, mostPopularArticles}
+    return {loading, error, mostPopularArticles: storedData.mostPopularViewedArticles}
 }

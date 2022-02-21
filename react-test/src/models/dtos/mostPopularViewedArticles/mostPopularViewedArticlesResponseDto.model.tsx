@@ -7,7 +7,7 @@ export type MostPopularViewedArticlesResponseDto = MosPopularCommonDto<
 export interface MostPopularViewedArticlesResponseContentDto {
   uri: string;
   url: string;
-  id: any;
+  id: number;
   asset_id: any;
   source: string;
   published_date: string;
