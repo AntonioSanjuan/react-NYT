@@ -30,12 +30,14 @@ function LoginPage() {
               onChange={(e) => setUsername(e.target.value)}
               value={username}
             />
+            <label>Username</label>
           </div>
           <div className="form-floating">
             <input type="password" className="form-control" placeholder="****"
               onChange={(e) => setPassword(e.target.value)}
               value={password}
             />
+          <label>Password</label>
           </div>
           <div className="Login_ActionContainer">
               <button disabled={!!!username || !!!password} className="btn btn-primary w-100" type="submit">

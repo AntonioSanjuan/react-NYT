@@ -32,15 +32,30 @@ describe('<useMostPopularArticles />', () => {
         expect(result.current).toBeDefined()
     })
 
-    // it('initially should request getMostPopularViewedArticles', async() => {
-    //     const input = PeriodOfTimes.Daily
-    //     expect(service_getMostPopularViewedArticlesSpy).not.toHaveBeenCalled()
+    it('initially should request getMostPopularViewedArticles', async() => {
+        const input = PeriodOfTimes.Daily
+        expect(service_getMostPopularViewedArticlesSpy).not.toHaveBeenCalled()
 
-    //     const { waitForNextUpdate } = renderHook(() => useMostPopularArticles({ periodOfTime: input}))
-    //     await waitForNextUpdate();
+        const { waitForNextUpdate } = renderHook(() => useMostPopularArticles({ periodOfTime: input}), { wrapper })
+        await waitForNextUpdate();
 
-    //     expect(service_getMostPopularViewedArticlesSpy).toHaveBeenCalledWith({periodOfTime: input})
-    // })
+        expect(service_getMostPopularViewedArticlesSpy).toHaveBeenCalledWith({periodOfTime: input})
+    })
+
+    
+    it('if response data has been previously fetched', async() => {
+        const input = PeriodOfTimes.Daily
+        expect(service_getMostPopularViewedArticlesSpy).not.toHaveBeenCalled()
+
+        const { waitForNextUpdate } = renderHook(() => useMostPopularArticles({ periodOfTime: input}), { wrapper })
+        await waitForNextUpdate();
+
+        expect(service_getMostPopularViewedArticlesSpy).toHaveBeenCalledTimes(1)
+        expect(service_getMostPopularViewedArticlesSpy).toHaveBeenCalledWith({periodOfTime: input})
+
+        expect(service_getMostPopularViewedArticlesSpy).toHaveBeenCalledTimes(1)
+
+    })
 
     it('initially should request getMostPopularViewedArticles if success...', async() => {
         const input = PeriodOfTimes.Daily
@@ -50,22 +65,22 @@ describe('<useMostPopularArticles />', () => {
         const {result, waitForNextUpdate} = renderHook(() => useMostPopularArticles({ periodOfTime: input}), { wrapper })
         await waitForNextUpdate();
 
-          // expect(result.current.mostPopularArticles).toEqual(response)
+        expect(result.current.mostPopularArticles).toEqual(response)
         expect(result.current.loading).toEqual(false)
         expect(result.current.error).toEqual(false)
         expect(useAppDispatchMockResponse).toHaveBeenCalledWith(actions.setMostPopularViewedArticles(response, input))
 
     })
 
-    // it('initially should request getMostPopularViewedArticles if error...', async() => {
-    //     service_getMostPopularViewedArticlesSpy = jest.spyOn(services, 'getMostPopularViewedArticles').mockRejectedValue({});        
+    it('initially should request getMostPopularViewedArticles if error...', async() => {
+        service_getMostPopularViewedArticlesSpy = jest.spyOn(services, 'getMostPopularViewedArticles').mockRejectedValue({});        
             
-    //     const {result, waitForNextUpdate} = renderHook(() => useMostPopularArticles({ periodOfTime: 8}), { wrapper })
-    //     await waitForNextUpdate();
+        const {result, waitForNextUpdate} = renderHook(() => useMostPopularArticles({ periodOfTime: 8}), { wrapper })
+        await waitForNextUpdate();
 
-    //     expect(result.current.mostPopularArticles).toEqual(undefined)
-    //     expect(result.current.loading).toEqual(false)
-    //     expect(result.current.error).toEqual(true)
-    //     expect(useAppDispatchMockResponse).toHaveBeenCalledWith(actions.unsetMostPopularViewedArticles())
-    // })
+        expect(result.current.mostPopularArticles).toEqual(undefined)
+        expect(result.current.loading).toEqual(false)
+        expect(result.current.error).toEqual(true)
+        expect(useAppDispatchMockResponse).toHaveBeenCalledWith(actions.unsetMostPopularViewedArticles())
+    })
 })

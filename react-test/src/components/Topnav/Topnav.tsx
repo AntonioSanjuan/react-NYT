@@ -6,7 +6,8 @@ import { useEffect, useState } from 'react';
 import { selectUserIsLogged } from '../../state/user/user.selectors';
 import { useSidenavLayer } from '../../hooks/sidenav/sidenavHook';
 
-function Topnav({displayLoginButton, displaySidenavButton} : {displayLoginButton: boolean | undefined, displaySidenavButton?: boolean}) {
+function Topnav({displayLoginButton, hideSidenavButton} : 
+  {displayLoginButton: boolean | undefined, hideSidenavButton?: boolean}) {
 
       const [loginButtonHidden, setLoginButtonHidden] = useState(!displayLoginButton);
 
@@ -24,13 +25,12 @@ function Topnav({displayLoginButton, displaySidenavButton} : {displayLoginButton
         switchSidenavStatus()
       };
 
-
       return (
       <>
         {
         <div className="TopNav_Maincontainer">
         <div className="TopNav_Subcontainer">
-          <div className="TopNav_Leftcontainer"  style={{visibility: displaySidenavButton ? 'hidden': 'visible'}}>
+          <div className="TopNav_Leftcontainer"  style={{visibility: hideSidenavButton ? 'hidden' : 'visible' }}>
             <button type="button" className="btn btn-dark" aria-label="switchSidenavButton" onClick={handleSidenavChange}>
               <i className="bi bi-list"></i>
             </button>

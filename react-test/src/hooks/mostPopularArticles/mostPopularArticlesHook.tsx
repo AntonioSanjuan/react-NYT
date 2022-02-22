@@ -12,22 +12,26 @@ export function useMostPopularArticles ({periodOfTime}: {periodOfTime: PeriodOfT
 
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
+    const [mostPopularArticles, setMostPopularArticles] = useState(storedData.mostPopularViewedArticles)
     
     useEffect(() => {
         setLoading(true)
         setError(false);
+        console.log("storedData", storedData)
         if(!storedData.mostPopularViewedArticles || storedData.mostPopularViewedArticlesRequestedPage !== periodOfTime) {
             getMostPopularViewedArticles({periodOfTime: periodOfTime})
             .then(mostPopularArticles => {
                 setLoading(false)
+                setMostPopularArticles(mostPopularArticles)
                 dispatch(actions.setMostPopularViewedArticles(mostPopularArticles, periodOfTime))
             }).catch((e) => {
                 setError(true);
                 setLoading(false)
+                setMostPopularArticles(undefined)
                 dispatch(actions.unsetMostPopularViewedArticles())
             })
         }
     }, [dispatch, periodOfTime, storedData])
 
-    return {loading, error, mostPopularArticles: storedData.mostPopularViewedArticles}
+    return {loading, error, mostPopularArticles}
 }

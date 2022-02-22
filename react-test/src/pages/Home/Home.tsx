@@ -31,7 +31,7 @@ function HomePage() {
               <p className="app_font_l">Most Popular Articles</p>
             </div>
             <select
-              className="MostPopularArticles_Filter"
+              className="form-select MostPopularArticles_Filter"
               value={selectedPeriodOfTime}
               onChange={setOption}
             >
