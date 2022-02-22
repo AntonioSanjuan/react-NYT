@@ -4,6 +4,7 @@ import { useSidenavLayer } from '../../hooks/sidenav/sidenavHook';
 import { useAppSelector } from '../../hooks/state/appStateHook';
 import { selectUserIsLogged } from '../../state/user/user.selectors';
 import { ProfileSection } from '../common/profileSection/profileSection';
+import { Search } from '../common/search/search';
 import { Section } from '../common/section/section';
 import './Sidenav.scss'
 
@@ -19,6 +20,10 @@ function Sidenav() {
         switchSidenavStatus();
     }
 
+    const handleSearch = (searchInput: string) => {
+        console.log("searchValue", searchInput)
+    }
+
     return (
             <div className="sidenav_MainContainer">
                 <div className="sidenav_NavContainer">
@@ -28,6 +33,8 @@ function Sidenav() {
                         </div>
                         <div className="sidenav_Search">
                             <p className="app_font_m">Search content</p>
+                            <Search 
+                            searchOutput={handleSearch}/>
                         </div>
                         <div className="sidenav_Section" onClick={() => {handleNavigation('/')}}>
                             <Section 

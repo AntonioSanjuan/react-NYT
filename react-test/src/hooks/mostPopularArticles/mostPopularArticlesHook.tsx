@@ -15,10 +15,9 @@ export function useMostPopularArticles ({periodOfTime}: {periodOfTime: PeriodOfT
     const [mostPopularArticles, setMostPopularArticles] = useState(storedData.mostPopularViewedArticles)
     
     useEffect(() => {
-        setLoading(true)
-        setError(false);
-        console.log("storedData", storedData)
         if(!storedData.mostPopularViewedArticles || storedData.mostPopularViewedArticlesRequestedPage !== periodOfTime) {
+            setLoading(true)
+            setError(false);
             getMostPopularViewedArticles({periodOfTime: periodOfTime})
             .then(mostPopularArticles => {
                 setLoading(false)

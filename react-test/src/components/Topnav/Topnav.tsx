@@ -1,13 +1,14 @@
-import './Topnav.scss';
 import logo from "../../assets/images/Logo.png"
 import { useAppSelector } from '../../hooks/state/appStateHook';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { selectUserIsLogged } from '../../state/user/user.selectors';
 import { useSidenavLayer } from '../../hooks/sidenav/sidenavHook';
+import './Topnav.scss';
+import { Search } from "../common/search/search";
 
-function Topnav({displayLoginButton, hideSidenavButton} : 
-  {displayLoginButton: boolean | undefined, hideSidenavButton?: boolean}) {
+function Topnav({displayLoginButton, hideSidenavButton, hideSearchButton} : 
+  {displayLoginButton: boolean | undefined, hideSidenavButton?: boolean, hideSearchButton?: boolean}) {
 
       const [loginButtonHidden, setLoginButtonHidden] = useState(!displayLoginButton);
 
@@ -25,15 +26,22 @@ function Topnav({displayLoginButton, hideSidenavButton} :
         switchSidenavStatus()
       };
 
+      const searchHandler = (searchValue: string) => {
+        console.log("mierda!!!!!", searchValue)
+      }
+      
       return (
       <>
         {
         <div className="TopNav_Maincontainer">
         <div className="TopNav_Subcontainer">
-          <div className="TopNav_Leftcontainer"  style={{visibility: hideSidenavButton ? 'hidden' : 'visible' }}>
+          <div className="TopNav_Leftcontainer" style={{visibility: hideSidenavButton ? 'hidden' : 'visible' }}>
             <button type="button" className="btn btn-dark" aria-label="switchSidenavButton" onClick={handleSidenavChange}>
               <i className="bi bi-list"></i>
             </button>
+            <div className="TopNav_Search" style={{visibility: hideSearchButton ? 'hidden' : 'visible' }}>
+              <Search searchOutput={searchHandler}/>
+            </div>
           </div>
           <div className="TopNav_Centercontainer">
           <Link to="/">

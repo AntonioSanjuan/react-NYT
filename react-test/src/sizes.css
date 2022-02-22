@@ -5,6 +5,10 @@
     --app-sidenav-desktop-height: 70%;
     --app-sidenav-mobile-height: 100%;
 
+    --app-loading-desktop-width: 70%;
+    --app-loading-mobile-width: 150px;
+    --app-loading-height: 50%;
+
     --app-sidenav-desktop-width: 200px;
 
     --app-width: 85%;
