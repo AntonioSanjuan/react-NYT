@@ -6,6 +6,7 @@ import './search.scss'
 function Search({searchOutput} : {searchOutput: any}) {
     const [searchOpened, setSearchOpenedNewStatus] = useState<boolean>(false);
     const [searchInputValue, setSearchInputValue] = useState<string|undefined>(undefined);
+    
     const useAnimation = useAnimationByStateTransition(searchOpened);
 
     const searchInput = (e: any) => {

@@ -7,7 +7,8 @@
 
     --app-loading-desktop-width: 70%;
     --app-loading-mobile-width: 150px;
-    --app-loading-height: 50%;
+    --app-loading-desktop-height: 50vh;
+    --app-loading-mobile-height: 25vh;
 
     --app-sidenav-desktop-width: 200px;
 

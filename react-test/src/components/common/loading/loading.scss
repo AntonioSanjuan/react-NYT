@@ -1,13 +1,15 @@
 .Loading_MainContainer {
     position: absolute;
-    top: calc(var(--app-topnav-desktop-height) + 30px);
-    left: calc(50% - var(--app-loading-width)/2);
+    top:0;
 
     flex-direction: column;
     box-sizing: border-box;
     display: flex;
     place-content: center;
     align-items: center;
+
+    height: 100%;
+    width: 100%;
 }
 
 .Loading_SubContainer {
@@ -18,7 +20,7 @@
     align-items: center;
 
     width: var(--app-loading-desktop-width);
-    height: fit-content;
+    height: var(--app-loading-desktop-height);
     background-color: var(--app-hight-contract);
     border-radius: 10px;
     padding: 20px;
@@ -54,5 +56,6 @@ animation: lds-dual-ring 1.2s linear infinite;
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
     .Loading_SubContainer {
         width: var(--app-loading-mobile-width);
+        height: var(--app-loading-mobile-height);
     }
 }
