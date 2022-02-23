@@ -9,14 +9,16 @@ import { Search } from "../common/search/search";
 
 function Topnav({displayLoginButton, hideSidenavButton, hideSearchButton} : 
   {displayLoginButton: boolean | undefined, hideSidenavButton?: boolean, hideSearchButton?: boolean}) {
-
-      const [loginButtonHidden, setLoginButtonHidden] = useState(!displayLoginButton);
+    console.log("displayLoginButton", !displayLoginButton)
+      const [loginButtonHidden, setLoginButtonHidden] = useState<boolean|undefined>(!displayLoginButton);
 
       const isLoggedIn = useAppSelector<boolean>(selectUserIsLogged);
       const { switchSidenavStatus } = useSidenavLayer()
 
       useEffect(() => {
+        console.log("hola????")
         if (displayLoginButton) {
+          console.log("estoy aqui???????")
           setLoginButtonHidden(isLoggedIn);
         }
       }, [displayLoginButton, isLoggedIn])
