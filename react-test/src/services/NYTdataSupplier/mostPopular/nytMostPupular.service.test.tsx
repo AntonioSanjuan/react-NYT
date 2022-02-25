@@ -1,13 +1,19 @@
 import { resolve } from 'path/posix';
+import { json } from 'stream/consumers';
+import { MostPopularViewedArticlesResponseDto } from '../../../models/dtos/mostPopularViewedArticles/mostPopularViewedArticlesResponseDto.model';
 import { getMostPopularViewedArticles} from './nytMostPupular.service'
 
 
 describe('nytMostPupular', () => {
-    const mockResponse = {};
+    let fetchSpy: any;
+    let jsonMock = jest.fn()
 
     beforeEach(() => {
-        jest.spyOn(global, 'fetch').mockResolvedValue({
-            json: jest.fn().mockResolvedValue(mockResponse),
+        jsonMock.mockResolvedValue({})
+        fetchSpy = jest.spyOn(global, 'fetch');
+
+        fetchSpy.mockResolvedValue({
+            json: jsonMock,
             ok: true
         } as any)
     });
@@ -18,5 +24,31 @@ describe('nytMostPupular', () => {
   
     it('getMostPopularViewedArticles should request fetch', async () => {
         const res = await getMostPopularViewedArticles({ periodOfTime: 3})
+        expect(fetchSpy).toHaveBeenCalled();
+    })
+
+    it('getMostPopularViewedArticles success should return json response', async () => {
+        const input = {
+            results: [ { id: 0}]
+        } as MostPopularViewedArticlesResponseDto;
+
+        jsonMock.mockResolvedValue(input)
+
+        const res = await getMostPopularViewedArticles({ periodOfTime: 3})
+        expect(res).toEqual(input);
+    })
+
+    it('getMostPopularViewedArticles rejected should throw Error "Response NOT VALID"', async () => {
+        let sut: any;
+        fetchSpy.mockResolvedValue({
+            json: jsonMock,
+            ok: false
+        } as any)
+
+        await getMostPopularViewedArticles({ periodOfTime: 3}).catch((e: Error) => {
+            sut = e;
+        })
+        expect(sut.message).toEqual('Response NOT VALID')
+
     })
 });
