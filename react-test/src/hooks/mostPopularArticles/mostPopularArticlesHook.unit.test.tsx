@@ -6,7 +6,7 @@ import { MostPopularViewedArticlesResponseDto } from '../../models/dtos/mostPopu
 
 import * as actions from '../../state/data/data.actions'
 import * as hooks from '../../hooks/state/appStateHook' 
-import * as services from '../../services/NYTdataSupplier/mostPopular/nytMostPupukar.service'
+import * as services from '../../services/NYTdataSupplier/mostPopular/nytMostPupular.service'
 import { PeriodOfTimes } from '../../models/internal/types/PeriodOfTimeEnum.model';
 import { Provider } from 'react-redux';
 import { store } from '../../state/rootState';

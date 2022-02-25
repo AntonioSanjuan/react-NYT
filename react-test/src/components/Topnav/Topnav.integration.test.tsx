@@ -14,7 +14,7 @@ describe('Topnav', () => {
     let topnavStore: any;
     let history: any;
 
-    const setLoginButtonHiddenMock = jest.fn(() => {} );
+    const setLoginButtonHiddenMock = jest.fn(() => {});
     const switchSidenavStatusMock = jest.fn(() => {})
 
     beforeEach(() => {
@@ -42,64 +42,66 @@ describe('Topnav', () => {
         );
 
         expect(container).toBeDefined()
-        expect(setLoginButtonHiddenMock).not.toHaveBeenCalled()
     });
     
-    // it('Topnav change properties should trigger setLoginButtonHidden status change', () => {
-    //     const { rerender } = render(
-    //         <Provider store={topnavStore}>
-    //             <Router location={history.location} navigator={history}>
-    //             <Topnav displayLoginButton={false}/>
-    //             </Router>
-    //         </Provider>
-    //     );
-    //     expect(setLoginButtonHiddenMock).toHaveBeenCalledTimes(0)
-    //     console.log("hola?")
-    //     rerender(            
-    //         <Provider store={topnavStore}>
-    //             <Router location={history.location} navigator={history}>
-    //                 <Topnav displayLoginButton={true}/>
-    //             </Router>
-    //         </Provider>
-    //     );
-    //     expect(setLoginButtonHiddenMock).toHaveBeenCalledTimes(1)
-    // })
-
-    // it('Topnav isLoggedIn observable value changes should trigger setLoginButtonHidden status change', async () => {
-    //     render(
-    //         <Provider store={topnavStore}>
-    //             <Router location={history.location} navigator={history}>
-    //                 <Topnav displayLoginButton={true}/>
-    //             </Router>
-    //         </Provider>
-    //     );
-    //     expect(setLoginButtonHiddenMock).toHaveBeenCalledTimes(1);
-    //     expect(setLoginButtonHiddenMock).toHaveBeenCalledWith(false);
-
-    //     await act(async () => {
-    //         topnavStore.dispatch(actions.setUset({ userName: 'testing_username'}));
-    //     })
+    it('Topnav change properties should trigger setLoginButtonHidden status change', () => {
+        const { rerender } = render(
+            <Provider store={topnavStore}>
+                <Router location={history.location} navigator={history}>
+                <Topnav displayLoginButton={false}/>
+                </Router>
+            </Provider>
+        );
         
-    //     expect(setLoginButtonHiddenMock).toHaveBeenCalledWith(true);
-    //     expect(setLoginButtonHiddenMock).toHaveBeenCalledTimes(2);
-    // });
+        rerender(            
+            <Provider store={topnavStore}>
+                <Router location={history.location} navigator={history}>
+                    <Topnav displayLoginButton={true}/>
+                </Router>
+            </Provider>
+        );
+        expect(setLoginButtonHiddenMock).toHaveBeenLastCalledWith(
+            topnavStore.getState().user.isLogged
+        )
+    })
 
-    // it('Topnav `login` button change should trigger', () => {
-    //     render(
-    //         <Provider store={topnavStore}>
-    //             <Router location={history.location} navigator={history}>
-    //                 <Topnav displayLoginButton={true}/>
-    //             </Router>
-    //         </Provider>
-    //     );
+    it('Topnav isLoggedIn observable value changes should trigger setLoginButtonHidden status change', async () => {
+        render(
+            <Provider store={topnavStore}>
+                <Router location={history.location} navigator={history}>
+                    <Topnav displayLoginButton={true}/>
+                </Router>
+            </Provider>
+        );
+        // expect(setLoginButtonHiddenMock).toHaveBeenCalledTimes(1);
+        expect(setLoginButtonHiddenMock).toHaveBeenCalledWith(false);
+
+        await act(async () => {
+            topnavStore.dispatch(actions.setUset({ userName: 'testing_username'}));
+        })
         
-    //     fireEvent.click(
-    //         screen.getAllByRole('button', {
-    //             name: /switchSidenavButton/i
-    //         })[0]
-    //     )
+        expect(setLoginButtonHiddenMock).toHaveBeenCalledWith(true);
+        // expect(setLoginButtonHiddenMock).toHaveBeenCalledTimes(2);
+    });
 
-    //     expect(switchSidenavStatusMock).toHaveBeenCalled()
+    it('Topnav `login` button change should trigger', () => {
+        render(
+            <Provider store={topnavStore}>
+                <Router location={history.location} navigator={history}>
+                    <Topnav displayLoginButton={true}/>
+                </Router>
+            </Provider>
+        );
+        
+        expect(switchSidenavStatusMock).not.toHaveBeenCalled()
 
-    // });
+        fireEvent.click(
+            screen.getAllByRole('button', {
+                name: /switchSidenavButton/i
+            })[0]
+        )
+
+        expect(switchSidenavStatusMock).toHaveBeenCalled()
+
+    });
 })

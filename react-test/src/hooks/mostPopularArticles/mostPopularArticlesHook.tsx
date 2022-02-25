@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import {getMostPopularViewedArticles} from "../../services/NYTdataSupplier/mostPopular/nytMostPupukar.service";
+import {getMostPopularViewedArticles} from "../../services/NYTdataSupplier/mostPopular/nytMostPupular.service";
 import { useAppDispatch, useAppSelector } from "../state/appStateHook";
 import * as actions from '../../state/data/data.actions'
 import { selectData } from "../../state/data/data.selectors";

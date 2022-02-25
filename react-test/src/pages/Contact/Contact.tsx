@@ -2,7 +2,7 @@ import './Contact.scss'
 import ContactMe from './components/contactMe/contactMe';
 
 
-function Contact() {
+function ContactPage() {
     return (
       <>
         <div className="Contact_MainContainer">
@@ -18,5 +18,5 @@ function Contact() {
     );
 }
 
-  export default Contact
+  export default ContactPage
   
