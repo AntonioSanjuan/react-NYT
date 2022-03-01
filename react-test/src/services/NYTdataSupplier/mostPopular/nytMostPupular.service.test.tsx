@@ -1,5 +1,3 @@
-import { resolve } from 'path/posix';
-import { json } from 'stream/consumers';
 import { MostPopularViewedArticlesResponseDto } from '../../../models/dtos/mostPopularViewedArticles/mostPopularViewedArticlesResponseDto.model';
 import { getMostPopularViewedArticles} from './nytMostPupular.service'
 
@@ -23,7 +21,7 @@ describe('nytMostPupular', () => {
     });
   
     it('getMostPopularViewedArticles should request fetch', async () => {
-        const res = await getMostPopularViewedArticles({ periodOfTime: 3})
+        await getMostPopularViewedArticles({ periodOfTime: 3})
         expect(fetchSpy).toHaveBeenCalled();
     })
 

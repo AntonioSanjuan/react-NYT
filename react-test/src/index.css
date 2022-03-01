@@ -1,5 +1,6 @@
 @import url('./colors.css');
 @import url('./sizes.css');
+@import url('./fonts.css');
 
 html, body,#root { height: 100%; }
 

@@ -1,5 +1,6 @@
 import './Contact.scss'
 import ContactMe from './components/contactMe/contactMe';
+import CV from './components/cv/cv';
 
 
 function ContactPage() {
@@ -10,8 +11,7 @@ function ContactPage() {
             <ContactMe/>
           </div>
           <div className="Contact_CenterContainer">
-            <h2>Welcome to the contactpage!</h2>
-            <p>You can do this, I believe in you.</p>
+            <CV />
           </div>
         </div>
       </>

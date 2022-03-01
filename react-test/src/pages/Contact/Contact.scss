@@ -7,14 +7,16 @@
   height: 100%;
 }
 
-.Contact_LeftContainer {
+.Contact_LeftContainer,
+.Contact_RightContainer {
   width: 250px;
 
   position: sticky;
-  top: calc(var(--app-topnav-desktop-height) + 10px);
+  top: calc(var(--app-topnav-desktop-height) + 30px);
 }
 
-.Contact_LeftContainer,
+// .Contact_LeftContainer,
+// .Contact_RightContainer,
 .Contact_CenterContainer
  {
   flex-direction: column;
@@ -23,22 +25,37 @@
   place-content: center;
   align-items: center;
 
-  margin: 0 10px;
+  padding-left: 20px;
 }
 
 .Contact_CenterContainer {
   height: 200vh;
+  place-content: flex-start;
 }
 
+@media (min-width: 480px) and (max-width: 1024px) {
+  .Contact_RightContainer {
+    display: none;
+  }
+}
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
   .Contact_MainContainer {
     flex-direction: column;
   }
+
   .Contact_LeftContainer {
     position: inherit;
     margin: 0;
     width: 100%;
+  }
+  
+  .Contact_RightContainer {
+    display: none;
+  }
+
+  .Contact_CenterContainer {
+    padding: 0;
   }
 }
 

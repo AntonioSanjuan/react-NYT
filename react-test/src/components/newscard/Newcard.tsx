@@ -17,22 +17,22 @@ function Newscard({article}: {article: MostPopularViewedArticlesResponseContentD
     return (
         <> 
         {
-            <div className="NewsCard_MainContainer">
+            <div onClick={() => window.open(article.url, '_blank')?.focus() } className="NewsCard_MainContainer">
                 <div className="NewsCard_ImageContainer">
                     {article && hasImage()? 
                     <>
                         <img
-                        alt='article resource'
-                        className="NewsCard_Image"
-                        src={getImage()}
+                            alt='article resource'
+                            className="NewsCard_Image"
+                            src={getImage()}
                         />
                     </>
                     : 
                     <>
                         <img
-                        alt='default resource'
-                        className="NewsCard_Image"
-                        src="../../../assets/images/NoImage.png"
+                            alt='default resource'
+                            className="NewsCard_Image"
+                            src={require('../../assets/images/NoImage.png')}
                         />
                     </>
                     }

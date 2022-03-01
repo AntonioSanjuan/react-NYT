@@ -14,7 +14,7 @@ function HomePage() {
   const [selectedPeriodOfTime, setSelectedPeriodOfTime] = useState<PeriodOfTimes>(mostPopularViewedArticlesRequestedPage);
   const periodOfTimes = PeriodOfTimes;
 
-  let {mostPopularArticles, loading} = useMostPopularArticles({periodOfTime: selectedPeriodOfTime})
+  let {mostPopularArticles, loading, error} = useMostPopularArticles({periodOfTime: selectedPeriodOfTime})
   const setOption = (selectedOption: any) => {
     setSelectedPeriodOfTime(Number.parseInt(selectedOption.target.value))
   }
@@ -46,7 +46,11 @@ function HomePage() {
               </select>
             </div>
             <div className="MostPopularArticles_News">
-            {mostPopularArticles?.results.map(article => 
+            {
+            error ?
+            <p>No Data</p>
+            :
+            mostPopularArticles?.results.map(article => 
               <div className="MostPopularArticles_New" key={article.id}>
                 <Newscard article={article}/>
               </div>
