@@ -3,7 +3,7 @@ import { Dispatch } from '@reduxjs/toolkit';
 
 import { useUser } from './userHook';
 import * as actions from '../../state/user/user.actions'
-import * as hooks from '../../hooks/state/appStateHook' 
+import * as hooks from '../state/appStateHook' 
 
 describe('<useUser />', () => {
     const useAppDispatchMockResponse = jest.fn((action) => {}) as Dispatch<any>
@@ -28,7 +28,7 @@ describe('<useUser />', () => {
         result.current.login({username: sut_username, password: 'sut_password'})
         
         expect(useAppDispatchMockResponse).toHaveBeenCalled()
-        expect(useAppDispatchMockResponse).toHaveBeenCalledWith(actions.setUset({ userName: sut_username}))
+        expect(useAppDispatchMockResponse).toHaveBeenCalledWith(actions.setUset)
     })
 
     it('logout should dispatch unset action', () => {

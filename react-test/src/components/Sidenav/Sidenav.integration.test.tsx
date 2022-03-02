@@ -6,7 +6,7 @@ import { store } from '../../state/rootState';
 import {createMemoryHistory} from 'history'
 import { Router } from 'react-router-dom';
 import * as sidenavHooks from '../../hooks/sidenav/sidenavHook' 
-import * as userHooks from '../../hooks/login/userHook' 
+import * as userHooks from '../../hooks/user/userHook' 
 
 describe('Sidenav', () => {
     let sidenavStore: any;

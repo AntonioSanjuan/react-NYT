@@ -1,6 +1,6 @@
-import { UserResponseDto } from "../../../models/dtos/user/user.model";
+import { UserCredential } from "firebase/auth";
 
 export interface UserState {
   isLogged: boolean;
-  userData: UserResponseDto | undefined;
+  userData: UserCredential | undefined;
 }

@@ -1,7 +1,7 @@
 import './blurAnimation.scss'
 
 export const inBlurAnimation = {
-  'pointer-events': "none",
+  pointerEvents: 'none',
   animation: "inBlurAnimationKeyframe 800ms ease-in",
   animationFillMode: "forwards"
 };

@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useUser } from '../../hooks/login/userHook';
+import { useUser } from '../../hooks/user/userHook';
 import { useSidenavLayer } from '../../hooks/sidenav/sidenavHook';
 import { useAppSelector } from '../../hooks/state/appStateHook';
 import { selectUserIsLogged } from '../../state/user/user.selectors';

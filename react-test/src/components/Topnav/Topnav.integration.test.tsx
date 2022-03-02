@@ -77,7 +77,7 @@ describe('Topnav', () => {
         expect(setLoginButtonHiddenMock).toHaveBeenCalledWith(false);
 
         await act(async () => {
-            topnavStore.dispatch(actions.setUset({ userName: 'testing_username'}));
+            topnavStore.dispatch(actions.setUset);
         })
         
         expect(setLoginButtonHiddenMock).toHaveBeenCalledWith(true);

@@ -1,11 +1,11 @@
-import { UserResponseDto } from "../../models/dtos/user/user.model"
+import { UserCredential } from "firebase/auth"
 
 export enum UserActions {
     setUser = '@action/setUSer',
     unsetUser = '@action/unsetUSer'
 }
 
-export const setUset = (userData: UserResponseDto) => ({
+export const setUset = (userData: UserCredential) => ({
     type: UserActions.setUser,
     payload: userData
 })

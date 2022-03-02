@@ -2,7 +2,7 @@ import Login from './Login'
 import { fireEvent, render, screen } from '@testing-library/react'
 import { Provider } from 'react-redux';
 import { store } from '../../state/rootState';
-import * as userHooks from '../../hooks/login/userHook' 
+import * as userHooks from '../../hooks/user/userHook' 
 
 import {createMemoryHistory} from 'history'
 import { Router } from 'react-router-dom';
