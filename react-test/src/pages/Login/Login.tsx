@@ -1,20 +1,38 @@
-import React, { useState } from "react";
-import './Login.scss'
-import logo from "../../assets/images/Logo.png"
+import './Login.scss';
+import logo from "../../assets/images/Logo.png";
 import { useUser } from "../../hooks/user/userHook";
 import { Loading } from "../../components/common/loading/loading";
 import { useNavigate } from "react-router-dom";
+import * as Yup from "yup";
+import { FormikProps, useFormik } from "formik";
+
+interface LoginFormModel {
+  username: string,
+  password: string
+}
 
 function LoginPage() {
-  const [username, setUsername] = useState<string|undefined>(undefined);
-  const [password, setPassword] = useState<string|undefined>(undefined);
   
   const { login, loading, error } = useUser()
   const navigate = useNavigate();
-  const handleSubmit = (async (e: any) => {
-    e.preventDefault();
 
-    await login({ username, password })
+  const formik: FormikProps<LoginFormModel> = useFormik<LoginFormModel>({
+    initialValues: {
+      username: '',
+      password: '',
+    },
+    validationSchema: Yup.object({
+      username: Yup.string().required().email(),
+      password: Yup.string().required(),
+    }),
+    onSubmit: async (values, { resetForm }) => {
+      await handleSubmit(values)
+      resetForm();
+    }
+  });
+
+  const handleSubmit = (async (form: LoginFormModel) => {
+    await login({ username: form.username, password: form.password })
     navigate('/')
   });
 
@@ -30,23 +48,45 @@ function LoginPage() {
         <div className="Login_Logo">
           <img src={logo} alt="logo"/>
         </div>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={formik.handleSubmit}>
           <div className="form-floating">
-            <input type="email" className="form-control" placeholder="name@example.com"           
-              onChange={(e) => setUsername(e.target.value)}
-              defaultValue={username}
+            <input 
+            type="email" 
+            id="username"
+            name="username"         
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.username}
+            className="form-control" 
+            placeholder="name@example.com"  
             />
             <label>Username</label>
+            {
+              formik.touched.username && formik.errors.username ? (
+                  <span className="app_font_error">{formik.errors.username}</span>
+              ) : null
+            }
           </div>
           <div className="form-floating">
-            <input type="password" className="form-control" placeholder="****"
-              onChange={(e) => setPassword(e.target.value)}
-              defaultValue={password}
+            <input 
+            type="password"
+            id="password"
+            name="password"  
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.password}
+            className="form-control" 
+            placeholder="****"
             />
           <label>Password</label>
+          {
+              formik.touched.password && formik.errors.password ? (
+                  <span className="app_font_error">{formik.errors.password}</span>
+              ) : null
+            }
           </div>
           <div className="Login_ActionContainer">
-              <button disabled={!!!username || !!!password} className="btn btn-primary w-100" type="submit">
+              <button disabled={!formik.isValid} className="btn btn-primary w-100" type="submit">
                 Login
               </button>
           </div>

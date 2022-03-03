@@ -6,9 +6,11 @@ export function useAnimationByStateTransition(newAnimationState: boolean|undefin
   const [stateTransition, setStateTransition] = useState<boolean>(false);
 
   const transitionExists = (): boolean => {
-    return (currentAnimationState !== undefined && 
-    newAnimationState !== undefined && 
-    currentAnimationState !== newAnimationState)
+    return (
+      currentAnimationState !== undefined && 
+      newAnimationState !== undefined && 
+      currentAnimationState !== newAnimationState
+    )
   }
 
   useEffect(() => {
@@ -17,6 +19,7 @@ export function useAnimationByStateTransition(newAnimationState: boolean|undefin
     }
     setCurrentAnimationState(newAnimationState);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentAnimationState, newAnimationState])
 
   return {stateTransition}
