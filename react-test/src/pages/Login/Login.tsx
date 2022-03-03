@@ -62,9 +62,8 @@ function LoginPage() {
             />
             <label>Username</label>
             {
-              formik.touched.username && formik.errors.username ? (
+              formik.touched.username && formik.errors.username &&
                   <span className="app_font_error">{formik.errors.username}</span>
-              ) : null
             }
           </div>
           <div className="form-floating">
@@ -80,14 +79,16 @@ function LoginPage() {
             />
           <label>Password</label>
           {
-              formik.touched.password && formik.errors.password ? (
-                  <span className="app_font_error">{formik.errors.password}</span>
-              ) : null
+              formik.touched.password && formik.errors.password && 
+              <span className="app_font_error">{formik.errors.password}</span>
             }
           </div>
           <div className="Login_ActionContainer">
-              <button disabled={!formik.isValid} className="btn btn-primary w-100" type="submit">
-                Login
+              <button 
+              disabled={!formik.dirty || !formik.isValid} 
+              className="btn btn-primary w-100" 
+              type="submit">
+                  Login
               </button>
           </div>
         </form>
@@ -96,7 +97,7 @@ function LoginPage() {
           <>
             <div className="Login_ErrorContainer">
               <p className="app_font_error">
-                Error, try it again
+                Error!, try it again
               </p>
             </div>
           </>
