@@ -26,8 +26,8 @@ function LoginPage() {
       password: Yup.string().required(),
     }),
     onSubmit: async (values, { resetForm }) => {
-      await handleSubmit(values)
       resetForm();
+      await handleSubmit(values)
     }
   });
 
