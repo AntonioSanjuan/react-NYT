@@ -3,17 +3,19 @@ import './Login.scss'
 import logo from "../../assets/images/Logo.png"
 import { useUser } from "../../hooks/user/userHook";
 import { Loading } from "../../components/common/loading/loading";
+import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
   const [username, setUsername] = useState<string|undefined>(undefined);
   const [password, setPassword] = useState<string|undefined>(undefined);
   
   const { login, loading, error } = useUser()
-
+  const navigate = useNavigate();
   const handleSubmit = (async (e: any) => {
     e.preventDefault();
 
     await login({ username, password })
+    navigate('/')
   });
 
   return (

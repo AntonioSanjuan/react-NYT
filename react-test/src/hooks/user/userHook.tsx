@@ -2,16 +2,16 @@ import { useCallback, useState } from "react"
 import { useAppDispatch } from "../state/appStateHook";
 import * as actions from '../../state/user/user.actions'
 import { firebaseLogin, firebaseLogout } from "../../services/firebaseAuth/firebaseAuth.service";
-import { useNavigate } from "react-router-dom";
+import { UserCredential } from "@firebase/auth";
 
 export function useUser () {
     const dispatch = useAppDispatch();
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const [loading, setLoading] = useState<boolean>(false)
     const [error, setError] = useState<boolean>(false)
     
-    const login = useCallback(async ({username, password}): Promise<void> => {
+    const login = useCallback(async ({username, password}): Promise<UserCredential> => {
         setLoading(true);
 
         return firebaseLogin(username, password)
@@ -20,12 +20,14 @@ export function useUser () {
             setError(false);
 
             dispatch(actions.setUset(resp))
-            navigate('/');
+            return resp;
         }).catch((e) => {
             setLoading(false);
             setError(true)
+            throw e;
         })
-    }, [dispatch, navigate])
+
+    }, [dispatch])
     
     const logout = useCallback(() => {
         firebaseLogout()

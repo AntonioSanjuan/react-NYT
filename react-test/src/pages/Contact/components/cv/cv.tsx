@@ -9,7 +9,6 @@ function CV() {
     const skillsRef = useRef(null);
 
     const scroolTo = (el: React.MutableRefObject<any>) => {
-        console.log("el", el)
         el.current.scrollIntoView({behavior: 'smooth', block: 'start'});
     }
 

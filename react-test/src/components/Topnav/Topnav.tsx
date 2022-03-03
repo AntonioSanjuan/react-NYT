@@ -54,8 +54,8 @@ function Topnav({displayLoginButton, hideSidenavButton, hideSearchButton} :
           </Link>
           </div>
           <div className="TopNav_Rightcontainer">
-             <Link to="/Login">
-              <button type="button" className="btn btn-primary" style={{visibility: loginButtonHidden ? 'hidden': 'visible'}}>
+             <Link to="/Login" style={{visibility: loginButtonHidden ? 'hidden': 'visible'}}>
+              <button type="button" className="btn btn-primary">
                 Login
               </button>
             </Link>

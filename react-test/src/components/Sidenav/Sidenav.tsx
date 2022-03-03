@@ -21,7 +21,6 @@ function Sidenav() {
     }
 
     const handleSearch = (searchInput: string) => {
-        console.log("searchValue", searchInput)
         handleNavigation('/')
     }
 

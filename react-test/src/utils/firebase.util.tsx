@@ -12,8 +12,6 @@ const firebaseConfig = {
     projectId: FIREBASE_PROJECT_ID
 };
 
-// Initialize Firebase
-console.log("cuantas veces?")
 const app = initializeApp(firebaseConfig);
 
 export const auth = getAuth();

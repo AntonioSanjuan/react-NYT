@@ -3,10 +3,10 @@ import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import { Layout } from './layouts/BaseLayout/BaseLayout';
 import { LoginLayout } from './layouts/LoginLayout/LoginLayout';
-import ContactPage from './pages/Contact/Contact';
 
 const Home = React.lazy(() => import("./pages/Home/Home"));
 const Login = React.lazy(() => import("./pages/Login/Login"));
+const Contact = React.lazy(() => import("./pages/Contact/Contact"));
 
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
             path="contact"
             element={
               <React.Suspense fallback={<>...</>}>
-                <ContactPage />
+                <Contact />
               </React.Suspense>
             }
           />

@@ -10,6 +10,7 @@ import {createMemoryHistory} from 'history'
 import { Router } from 'react-router-dom';
 import * as hooks from '../../hooks/sidenav/sidenavHook' 
 import React from 'react';
+import { UserCredential } from 'firebase/auth';
 describe('Topnav', () => {
     let topnavStore: any;
     let history: any;
@@ -77,7 +78,7 @@ describe('Topnav', () => {
         expect(setLoginButtonHiddenMock).toHaveBeenCalledWith(false);
 
         await act(async () => {
-            topnavStore.dispatch(actions.setUset);
+            topnavStore.dispatch(actions.setUset({} as UserCredential));
         })
         
         expect(setLoginButtonHiddenMock).toHaveBeenCalledWith(true);
