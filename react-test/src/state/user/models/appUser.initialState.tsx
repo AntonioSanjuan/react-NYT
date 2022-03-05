@@ -1,6 +1,7 @@
 import { UserState } from './appUser.state';
 
-export const userInitialState = {
+export const userInitialState: UserState = {
   isLogged: false,
   userData: undefined,
-} as UserState;
+  userStoredArticles: undefined
+};

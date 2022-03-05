@@ -1,23 +1,29 @@
+import { useCallback } from 'react';
+import { useStoredArticle } from '../../hooks/storedArticle/storedArticleHook';
+import { useAppSelector } from '../../hooks/state/appStateHook';
 import { MostPopularViewedArticlesResponseContentDto } from '../../models/dtos/mostPopularViewedArticles/mostPopularViewedArticlesResponseDto.model';
+import { selectUserIsLogged } from '../../state/user/user.selectors';
 import './Newcard.scss';
 
-function Newscard({article}: {article: MostPopularViewedArticlesResponseContentDto}) {
+function Newscard({article, showDeleteStoredArticle}: {article: MostPopularViewedArticlesResponseContentDto, showDeleteStoredArticle?: boolean}) {
+    const {addStoredArticle, deleteStoredArticle } = useStoredArticle()
+    const userIsLogged = useAppSelector<boolean>(selectUserIsLogged);
 
-    const hasImage = () => {
+    const hasImage = useCallback(() => {
         return !!article?.media[0];
-    }
+    }, [article])
 
-    const getImage = () => {
+    const getImage = useCallback(() => {
         const mediaMetadataIndex =
-          article?.media[0]['media-metadata'].length - 1;
+        article?.media[0]['media-metadata'].length - 1;
     
         return article?.media[0]['media-metadata'][mediaMetadataIndex].url;
-    }
+    }, [article])
 
     return (
         <> 
         {
-            <div onClick={() => window.open(article.url, '_blank')?.focus() } className="NewsCard_MainContainer">
+            <div className="NewsCard_MainContainer">
                 <div className="NewsCard_ImageContainer">
                     {article && hasImage()? 
                     <>
@@ -58,6 +64,24 @@ function Newscard({article}: {article: MostPopularViewedArticlesResponseContentD
                     <p className="app_font_s">
                         {article?.abstract}
                     </p>
+                </div>
+                <div className="NewsCard_ActionContainer" style={{display: userIsLogged ? 'inherit': 'none'}}>
+                    <div className='NewsCard_Leftcontainer'>
+                        <button type="button" className="btn btn-dark" aria-label="add from stored articles" onClick={() => addStoredArticle(article)}>
+                            <i className="bi bi-save2-fill"></i>
+                        </button>         
+                        <button type="button" className="btn btn-dark" aria-label="go to see full information" onClick={() => window.open(article.url, '_blank')?.focus()}>
+                            <i className="bi bi-globe"></i>
+                        </button>
+                    </div>
+                    <div className='NewsCard_Rightcontainer'>
+                        <button type="button" style={{visibility: showDeleteStoredArticle ? 'visible': 'hidden'}} className="btn btn-dark" aria-label="remove from stored articles" onClick={() => deleteStoredArticle()}>
+                            <i className="bi bi-trash-fill"></i>
+                        </button>
+                    </div>
+
+                    
+
                 </div>
             </div>
         }

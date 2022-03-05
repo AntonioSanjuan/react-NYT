@@ -1,5 +1,5 @@
 import { LayoutState } from "./appLayout.state";
 
-export const layoutInitialState = {
+export const layoutInitialState: LayoutState = {
   isSidenavOpened: false,
-} as LayoutState;
+};

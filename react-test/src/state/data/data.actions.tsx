@@ -11,7 +11,6 @@ export const setMostPopularViewedArticles = (mostPopularViewedArticles: MostPopu
     payload: {mostPopularViewedArticles, mostPopularViewedArticlesRequestedPage}
 })
 
-
 export const unsetMostPopularViewedArticles = () => ({
     type: DataActions.setMostPopularViewedArticles,
 })

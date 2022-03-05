@@ -38,8 +38,14 @@ function Sidenav() {
                         </div>
                         <div className="sidenav_Section" onClick={() => {handleNavigation('/')}}>
                             <Section 
-                                sectionName={'Most Popular Articles'}>
-                                <i className="bi bi-bar-chart-line-fill"></i>
+                                sectionName={'Popular Articles'}>
+                                <i className="bi bi-book-fill"></i>
+                            </Section>
+                        </div>
+                        <div className="sidenav_Section" style={{display: isLoggedIn ? 'inherit': 'none'}} onClick={() => {handleNavigation('/storedArticles')}}>
+                            <Section 
+                                sectionName={'Stored Articles'}>
+                                <i className="bi bi-bookmark-star-fill"></i>
                             </Section>
                         </div>
                         <div className="sidenav_Section">
