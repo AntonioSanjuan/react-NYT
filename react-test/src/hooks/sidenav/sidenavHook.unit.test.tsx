@@ -4,7 +4,7 @@ import { useSidenavLayer } from './sidenavHook';
 import { Dispatch } from '@reduxjs/toolkit';
 
 import * as hooks from '../../hooks/state/appStateHook' 
-import * as actions from '../../state/layout/layout.actions'
+import { switchSidenavStatusAction } from '../../state/layout/layout.actions';
 
 describe('<useSidenavLayer />', () => {
     const useAppDispatchMockResponse = jest.fn((action) => {}) as Dispatch<any>
@@ -29,6 +29,6 @@ describe('<useSidenavLayer />', () => {
         result.current.switchSidenavStatus()
         
         expect(useAppDispatchMockResponse).toHaveBeenCalled()
-        expect(useAppDispatchMockResponse).toHaveBeenCalledWith(actions.switchSidenavStatus())
+        expect(useAppDispatchMockResponse).toHaveBeenCalledWith(switchSidenavStatusAction())
     })
 })

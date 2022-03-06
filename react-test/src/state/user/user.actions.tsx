@@ -12,11 +12,11 @@ export const setUserStoredArticles = (userStoredArticles: FirebaseStoredArticleI
     payload: userStoredArticles
 })
 
-export const setUset = (userData: UserCredential) => ({
+export const setUsetAction = (userData: UserCredential) => ({
     type: UserActions.setUser,
     payload: userData
 })
 
-export const unsetUset = () => ({
+export const unsetUsetAction = () => ({
     type: UserActions.unsetUser
 })

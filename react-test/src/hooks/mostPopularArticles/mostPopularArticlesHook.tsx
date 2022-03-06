@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import {getMostPopularViewedArticles} from "../../services/NYTdataSupplier/mostPopular/nytMostPupular.service";
 import { useAppDispatch, useAppSelector } from "../state/appStateHook";
-import * as actions from '../../state/data/data.actions'
 import { selectData } from "../../state/data/data.selectors";
 import { DataState } from "../../state/data/models/appData.state";
 import { PeriodOfTimes } from "../../models/internal/types/PeriodOfTimeEnum.model";
+import { setMostPopularViewedArticlesAction, unsetMostPopularViewedArticlesAction } from "../../state/data/data.actions";
 
 export function useMostPopularArticles ({periodOfTime}: {periodOfTime: PeriodOfTimes}) {
     const dispatch = useAppDispatch();
@@ -23,12 +23,12 @@ export function useMostPopularArticles ({periodOfTime}: {periodOfTime: PeriodOfT
             .then(mostPopularArticles => {
                 setLoading(false)
                 setMostPopularArticles(mostPopularArticles)
-                dispatch(actions.setMostPopularViewedArticles(mostPopularArticles, periodOfTime))
+                dispatch(setMostPopularViewedArticlesAction(mostPopularArticles, periodOfTime))
             }).catch((e) => {
                 setError(true);
                 setLoading(false)
                 setMostPopularArticles(undefined)
-                dispatch(actions.unsetMostPopularViewedArticles())
+                dispatch(unsetMostPopularViewedArticlesAction())
             })
         }
     }, [dispatch, periodOfTime, storedData])

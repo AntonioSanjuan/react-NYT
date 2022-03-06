@@ -1,7 +1,6 @@
 import { Topnav } from './Topnav'
 import { fireEvent, render, screen } from '@testing-library/react'
 import { Provider } from 'react-redux';
-import { store } from '../../state/rootState';
 
 import { act } from 'react-dom/test-utils';
 
@@ -10,7 +9,8 @@ import { Router } from 'react-router-dom';
 import * as hooks from '../../hooks/sidenav/sidenavHook' 
 import React from 'react';
 import { UserCredential } from 'firebase/auth';
-import { setUset } from '../../state/user/user.actions';
+import { setUsetAction } from '../../state/user/user.actions';
+import { createTestStore } from '../../utils/testsUtils/createTestStore.util';
 describe('Topnav', () => {
     let topnavStore: any;
     let history: any;
@@ -19,7 +19,7 @@ describe('Topnav', () => {
     const switchSidenavStatusMock = jest.fn(() => {})
 
     beforeEach(() => {
-        topnavStore = {...store};
+        topnavStore = createTestStore();
         history = createMemoryHistory();
 
         const useState_loginButtonHidden_Mock = jest.spyOn(React, 'useState');
@@ -78,7 +78,7 @@ describe('Topnav', () => {
         expect(setLoginButtonHiddenMock).toHaveBeenCalledWith(false);
 
         await act(async () => {
-            topnavStore.dispatch(setUset({} as UserCredential));
+            topnavStore.dispatch(setUsetAction({} as UserCredential));
         })
         
         expect(setLoginButtonHiddenMock).toHaveBeenCalledWith(true);

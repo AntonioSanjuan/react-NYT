@@ -1,14 +1,14 @@
 import { Newscard } from './Newcard'
 import { act, fireEvent, render, screen } from '@testing-library/react'
 import { Provider } from 'react-redux';
-import { store } from '../../state/rootState';
 
 import {createMemoryHistory} from 'history'
 import { Router } from 'react-router-dom';
 import * as storedArticlesHook from '../../hooks/storedArticle/storedArticleHook' 
 import { MostPopularViewedArticlesResponseContentDto } from '../../models/dtos/mostPopularViewedArticles/mostPopularViewedArticlesResponseDto.model';
 import { UserCredential } from 'firebase/auth';
-import { setUset } from '../../state/user/user.actions';
+import { setUsetAction } from '../../state/user/user.actions';
+import { createTestStore } from '../../utils/testsUtils/createTestStore.util';
 
 describe('Newcard', () => {
     let sidenavStore: any;
@@ -20,7 +20,7 @@ describe('Newcard', () => {
         media: [{'media-metadata': [{url: 'http://testingUrl'}]}],
     } as MostPopularViewedArticlesResponseContentDto;
     beforeEach(() => {
-        sidenavStore = {...store};
+        sidenavStore = createTestStore();
         history = createMemoryHistory();
 
         const useUserMock = jest.spyOn(storedArticlesHook, 'useStoredArticle');
@@ -63,7 +63,7 @@ describe('Newcard', () => {
         expect(screen.getByLabelText("add from stored articles")).not.toBeVisible()
 
         await act(async () => {
-            sidenavStore.dispatch(setUset({} as UserCredential));
+            sidenavStore.dispatch(setUsetAction({} as UserCredential));
         })
 
         expect(screen.getByLabelText("add from stored articles")).toBeVisible()
@@ -79,7 +79,7 @@ describe('Newcard', () => {
         );
 
         await act(async () => {
-            sidenavStore.dispatch(setUset({} as UserCredential));
+            sidenavStore.dispatch(setUsetAction({} as UserCredential));
         })
 
         expect(addStoredArticleMock).not.toHaveBeenCalled()

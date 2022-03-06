@@ -4,9 +4,9 @@ import { Provider } from 'react-redux';
 import {createMemoryHistory} from 'history'
 
 import HomePage from './Home'
-import { store } from '../../state/rootState';
 
 import * as mostPopularArticlesHooks from "../../hooks/mostPopularArticles/mostPopularArticlesHook"
+import { createTestStore } from '../../utils/testsUtils/createTestStore.util';
 
 describe('HomePage', () => {
     let homeStore: any;
@@ -15,7 +15,7 @@ describe('HomePage', () => {
     let useMostPopularArticlesMock: any;
 
     beforeEach(() => {
-        homeStore = {...store};
+        homeStore = createTestStore();
         history = createMemoryHistory();
 
         useMostPopularArticlesMock = jest.spyOn(mostPopularArticlesHooks, 'useMostPopularArticles').mockReturnValue({mostPopularArticles: undefined} as any);

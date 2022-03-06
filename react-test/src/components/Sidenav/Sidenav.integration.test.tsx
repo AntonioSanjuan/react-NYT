@@ -1,12 +1,12 @@
 import { Sidenav } from './Sidenav'
 import { fireEvent, render, screen } from '@testing-library/react'
 import { Provider } from 'react-redux';
-import { store } from '../../state/rootState';
 
 import {createMemoryHistory} from 'history'
 import { Router } from 'react-router-dom';
 import * as sidenavHooks from '../../hooks/sidenav/sidenavHook' 
 import * as userHooks from '../../hooks/user/userHook' 
+import { createTestStore } from '../../utils/testsUtils/createTestStore.util';
 
 describe('Sidenav', () => {
     let sidenavStore: any;
@@ -16,7 +16,7 @@ describe('Sidenav', () => {
     const logoutMock = jest.fn(() => {})
 
     beforeEach(() => {
-        sidenavStore = {...store};
+        sidenavStore = createTestStore();
         history = createMemoryHistory();
 
         const useLayerMock = jest.spyOn(sidenavHooks, 'useSidenavLayer');

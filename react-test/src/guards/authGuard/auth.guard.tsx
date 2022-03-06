@@ -4,6 +4,5 @@ import { selectUserIsLogged } from "../../state/user/user.selectors";
 
 export const AuthRouteGuard = ({ children }: {children: any}) => {
     const userIsLogged = useAppSelector<boolean>(selectUserIsLogged);
-    
     return userIsLogged ? children : <Navigate to="/" />;
 }

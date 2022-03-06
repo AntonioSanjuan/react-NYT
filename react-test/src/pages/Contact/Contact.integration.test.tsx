@@ -3,8 +3,8 @@ import { Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import {createMemoryHistory} from 'history'
 
-import { store } from '../../state/rootState';
 import ContactPage from './Contact';
+import { createTestStore } from '../../utils/testsUtils/createTestStore.util';
 
 
 describe('Contact', () => {
@@ -12,7 +12,7 @@ describe('Contact', () => {
     let history: any;
 
     beforeEach(() => {
-        contactStore = {...store};
+        contactStore = createTestStore();
         history = createMemoryHistory();
     });
 

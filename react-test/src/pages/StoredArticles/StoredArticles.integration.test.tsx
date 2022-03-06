@@ -3,10 +3,11 @@ import { Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import {createMemoryHistory} from 'history'
 
-import CV from './cv';
-import { createTestStore } from '../../../../utils/testsUtils/createTestStore.util';
+import StoredArticles from './StoredArticles';
+import { createTestStore } from '../../utils/testsUtils/createTestStore.util';
 
-describe('CV', () => {
+
+describe('Contact', () => {
     let contactStore: any;
     let history: any;
 
@@ -19,7 +20,7 @@ describe('CV', () => {
         const { container } = render(
             <Provider store={contactStore}>
                 <Router location={history.location} navigator={history}>
-                    <CV/>
+                    <StoredArticles/>
                 </Router>
             </Provider>
         );

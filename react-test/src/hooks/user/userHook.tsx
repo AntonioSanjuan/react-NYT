@@ -1,8 +1,8 @@
 import { useCallback, useState } from "react"
 import { useAppDispatch } from "../state/appStateHook";
-import * as actions from '../../state/user/user.actions'
 import { firebaseLogin, firebaseLogout } from "../../services/firebaseAuth/firebaseAuth.service";
 import { UserCredential } from "@firebase/auth";
+import { setUsetAction, unsetUsetAction } from "../../state/user/user.actions";
 
 export function useUser () {
     const dispatch = useAppDispatch();
@@ -19,7 +19,7 @@ export function useUser () {
             setLoading(false);
             setError(false);
 
-            dispatch(actions.setUset(resp))
+            dispatch(setUsetAction(resp))
             return resp;
         }).catch((e) => {
             setLoading(false);
@@ -31,7 +31,7 @@ export function useUser () {
     
     const logout = useCallback(() => {
         firebaseLogout()
-        dispatch(actions.unsetUset())
+        dispatch(unsetUsetAction())
     }, [dispatch])
 
     return {

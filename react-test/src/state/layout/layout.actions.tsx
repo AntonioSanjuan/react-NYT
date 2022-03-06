@@ -2,6 +2,6 @@ export enum LayoutActions {
     switchSidenavStatus = '@action/switchSidenavStatus'
 }
 
-export const switchSidenavStatus = () => ({
+export const switchSidenavStatusAction = () => ({
     type: LayoutActions.switchSidenavStatus
 })

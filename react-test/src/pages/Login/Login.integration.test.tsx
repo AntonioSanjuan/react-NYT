@@ -1,11 +1,11 @@
 import Login from './Login'
 import { fireEvent, render, screen } from '@testing-library/react'
 import { Provider } from 'react-redux';
-import { store } from '../../state/rootState';
 import * as userHooks from '../../hooks/user/userHook';
 import {createMemoryHistory} from 'history'
 import { Router } from 'react-router-dom';
 import { act } from 'react-dom/test-utils';
+import { createTestStore } from '../../utils/testsUtils/createTestStore.util';
 
 describe('Login', () => {
     let loginStore: any;
@@ -14,7 +14,7 @@ describe('Login', () => {
     const loginMock = jest.fn(() => {})
 
     beforeEach(() => {
-        loginStore = {...store};
+        loginStore = createTestStore();
         history = createMemoryHistory();
 
         const useUserMock = jest.spyOn(userHooks, 'useUser');

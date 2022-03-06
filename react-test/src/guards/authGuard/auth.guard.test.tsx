@@ -1,9 +1,109 @@
-import { Navigate } from "react-router-dom";
-import { useAppSelector } from "../../hooks/state/appStateHook";
-import { selectUserIsLogged } from "../../state/user/user.selectors";
+import { act, render } from '@testing-library/react'
+import { Route, Router, Routes } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import {createMemoryHistory} from 'history'
 
-export const AuthRouteGuard = ({ children }: {children: any}) => {
-    const userIsLogged = useAppSelector<boolean>(selectUserIsLogged);
-    
-    return userIsLogged ? children : <Navigate to="/" />;
-}
+import { AuthRouteGuard } from './auth.guard';
+import { UserCredential } from 'firebase/auth';
+import { setUsetAction } from '../../state/user/user.actions';
+import { createTestStore } from '../../utils/testsUtils/createTestStore.util';
+
+
+describe('AuthRouteGuard', () => {
+    let authGuardStore: any;
+    let history: any;
+
+    beforeEach(() => {
+        authGuardStore = createTestStore();;
+        history = createMemoryHistory();
+    });
+
+    it('should create', () => {
+        const { container } = render(
+            <Provider store={authGuardStore}>
+                <Router location={history.location} navigator={history}>
+                    <Routes>
+                        <Route
+                            path="/"
+                            element={
+                                <p> view ! </p>
+                            }
+                        />
+                        <Route
+                            path="/testUri"
+                            element={
+                                <AuthRouteGuard>
+                                    <p> view ! </p>
+                                </AuthRouteGuard>
+                            }
+                        />
+                    </Routes>
+                </Router>
+            </Provider>
+        );
+
+        expect(container).toBeDefined()
+    });
+
+    it('if !userIsLogged, guard should redirect to default route', () => {
+        history.push('/testUri');
+        render(
+            <Provider store={authGuardStore}>
+                <Router location={history.location} navigator={history}>
+                    <Routes>
+                        <Route
+                            path="/"
+                            element={
+                                <p>  default view! </p>
+                            }
+                        />
+                        <Route
+                            path="/testUri"
+                            element={
+                                <AuthRouteGuard>
+                                    <p>  target view! </p>
+                                </AuthRouteGuard>
+                            }
+                        />
+                    </Routes>
+                </Router>
+            </Provider>
+        );
+
+        expect(history.location.pathname).toEqual('/')
+    })
+
+    it('if userIsLogged, guard should allow children view', async () => {
+        await act(async () => {
+            authGuardStore.dispatch(setUsetAction({} as UserCredential));
+        })
+
+        history.push('/testUri');
+        render(
+            <Provider store={authGuardStore}>
+                <Router location={history.location} navigator={history}>
+                    <Routes>
+                        <Route
+                            path="/"
+                            element={
+                                <p>  target view! </p>
+                            }
+                        />
+                        <Route
+                            path="/testUri"
+                            element={
+                                <AuthRouteGuard>
+                                    <p>  default view! </p>
+                                </AuthRouteGuard>
+                            }
+                        />
+                    </Routes>
+                </Router>
+            </Provider>
+        );
+
+ 
+
+        expect(history.location.pathname).toEqual('/testUri')
+    });
+})

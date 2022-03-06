@@ -13,11 +13,12 @@ export interface AppRootState {
     data: DataState
 }
 
-const combinedReducers = combineReducers({
+export const combinedReducers = combineReducers({
   user: userReducer,
   layout: layoutReducer,
   data: dataReducer
 })
+
 export const store = createStore(
   combinedReducers,
   composeWithDevTools()

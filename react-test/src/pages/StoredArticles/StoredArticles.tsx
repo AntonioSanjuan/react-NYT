@@ -8,7 +8,6 @@ function StoredArticlesPage() {
   const { storedArticles, loading, error } = useFetchStoredArticles()
 
   useEffect(() => {
-    console.log("storedArticlesPageInit", storedArticles)
   }, [storedArticles])
 
   return (

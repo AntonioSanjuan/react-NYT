@@ -2,10 +2,9 @@ import { act, renderHook} from '@testing-library/react-hooks'
 import { Dispatch } from '@reduxjs/toolkit';
 
 import { useUser } from './userHook';
-import * as actions from '../../state/user/user.actions'
 import * as hooks from '../state/appStateHook' 
 import * as services from '../../services/firebaseAuth/firebaseAuth.service'
-import { setUset } from '../../state/user/user.actions';
+import { setUsetAction, unsetUsetAction } from '../../state/user/user.actions';
 import { UserCredential } from 'firebase/auth';
 
 describe('<useUser />', () => {
@@ -49,7 +48,7 @@ describe('<useUser />', () => {
         })
         
         expect(useAppDispatchMockResponse).toHaveBeenCalled()
-        expect(useAppDispatchMockResponse).toHaveBeenCalledWith(setUset(output))
+        expect(useAppDispatchMockResponse).toHaveBeenCalledWith(setUsetAction(output))
 
         expect(result.current.error).toBeFalsy()
         expect(result.current.loading).toBeFalsy()
@@ -80,6 +79,6 @@ describe('<useUser />', () => {
         result.current.logout()
         
         expect(useAppDispatchMockResponse).toHaveBeenCalled()
-        expect(useAppDispatchMockResponse).toHaveBeenCalledWith(actions.unsetUset())
+        expect(useAppDispatchMockResponse).toHaveBeenCalledWith(unsetUsetAction())
     })
 })
