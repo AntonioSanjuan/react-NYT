@@ -11,22 +11,22 @@ import React from 'react';
 import { UserCredential } from 'firebase/auth';
 import { setUsetAction } from '../../state/user/user.actions';
 import { createTestStore } from '../../utils/testsUtils/createTestStore.util';
+import { useSidenavMock } from '../../hooks/sidenav/sidenavHook.mock';
 describe('Topnav', () => {
     let topnavStore: any;
     let history: any;
 
     const setLoginButtonHiddenMock = jest.fn(() => {});
-    const switchSidenavStatusMock = jest.fn(() => {})
 
     beforeEach(() => {
         topnavStore = createTestStore();
         history = createMemoryHistory();
 
         const useState_loginButtonHidden_Mock = jest.spyOn(React, 'useState');
-        const useLayerMock = jest.spyOn(hooks, 'useSidenavLayer');
+        const useSidenavSpy = jest.spyOn(hooks, 'useSidenavLayer');
 
         useState_loginButtonHidden_Mock.mockImplementation(() => [undefined, setLoginButtonHiddenMock]);
-        useLayerMock.mockImplementation(() => { return {switchSidenavStatus: switchSidenavStatusMock}})
+        useSidenavSpy.mockImplementation(useSidenavMock)
         expect(setLoginButtonHiddenMock).toHaveBeenCalledTimes(0)
 
     });
@@ -94,7 +94,7 @@ describe('Topnav', () => {
             </Provider>
         );
         
-        expect(switchSidenavStatusMock).not.toHaveBeenCalled()
+        expect(useSidenavMock().switchSidenavStatus).not.toHaveBeenCalled()
 
         fireEvent.click(
             screen.getAllByRole('button', {
@@ -102,7 +102,7 @@ describe('Topnav', () => {
             })[0]
         )
 
-        expect(switchSidenavStatusMock).toHaveBeenCalled()
+        expect(useSidenavMock().switchSidenavStatus).toHaveBeenCalled()
 
     });
 })

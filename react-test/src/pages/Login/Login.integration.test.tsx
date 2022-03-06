@@ -6,19 +6,18 @@ import {createMemoryHistory} from 'history'
 import { Router } from 'react-router-dom';
 import { act } from 'react-dom/test-utils';
 import { createTestStore } from '../../utils/testsUtils/createTestStore.util';
+import { useUserMock } from '../../hooks/user/userHook.mock';
 
 describe('Login', () => {
     let loginStore: any;
     let history: any;
 
-    const loginMock = jest.fn(() => {})
-
     beforeEach(() => {
         loginStore = createTestStore();
         history = createMemoryHistory();
 
-        const useUserMock = jest.spyOn(userHooks, 'useUser');
-        useUserMock.mockImplementation(() => { return {login: loginMock} as any})
+        const useUserSpy = jest.spyOn(userHooks, 'useUser');
+        useUserSpy.mockImplementation(useUserMock)
     })
 
     it('should create', () => {
@@ -44,7 +43,7 @@ describe('Login', () => {
             </Provider>
         );
 
-        expect(loginMock).not.toHaveBeenCalled()
+        expect(useUserMock().login).not.toHaveBeenCalled()
         const usernameInput = screen.getByPlaceholderText(/name@example.com/i);
         fireEvent.change(usernameInput, {target: {value: username}})
         const passwordInput = screen.getByPlaceholderText('****');
@@ -56,7 +55,7 @@ describe('Login', () => {
         await act(async () => {
             fireEvent.click(loginButton);
         })
-        expect(loginMock).toHaveBeenCalledWith({username, password})
+        expect(useUserMock().login).toHaveBeenCalledWith({username, password})
         expect(history.location.pathname).toEqual('/')
     });
 
@@ -70,7 +69,7 @@ describe('Login', () => {
             </Provider>
         );
 
-        expect(loginMock).not.toHaveBeenCalled()
+        expect(useUserMock().login).not.toHaveBeenCalled()
         const usernameInput = screen.getByPlaceholderText(/name@example.com/i);
 
         // eslint-disable-next-line testing-library/no-unnecessary-act
@@ -93,7 +92,7 @@ describe('Login', () => {
             </Provider>
         );
 
-        expect(loginMock).not.toHaveBeenCalled()
+        expect(useUserMock().login).not.toHaveBeenCalled()
         const usernameInput = screen.getByPlaceholderText(/name@example.com/i);
         const passwordInput = screen.getByPlaceholderText('****');
 

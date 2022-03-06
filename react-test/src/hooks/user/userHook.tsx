@@ -29,8 +29,8 @@ export function useUser () {
 
     }, [dispatch])
     
-    const logout = useCallback(() => {
-        firebaseLogout()
+    const logout = useCallback(async(): Promise<void> => {
+        await firebaseLogout()
         dispatch(unsetUsetAction())
     }, [dispatch])
 

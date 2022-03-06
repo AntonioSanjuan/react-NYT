@@ -7,23 +7,22 @@ import { Router } from 'react-router-dom';
 import * as sidenavHooks from '../../hooks/sidenav/sidenavHook' 
 import * as userHooks from '../../hooks/user/userHook' 
 import { createTestStore } from '../../utils/testsUtils/createTestStore.util';
+import {useUserMock} from "../../hooks/user/userHook.mock"
+import { useSidenavMock } from '../../hooks/sidenav/sidenavHook.mock';
 
 describe('Sidenav', () => {
     let sidenavStore: any;
     let history: any;
 
-    const switchSidenavStatusMock = jest.fn(() => {})
-    const logoutMock = jest.fn(() => {})
-
     beforeEach(() => {
         sidenavStore = createTestStore();
         history = createMemoryHistory();
 
-        const useLayerMock = jest.spyOn(sidenavHooks, 'useSidenavLayer');
-        useLayerMock.mockImplementation(() => { return {switchSidenavStatus: switchSidenavStatusMock}})
+        const useLayerSpy = jest.spyOn(sidenavHooks, 'useSidenavLayer');
+        useLayerSpy.mockImplementation(useSidenavMock)
 
-        const useUserMock = jest.spyOn(userHooks, 'useUser');
-        useUserMock.mockImplementation(() => { return {logout: logoutMock} as any})
+        const useUserSpy = jest.spyOn(userHooks, 'useUser');
+        useUserSpy.mockImplementation(useUserMock)
     });
 
     it('should create', () => {
@@ -47,14 +46,14 @@ describe('Sidenav', () => {
             </Provider>
         );
         
-        expect(switchSidenavStatusMock).not.toHaveBeenCalled()
+        expect(useSidenavMock().switchSidenavStatus).not.toHaveBeenCalled()
 
         fireEvent.click(
             screen.getByText('Popular Articles')
         )
 
         expect(history.location.pathname).toEqual('/')
-        expect(switchSidenavStatusMock).toHaveBeenCalled()
+        expect(useSidenavMock().switchSidenavStatus).toHaveBeenCalled()
     });
 
     it('Sidenav `navigateToStoredArticlesAction` secction should trigger navigation to storedArticles', () => {
@@ -66,14 +65,14 @@ describe('Sidenav', () => {
             </Provider>
         );
         
-        expect(switchSidenavStatusMock).not.toHaveBeenCalled()
+        expect(useSidenavMock().switchSidenavStatus).not.toHaveBeenCalled()
 
         fireEvent.click(
             screen.getByText('Stored Articles')
         )
 
         expect(history.location.pathname).toEqual('/storedArticles')
-        expect(switchSidenavStatusMock).toHaveBeenCalled()
+        expect(useSidenavMock().switchSidenavStatus).toHaveBeenCalled()
     });
 
     it('Sidenav `navigateToContactAction` secction should trigger navigation to contact', () => {
@@ -85,14 +84,14 @@ describe('Sidenav', () => {
             </Provider>
         );
         
-        expect(switchSidenavStatusMock).not.toHaveBeenCalled()
+        expect(useSidenavMock().switchSidenavStatus).not.toHaveBeenCalled()
 
         fireEvent.click(
             screen.getByText('Contact')
         )
 
         expect(history.location.pathname).toEqual('/contact')
-        expect(switchSidenavStatusMock).toHaveBeenCalledWith()
+        expect(useSidenavMock().switchSidenavStatus).toHaveBeenCalledWith()
     });
 
     it('Sidenav `exit` secction should trigger logout from useUser', () => {
@@ -104,14 +103,14 @@ describe('Sidenav', () => {
             </Provider>
         );
         
-        expect(logoutMock).not.toHaveBeenCalled()
+        expect(useUserMock().logout).not.toHaveBeenCalled()
 
 
         fireEvent.click(
             screen.getByText('Exit')
         )
 
-        expect(logoutMock).toHaveBeenCalled()
+        expect(useUserMock().logout).toHaveBeenCalled()
 
     });
 })

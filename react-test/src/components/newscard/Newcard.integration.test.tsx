@@ -9,25 +9,22 @@ import { MostPopularViewedArticlesResponseContentDto } from '../../models/dtos/m
 import { UserCredential } from 'firebase/auth';
 import { setUsetAction } from '../../state/user/user.actions';
 import { createTestStore } from '../../utils/testsUtils/createTestStore.util';
+import { useStoredArticleMock } from '../../hooks/storedArticle/storedArticleHook.mock';
 
 describe('Newcard', () => {
     let sidenavStore: any;
     let history: any;
 
-    const addStoredArticleMock = jest.fn(() => {})
-    const deleteStoredArticleMock = jest.fn(() => {})
     const inputArticle = {
         media: [{'media-metadata': [{url: 'http://testingUrl'}]}],
     } as MostPopularViewedArticlesResponseContentDto;
+    
     beforeEach(() => {
         sidenavStore = createTestStore();
         history = createMemoryHistory();
 
         const useUserMock = jest.spyOn(storedArticlesHook, 'useStoredArticle');
-        useUserMock.mockImplementation(() => { return {
-            addStoredArticle: addStoredArticleMock,
-            deleteStoredArticle: deleteStoredArticleMock
-        } as any})
+        useUserMock.mockImplementation(useStoredArticleMock)
     });
 
     it('should create', () => {
@@ -82,9 +79,9 @@ describe('Newcard', () => {
             sidenavStore.dispatch(setUsetAction({} as UserCredential));
         })
 
-        expect(addStoredArticleMock).not.toHaveBeenCalled()
+        expect(useStoredArticleMock().addStoredArticle).not.toHaveBeenCalled()
         fireEvent.click(screen.getByLabelText("add from stored articles"))
-        expect(addStoredArticleMock).toHaveBeenCalledWith(inputArticle)
+        expect(useStoredArticleMock().addStoredArticle).toHaveBeenCalledWith(inputArticle)
     });
 
     it('if remove from stored articles button its clicked removeStoredArticle hook func should be called', async () => {
@@ -96,8 +93,8 @@ describe('Newcard', () => {
             </Provider>
         );
 
-        expect(deleteStoredArticleMock).not.toHaveBeenCalled()
+        expect(useStoredArticleMock().deleteStoredArticle).not.toHaveBeenCalled()
         fireEvent.click(screen.getByLabelText("remove from stored articles"))
-        expect(deleteStoredArticleMock).toHaveBeenCalledWith()
+        expect(useStoredArticleMock().deleteStoredArticle).toHaveBeenCalledWith()
     });
 });

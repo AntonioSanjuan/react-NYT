@@ -4,13 +4,12 @@ import { Dispatch } from '@reduxjs/toolkit';
 import { useFetchStoredArticles } from './fetchStoredArticlesHook';
 
 import * as hooks from '../state/appStateHook' 
-import * as services from '../../services/firebaseStore/firebaseStore.service'
+import * as firebaseStoreService from '../../services/firebaseStore/firebaseStore.service'
 import { Provider } from 'react-redux';
 import { DocumentData, QuerySnapshot } from 'firebase/firestore';
 import { setUserStoredArticles } from '../../state/user/user.actions';
 import { act } from 'react-dom/test-utils';
 import { createTestStore } from '../../utils/testsUtils/createTestStore.util';
-import { setMostPopularViewedArticlesAction } from '../../state/data/data.actions';
 import { MostPopularViewedArticlesResponseContentDto } from '../../models/dtos/mostPopularViewedArticles/mostPopularViewedArticlesResponseDto.model';
 
 describe('<useFetchStoredArticles />', () => {
@@ -26,24 +25,24 @@ describe('<useFetchStoredArticles />', () => {
         
         jest.spyOn(hooks, 'useAppDispatch').mockReturnValue(useAppDispatchMockResponse);
 
-        service_getUserStoredArticlesSpy = jest.spyOn(services, 'getUserStoredArticles').mockResolvedValue({} as QuerySnapshot<DocumentData>)
+        service_getUserStoredArticlesSpy = jest.spyOn(firebaseStoreService, 'getUserStoredArticles').mockResolvedValue({} as QuerySnapshot<DocumentData>)
     });
 
-    // it('should create', async() => {
-    //     const {result, waitForNextUpdate} = renderHook(() => useFetchStoredArticles(), { wrapper })
+    it('should create', async() => {
+        const {result, waitForNextUpdate} = renderHook(() => useFetchStoredArticles(), { wrapper })
 
-    //     await waitForNextUpdate();
-    //     expect(result.current).toBeDefined()
-    // })
+        await waitForNextUpdate();
+        expect(result.current).toBeDefined()
+    })
 
-    // it('initially should request getUserStoredArticles', async() => {
-    //     expect(service_getUserStoredArticlesSpy).not.toHaveBeenCalled()
+    it('initially should request getUserStoredArticles', async() => {
+        expect(service_getUserStoredArticlesSpy).not.toHaveBeenCalled()
 
-    //     const { waitForNextUpdate } = renderHook(() => useFetchStoredArticles(), { wrapper })
-    //     await waitForNextUpdate();
+        const { waitForNextUpdate } = renderHook(() => useFetchStoredArticles(), { wrapper })
+        await waitForNextUpdate();
 
-    //     expect(service_getUserStoredArticlesSpy).toHaveBeenCalled()
-    // })
+        expect(service_getUserStoredArticlesSpy).toHaveBeenCalled()
+    })
 
     
     it('if response data has been previously fetched should not fetch again', async () => {
@@ -75,7 +74,7 @@ describe('<useFetchStoredArticles />', () => {
                 }
             ]
         } as any
-        service_getUserStoredArticlesSpy = jest.spyOn(services, 'getUserStoredArticles').mockResolvedValue(response);        
+        service_getUserStoredArticlesSpy = jest.spyOn(firebaseStoreService, 'getUserStoredArticles').mockResolvedValue(response);        
             
         const {result, waitForNextUpdate} = renderHook(() => useFetchStoredArticles(), { wrapper })
         await waitForNextUpdate();
@@ -87,7 +86,7 @@ describe('<useFetchStoredArticles />', () => {
     })
 
     it('initially should request getUserStoredArticles if error...', async() => {
-        service_getUserStoredArticlesSpy = jest.spyOn(services, 'getUserStoredArticles').mockRejectedValue({});        
+        service_getUserStoredArticlesSpy = jest.spyOn(firebaseStoreService, 'getUserStoredArticles').mockRejectedValue({});        
 
         const {result, waitForNextUpdate} = renderHook(() => useFetchStoredArticles(), { wrapper })
         await waitForNextUpdate();

@@ -71,12 +71,14 @@ describe('<useUser />', () => {
 
     })
 
-    it('logout should dispatch unset action', () => {
+    it('logout should dispatch unset action', async () => {
         const { result } = renderHook(() => useUser())
 
         expect(useAppDispatchMockResponse).not.toHaveBeenCalled()
 
-        result.current.logout()
+        await act(async () => {
+            await result.current.logout()
+        })
         
         expect(useAppDispatchMockResponse).toHaveBeenCalled()
         expect(useAppDispatchMockResponse).toHaveBeenCalledWith(unsetUsetAction())
