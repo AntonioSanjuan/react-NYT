@@ -65,9 +65,9 @@ function Newscard({article, showDeleteStoredArticle}: {article: MostPopularViewe
                         {article?.abstract}
                     </p>
                 </div>
-                <div className="NewsCard_ActionContainer" style={{display: userIsLogged ? 'inherit': 'none'}}>
+                <div className="NewsCard_ActionContainer" >
                     <div className='NewsCard_Leftcontainer'>
-                        <button type="button" className="btn btn-dark" aria-label="add from stored articles" onClick={() => addStoredArticle(article)}>
+                        <button type="button" style={{display: userIsLogged ? 'inherit': 'none'}} className="btn btn-dark" aria-label="add from stored articles" onClick={() => addStoredArticle(article)}>
                             <i className="bi bi-save2-fill"></i>
                         </button>         
                         <button type="button" className="btn btn-dark" aria-label="go to see full information" onClick={() => window.open(article.url, '_blank')?.focus()}>

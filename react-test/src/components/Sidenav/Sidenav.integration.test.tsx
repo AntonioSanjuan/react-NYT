@@ -50,10 +50,29 @@ describe('Sidenav', () => {
         expect(switchSidenavStatusMock).not.toHaveBeenCalled()
 
         fireEvent.click(
-            screen.getByText('Most Popular Articles')
+            screen.getByText('Popular Articles')
         )
 
         expect(history.location.pathname).toEqual('/')
+        expect(switchSidenavStatusMock).toHaveBeenCalled()
+    });
+
+    it('Sidenav `navigateToStoredArticlesAction` secction should trigger navigation to storedArticles', () => {
+        render(
+            <Provider store={sidenavStore}>
+                <Router location={history.location} navigator={history}>
+                    <Sidenav/>
+                </Router>
+            </Provider>
+        );
+        
+        expect(switchSidenavStatusMock).not.toHaveBeenCalled()
+
+        fireEvent.click(
+            screen.getByText('Stored Articles')
+        )
+
+        expect(history.location.pathname).toEqual('/storedArticles')
         expect(switchSidenavStatusMock).toHaveBeenCalled()
     });
 

@@ -3,7 +3,6 @@ import { fireEvent, render, screen } from '@testing-library/react'
 import { Provider } from 'react-redux';
 import { store } from '../../state/rootState';
 
-import * as actions from '../../state/user/user.actions';
 import { act } from 'react-dom/test-utils';
 
 import {createMemoryHistory} from 'history'
@@ -11,6 +10,7 @@ import { Router } from 'react-router-dom';
 import * as hooks from '../../hooks/sidenav/sidenavHook' 
 import React from 'react';
 import { UserCredential } from 'firebase/auth';
+import { setUset } from '../../state/user/user.actions';
 describe('Topnav', () => {
     let topnavStore: any;
     let history: any;
@@ -78,7 +78,7 @@ describe('Topnav', () => {
         expect(setLoginButtonHiddenMock).toHaveBeenCalledWith(false);
 
         await act(async () => {
-            topnavStore.dispatch(actions.setUset({} as UserCredential));
+            topnavStore.dispatch(setUset({} as UserCredential));
         })
         
         expect(setLoginButtonHiddenMock).toHaveBeenCalledWith(true);
