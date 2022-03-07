@@ -18,11 +18,11 @@ describe('Sidenav', () => {
         sidenavStore = createTestStore();
         history = createMemoryHistory();
 
-        const useLayerSpy = jest.spyOn(sidenavHooks, 'useSidenavLayer');
-        useLayerSpy.mockImplementation(useSidenavMock)
+        jest.spyOn(sidenavHooks, 'useSidenavLayer')
+        .mockImplementation(useSidenavMock)
 
-        const useUserSpy = jest.spyOn(userHooks, 'useUser');
-        useUserSpy.mockImplementation(useUserMock)
+        jest.spyOn(userHooks, 'useUser')
+        .mockImplementation(useUserMock)
     });
 
     it('should create', () => {

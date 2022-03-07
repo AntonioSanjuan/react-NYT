@@ -12,13 +12,15 @@ describe('HomePage', () => {
     let homeStore: any;
     let history: any;
 
-    let useMostPopularArticlesMock: any;
+    let useMostPopularArticlesSpy: any;
 
     beforeEach(() => {
         homeStore = createTestStore();
         history = createMemoryHistory();
 
-        useMostPopularArticlesMock = jest.spyOn(mostPopularArticlesHooks, 'useMostPopularArticles').mockReturnValue({mostPopularArticles: undefined} as any);
+        // useMostPopularArticlesMock
+        useMostPopularArticlesSpy = jest.spyOn(mostPopularArticlesHooks, 'useMostPopularArticles')
+        .mockReturnValue({mostPopularArticles: undefined} as any);
     });
 
     it('should create', () => {
@@ -42,6 +44,6 @@ describe('HomePage', () => {
           </Provider>
       );
 
-      expect(useMostPopularArticlesMock).toHaveBeenCalled()
+      expect(useMostPopularArticlesSpy).toHaveBeenCalled()
   });
 })

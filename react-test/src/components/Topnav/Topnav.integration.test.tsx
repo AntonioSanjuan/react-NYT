@@ -22,11 +22,12 @@ describe('Topnav', () => {
         topnavStore = createTestStore();
         history = createMemoryHistory();
 
-        const useState_loginButtonHidden_Mock = jest.spyOn(React, 'useState');
-        const useSidenavSpy = jest.spyOn(hooks, 'useSidenavLayer');
+        jest.spyOn(React, 'useState')
+        .mockImplementation(() => [undefined, setLoginButtonHiddenMock]);
 
-        useState_loginButtonHidden_Mock.mockImplementation(() => [undefined, setLoginButtonHiddenMock]);
-        useSidenavSpy.mockImplementation(useSidenavMock)
+        jest.spyOn(hooks, 'useSidenavLayer')
+        .mockImplementation(useSidenavMock)
+
         expect(setLoginButtonHiddenMock).toHaveBeenCalledTimes(0)
 
     });

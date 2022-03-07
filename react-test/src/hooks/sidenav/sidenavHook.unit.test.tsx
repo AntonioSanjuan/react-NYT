@@ -8,10 +8,10 @@ import { switchSidenavStatusAction } from '../../state/layout/layout.actions';
 
 describe('<useSidenavLayer />', () => {
     const useAppDispatchMockResponse = jest.fn((action) => {}) as Dispatch<any>
-    let useAppDispatchMock: any;
 
     beforeEach(() => {
-        useAppDispatchMock = jest.spyOn(hooks, 'useAppDispatch').mockReturnValue(useAppDispatchMockResponse);
+        jest.spyOn(hooks, 'useAppDispatch')
+        .mockReturnValue(useAppDispatchMockResponse);
     });
 
     it('should create', () => {

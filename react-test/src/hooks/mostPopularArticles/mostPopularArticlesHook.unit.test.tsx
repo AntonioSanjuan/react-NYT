@@ -5,7 +5,7 @@ import { useMostPopularArticles } from './mostPopularArticlesHook';
 import { MostPopularViewedArticlesResponseDto } from '../../models/dtos/mostPopularViewedArticles/mostPopularViewedArticlesResponseDto.model';
 
 import * as hooks from '../../hooks/state/appStateHook' 
-import * as services from '../../services/NYTdataSupplier/mostPopular/nytMostPupular.service'
+import * as nyt_service from '../../services/NYTdataSupplier/mostPopular/nytMostPupular.service'
 import { PeriodOfTimes } from '../../models/internal/types/PeriodOfTimeEnum.model';
 import { Provider } from 'react-redux';
 import { setMostPopularViewedArticlesAction, unsetMostPopularViewedArticlesAction } from '../../state/data/data.actions';
@@ -22,9 +22,10 @@ describe('<useMostPopularArticles />', () => {
         useMostPopularArticlesStore = createTestStore();
         wrapper = ({ children }: { children: any }) => <Provider store={useMostPopularArticlesStore}>{children}</Provider>
         
-        jest.spyOn(hooks, 'useAppDispatch').mockReturnValue(useAppDispatchMockResponse);
+        jest.spyOn(hooks, 'useAppDispatch')
+        .mockReturnValue(useAppDispatchMockResponse);
 
-        service_getMostPopularViewedArticlesSpy = jest.spyOn(services, 'getMostPopularViewedArticles').mockResolvedValue({} as MostPopularViewedArticlesResponseDto)
+        service_getMostPopularViewedArticlesSpy = jest.spyOn(nyt_service, 'getMostPopularViewedArticles').mockResolvedValue({} as MostPopularViewedArticlesResponseDto)
     });
 
     afterEach(() => {
@@ -66,7 +67,7 @@ describe('<useMostPopularArticles />', () => {
     it('initially should request getMostPopularViewedArticles if success...', async () => {
         const input = PeriodOfTimes.Daily
         const response = { results: [ {}]} as MostPopularViewedArticlesResponseDto
-        service_getMostPopularViewedArticlesSpy = jest.spyOn(services, 'getMostPopularViewedArticles').mockResolvedValue(response);        
+        service_getMostPopularViewedArticlesSpy = jest.spyOn(nyt_service, 'getMostPopularViewedArticles').mockResolvedValue(response);        
             
         const {result, waitForNextUpdate} = renderHook(() => useMostPopularArticles({ periodOfTime: input}), { wrapper })
         await waitForNextUpdate();
@@ -79,7 +80,7 @@ describe('<useMostPopularArticles />', () => {
     })
 
     it('initially should request getMostPopularViewedArticles if error...', async() => {
-        service_getMostPopularViewedArticlesSpy = jest.spyOn(services, 'getMostPopularViewedArticles').mockRejectedValue({});        
+        service_getMostPopularViewedArticlesSpy = jest.spyOn(nyt_service, 'getMostPopularViewedArticles').mockRejectedValue({});        
             
         const {result, waitForNextUpdate} = renderHook(() => useMostPopularArticles({ periodOfTime: 8}), { wrapper })
         await waitForNextUpdate();

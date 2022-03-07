@@ -16,8 +16,8 @@ describe('Login', () => {
         loginStore = createTestStore();
         history = createMemoryHistory();
 
-        const useUserSpy = jest.spyOn(userHooks, 'useUser');
-        useUserSpy.mockImplementation(useUserMock)
+        jest.spyOn(userHooks, 'useUser')
+        .mockImplementation(useUserMock)
     })
 
     it('should create', () => {

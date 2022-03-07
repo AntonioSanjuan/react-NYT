@@ -23,8 +23,8 @@ describe('Newcard', () => {
         sidenavStore = createTestStore();
         history = createMemoryHistory();
 
-        const useUserMock = jest.spyOn(storedArticlesHook, 'useStoredArticle');
-        useUserMock.mockImplementation(useStoredArticleMock)
+        jest.spyOn(storedArticlesHook, 'useStoredArticle')
+        .mockImplementation(useStoredArticleMock)
     });
 
     it('should create', () => {
