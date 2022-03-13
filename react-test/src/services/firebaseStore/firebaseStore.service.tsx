@@ -1,4 +1,4 @@
-import { addDoc, collection, DocumentData, DocumentReference, getDocs, query, QuerySnapshot, where } from "firebase/firestore";
+import { collection, doc, DocumentData, getDocs, query, QuerySnapshot, setDoc, where } from "firebase/firestore";
 import { FirebaseStoredArticleDto } from "../../models/dtos/firebaseStore/firebaseStoredArticle.model";
 import { auth, db } from "../../utils/firebase.util";
 
@@ -7,9 +7,10 @@ export function getUserStoredArticles(): Promise<QuerySnapshot<DocumentData>> {
     return getDocs(q);
 }
 
-export function addUserStoredArticle(article: FirebaseStoredArticleDto): Promise<DocumentReference<DocumentData>> {
-    return addDoc(collection(db, "storedArticles"),
+export function addUserStoredArticle(article: FirebaseStoredArticleDto): Promise<any> {
+    const paymentRef = doc(db, "storedArticles", article.articleId);
+    return setDoc(paymentRef, {
         article
-    );
+      });
 }
 //todo push new savedArticle

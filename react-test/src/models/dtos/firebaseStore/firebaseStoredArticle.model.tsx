@@ -7,5 +7,6 @@ export interface FirebaseStoredArticleInternal {
 
 export interface FirebaseStoredArticleDto {
     userUid: string;
+    articleId: string;
     articleStringify: string;
 }

@@ -9,6 +9,7 @@ export function useStoredArticle () {
     const addStoredArticle = useCallback(async(article: MostPopularViewedArticlesResponseContentDto): Promise<void> => {
         const request: FirebaseStoredArticleDto = {
             userUid: auth.currentUser?.uid as string,
+            articleId: article.id.toString(),
             articleStringify: JSON.stringify(article)
         }
         await firebaseStoreService.addUserStoredArticle(request);
