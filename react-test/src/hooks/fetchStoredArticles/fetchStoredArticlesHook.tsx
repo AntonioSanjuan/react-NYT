@@ -14,27 +14,26 @@ export function useFetchStoredArticles () {
     const [error, setError] = useState<boolean>(false)
     
     useEffect(() => {
-        if(!user.userStoredArticles) {
-            setLoading(true);
+        setLoading(true);
 
-            getUserStoredArticles()
-            .then((resp) => {
-                const userStoredArticles = resp.docs.map<FirebaseStoredArticleInternal>((doc) => {
-                    const response = ({ ...doc.data()} as FirebaseStoredArticleDto)
-                    return ({
-                            storedArticle: JSON.parse(response.articleStringify),
-                            firebaseDocId: doc.id,
-                        } as FirebaseStoredArticleInternal)
-                })
-                dispatch(setUserStoredArticles(userStoredArticles))
-                setLoading(false);
-                setError(false);
-
-            }).catch((e) => {
-                setLoading(false);
-                setError(true)
+        getUserStoredArticles()
+        .then((resp) => {
+            console.log("resp", resp)
+            const userStoredArticles = resp.docs.map<FirebaseStoredArticleInternal>((doc) => {
+                const response = ({ ...doc.data()} as FirebaseStoredArticleDto)
+                return ({
+                        storedArticle: JSON.parse(response.articleStringify),
+                        firebaseDocId: doc.id,
+                    } as FirebaseStoredArticleInternal)
             })
-        }
+            dispatch(setUserStoredArticles(userStoredArticles))
+            setLoading(false);
+            setError(false);
+
+        }).catch((e) => {
+            setLoading(false);
+            setError(true)
+        })
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch, user.userData])
 

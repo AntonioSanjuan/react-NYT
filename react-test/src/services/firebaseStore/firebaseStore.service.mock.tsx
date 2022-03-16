@@ -6,8 +6,11 @@ const addUserStoredArticleResponseObjMock = {} as DocumentReference<DocumentData
 
 export const getUserStoredArticlesResponseMock = Promise.resolve(getUserStoredArticlesResponseObjMock)
 export const addUserStoredArticleResponseMock = new Promise<DocumentReference<DocumentData>>((resolve, rejects) => resolve(addUserStoredArticleResponseObjMock));
+export const deleteUserStoredArticleResponseMock = new Promise<void>((resolve, rejects) => resolve());
 
 export const addUserStoredArticleMock = jest.spyOn(firebaseStoreService, 'addUserStoredArticle')
 .mockReturnValue(addUserStoredArticleResponseMock)
 export const getUserStoredArticlesMock = jest.spyOn(firebaseStoreService, 'getUserStoredArticles')
 .mockReturnValue(getUserStoredArticlesResponseMock)
+export const deleteUserStoredArticlesMock = jest.spyOn(firebaseStoreService, 'deleteUserStoredArticle')
+.mockReturnValue(deleteUserStoredArticleResponseMock)

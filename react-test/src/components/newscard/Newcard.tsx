@@ -5,7 +5,7 @@ import { MostPopularViewedArticlesResponseContentDto } from '../../models/dtos/m
 import { selectUserIsLogged } from '../../state/user/user.selectors';
 import './Newcard.scss';
 
-function Newscard({article, showDeleteStoredArticle}: {article: MostPopularViewedArticlesResponseContentDto, showDeleteStoredArticle?: boolean}) {
+function Newscard({article, isStored}: {article: MostPopularViewedArticlesResponseContentDto, isStored?: boolean}) {
     const {addStoredArticle, deleteStoredArticle } = useStoredArticle()
     const userIsLogged = useAppSelector<boolean>(selectUserIsLogged);
 
@@ -67,7 +67,7 @@ function Newscard({article, showDeleteStoredArticle}: {article: MostPopularViewe
                 </div>
                 <div className="NewsCard_ActionContainer" >
                     <div className='NewsCard_Leftcontainer'>
-                        <button type="button" style={{display: userIsLogged ? 'inherit': 'none'}} className="btn btn-dark" aria-label="add from stored articles" onClick={() => addStoredArticle(article)}>
+                        <button type="button" style={{display: userIsLogged && !isStored ? 'inherit': 'none'}} className="btn btn-dark" aria-label="add from stored articles" onClick={() => addStoredArticle(article)}>
                             <i className="bi bi-save2-fill"></i>
                         </button>         
                         <button type="button" className="btn btn-dark" aria-label="go to see full information" onClick={() => window.open(article.url, '_blank')?.focus()}>
@@ -75,13 +75,10 @@ function Newscard({article, showDeleteStoredArticle}: {article: MostPopularViewe
                         </button>
                     </div>
                     <div className='NewsCard_Rightcontainer'>
-                        <button type="button" style={{visibility: showDeleteStoredArticle ? 'visible': 'hidden'}} className="btn btn-dark" aria-label="remove from stored articles" onClick={() => deleteStoredArticle()}>
+                        <button type="button" style={{visibility: isStored ? 'visible': 'hidden'}} className="btn btn-dark" aria-label="remove from stored articles" onClick={() => deleteStoredArticle()}>
                             <i className="bi bi-trash-fill"></i>
                         </button>
                     </div>
-
-                    
-
                 </div>
             </div>
         }

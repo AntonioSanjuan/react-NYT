@@ -88,7 +88,7 @@ describe('Newcard', () => {
         render(
             <Provider store={sidenavStore}>
                 <Router location={history.location} navigator={history}>
-                    <Newscard article={inputArticle} showDeleteStoredArticle={true}/>
+                    <Newscard article={inputArticle} isStored={true}/>
                 </Router>
             </Provider>
         );
