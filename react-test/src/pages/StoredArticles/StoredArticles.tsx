@@ -27,7 +27,7 @@ function StoredArticlesPage() {
           storedArticles?.map(article => 
             <div className="StoredArticles_New" key={article.firebaseDocId}>
               <Newscard article={article.storedArticle}
-              showDeleteStoredArticle={true}/>
+              isStored={true}/>
             </div>
           )}
         </div>
