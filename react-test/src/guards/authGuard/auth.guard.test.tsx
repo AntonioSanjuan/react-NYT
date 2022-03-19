@@ -4,8 +4,8 @@ import { Provider } from 'react-redux';
 import {createMemoryHistory} from 'history'
 
 import { AuthRouteGuard } from './auth.guard';
-import { UserCredential } from 'firebase/auth';
-import { setUsetAction } from '../../state/user/user.actions';
+import { User } from 'firebase/auth';
+import { setUserAction } from '../../state/user/user.actions';
 import { createTestStore } from '../../utils/testsUtils/createTestStore.util';
 
 
@@ -75,7 +75,7 @@ describe('AuthRouteGuard', () => {
 
     it('if userIsLogged, guard should allow children view', async () => {
         await act(async () => {
-            authGuardStore.dispatch(setUsetAction({} as UserCredential));
+            authGuardStore.dispatch(setUserAction({} as User));
         })
 
         history.push('/testUri');

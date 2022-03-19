@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import { Layout } from './layouts/BaseLayout/BaseLayout';
 import { LoginLayout } from './layouts/LoginLayout/LoginLayout';
 import { AuthRouteGuard } from './guards/authGuard/auth.guard';
+import { useUser } from './hooks/user/userHook';
 
 const Home = React.lazy(() => import("./pages/Home/Home"));
 const Login = React.lazy(() => import("./pages/Login/Login"));
@@ -11,6 +12,8 @@ const Contact = React.lazy(() => import("./pages/Contact/Contact"));
 const StoredArticles = React.lazy(() => import("./pages/StoredArticles/StoredArticles"));
 
 function App() {
+  const {keepUserLogged} = useUser();
+  keepUserLogged()
   return (
     <Routes>
     <Route path="/" element={

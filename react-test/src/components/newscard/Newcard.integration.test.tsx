@@ -6,8 +6,8 @@ import {createMemoryHistory} from 'history'
 import { Router } from 'react-router-dom';
 import * as storedArticlesHook from '../../hooks/storedArticle/storedArticleHook' 
 import { MostPopularViewedArticlesResponseContentDto } from '../../models/dtos/mostPopularViewedArticles/mostPopularViewedArticlesResponseDto.model';
-import { UserCredential } from 'firebase/auth';
-import { setUsetAction } from '../../state/user/user.actions';
+import { User } from 'firebase/auth';
+import { setUserAction } from '../../state/user/user.actions';
 import { createTestStore } from '../../utils/testsUtils/createTestStore.util';
 import { useStoredArticleMock } from '../../hooks/storedArticle/storedArticleHook.mock';
 
@@ -60,7 +60,7 @@ describe('Newcard', () => {
         expect(screen.getByLabelText("add from stored articles")).not.toBeVisible()
 
         await act(async () => {
-            sidenavStore.dispatch(setUsetAction({} as UserCredential));
+            sidenavStore.dispatch(setUserAction({} as User));
         })
 
         expect(screen.getByLabelText("add from stored articles")).toBeVisible()
@@ -76,7 +76,7 @@ describe('Newcard', () => {
         );
 
         await act(async () => {
-            sidenavStore.dispatch(setUsetAction({} as UserCredential));
+            sidenavStore.dispatch(setUserAction({} as User));
         })
 
         expect(useStoredArticleMock().addStoredArticle).not.toHaveBeenCalled()

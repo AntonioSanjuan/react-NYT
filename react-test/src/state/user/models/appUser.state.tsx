@@ -1,8 +1,8 @@
-import { UserCredential } from "firebase/auth";
+import { User } from "firebase/auth";
 import { FirebaseStoredArticleInternal } from "../../../models/dtos/firebaseStore/firebaseStoredArticle.model";
 
 export interface UserState {
   isLogged: boolean;
-  userData: UserCredential | undefined;
+  userData: User | null;
   userStoredArticles: FirebaseStoredArticleInternal[] | undefined;
 }

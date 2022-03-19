@@ -4,11 +4,10 @@ import { Dispatch } from '@reduxjs/toolkit';
 import { useUser } from './userHook';
 import * as hooks from '../state/appStateHook' 
 import * as firebaseAuthService from '../../services/firebaseAuth/firebaseAuth.service'
-import { setUsetAction, unsetUsetAction } from '../../state/user/user.actions';
-import { UserCredential } from 'firebase/auth';
 import { firebaseLoginMock } from '../../services/firebaseAuth/firebaseAuth.service.mock';
 import { createTestStore } from '../../utils/testsUtils/createTestStore.util';
 import { Provider } from 'react-redux';
+import { unsetUserAction } from '../../state/user/user.actions';
 
 describe('<useUser />', () => {
     let useStoredArticleStore: any;
@@ -90,6 +89,6 @@ describe('<useUser />', () => {
         })
         
         expect(useAppDispatchMockResponse).toHaveBeenCalled()
-        expect(useAppDispatchMockResponse).toHaveBeenCalledWith(unsetUsetAction())
+        expect(useAppDispatchMockResponse).toHaveBeenCalledWith(unsetUserAction())
     })
 })

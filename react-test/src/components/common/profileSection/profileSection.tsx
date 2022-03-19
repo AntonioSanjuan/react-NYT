@@ -20,7 +20,7 @@ function ProfileSection() {
                             </svg>
                         </div>
                         <div className="ProfileSection_DataContainer">
-                            <p className="app_font_l">Hi <span>{user.userData?.user.email}</span></p>
+                            <p className="app_font_l">Hi <span>{user.userData?.email}</span></p>
                             <p className="app_font_s">Profile</p>
                         </div>
                     </> 
