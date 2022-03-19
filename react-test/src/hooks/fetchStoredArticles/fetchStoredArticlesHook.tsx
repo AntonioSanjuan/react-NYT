@@ -18,7 +18,6 @@ export function useFetchStoredArticles () {
 
         getUserStoredArticles()
         .then((resp) => {
-            console.log("resp", resp)
             const userStoredArticles = resp.docs.map<FirebaseStoredArticleInternal>((doc) => {
                 const response = ({ ...doc.data()} as FirebaseStoredArticleDto)
                 return ({
