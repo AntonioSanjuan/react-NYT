@@ -1,5 +1,5 @@
 import { DocumentData, DocumentReference, QuerySnapshot } from "firebase/firestore";
-import * as firebaseStoreService from './firebaseStore.service';
+import * as firebaseStoreService from './storedArticles.service';
 
 const getUserStoredArticlesResponseObjMock = {} as QuerySnapshot<DocumentData>;
 const addUserStoredArticleResponseObjMock = {} as DocumentReference<DocumentData>;

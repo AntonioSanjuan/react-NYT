@@ -4,9 +4,9 @@ import { Dispatch } from '@reduxjs/toolkit';
 import { useFetchStoredArticles } from './fetchStoredArticlesHook';
 
 import * as hooks from '../state/appStateHook' 
-import * as firebaseStoreServiceMock from '../../services/firebaseStore/firebaseStore.service.mock'
+import * as firebaseStoreServiceMock from '../../services/firebaseStore/storedArticles/storedArticles.service.mock'
 import { Provider } from 'react-redux';
-import { setUserStoredArticles } from '../../state/user/user.actions';
+import { setUserStoredArticlesAction } from '../../state/user/user.actions';
 import { act } from 'react-dom/test-utils';
 import { createTestStore } from '../../utils/testsUtils/createTestStore.util';
 import { MostPopularViewedArticlesResponseContentDto } from '../../models/dtos/mostPopularViewedArticles/mostPopularViewedArticlesResponseDto.model';
@@ -45,7 +45,7 @@ describe('<useFetchStoredArticles />', () => {
         expect(firebaseStoreServiceMock.getUserStoredArticlesMock).not.toHaveBeenCalled()
 
         await act(async() => {
-            useFetchStoredArticlesStore.dispatch(setUserStoredArticles([]))
+            useFetchStoredArticlesStore.dispatch(setUserStoredArticlesAction([]))
         });
         
         renderHook(() => useFetchStoredArticles(), { wrapper })
@@ -77,7 +77,7 @@ describe('<useFetchStoredArticles />', () => {
 
         expect(result.current.loading).toEqual(false)
         expect(result.current.error).toEqual(false)
-        expect(useAppDispatchMockResponse).toHaveBeenCalledWith(setUserStoredArticles([{ storedArticle: { uri: 'uritest' }, firebaseDocId: 'idTest' } as any]))
+        expect(useAppDispatchMockResponse).toHaveBeenCalledWith(setUserStoredArticlesAction([{ storedArticle: { uri: 'uritest' }, firebaseDocId: 'idTest' } as any]))
 
     })
 

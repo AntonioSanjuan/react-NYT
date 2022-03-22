@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import { Layout } from './layouts/BaseLayout/BaseLayout';
@@ -12,8 +12,14 @@ const Contact = React.lazy(() => import("./pages/Contact/Contact"));
 const StoredArticles = React.lazy(() => import("./pages/StoredArticles/StoredArticles"));
 
 function App() {
-  const {keepUserLogged} = useUser();
-  keepUserLogged()
+  const {keepUserStateUpdated} = useUser();
+
+  useEffect(() => {
+    console.log("App initialize")
+    keepUserStateUpdated()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   return (
     <Routes>
     <Route path="/" element={

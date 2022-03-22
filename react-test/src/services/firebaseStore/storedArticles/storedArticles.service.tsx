@@ -1,6 +1,6 @@
 import { collection, deleteDoc, doc, DocumentData, getDocs, query, QuerySnapshot, setDoc, where } from "firebase/firestore";
-import { FirebaseStoredArticleDto } from "../../models/dtos/firebaseStore/firebaseStoredArticle.model";
-import { auth, db } from "../../utils/firebase.util";
+import { FirebaseStoredArticleDto } from "../../../models/dtos/firebaseStore/firebaseStoredArticle.model";
+import { auth, db } from "../../../utils/firebase.util";
 
 export function getUserStoredArticles(): Promise<QuerySnapshot<DocumentData>> {
     const q = query(collection(db, "storedArticles"), where("userUid", "==", auth.currentUser ? auth.currentUser?.uid: 'null'));
@@ -16,4 +16,5 @@ export function deleteUserStoredArticle(article: FirebaseStoredArticleDto): Prom
     const docRef = doc(db, "storedArticles", article.articleId);
     return deleteDoc(docRef)
 }
+
 //todo push new savedArticle

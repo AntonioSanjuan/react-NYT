@@ -4,7 +4,7 @@ import { Dispatch } from '@reduxjs/toolkit';
 import { useStoredArticle } from './storedArticleHook';
 
 import * as hooks from '../state/appStateHook' 
-import * as firebaseStoreServiceMock from '../../services/firebaseStore/firebaseStore.service.mock'
+import * as firebaseStoreServiceMock from '../../services/firebaseStore/storedArticles/storedArticles.service.mock'
 import { Provider } from 'react-redux';
 import { createTestStore } from '../../utils/testsUtils/createTestStore.util';
 import { MostPopularViewedArticlesResponseContentDto } from '../../models/dtos/mostPopularViewedArticles/mostPopularViewedArticlesResponseDto.model';

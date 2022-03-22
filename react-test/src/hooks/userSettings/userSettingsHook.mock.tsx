@@ -14,13 +14,13 @@ const useUser_SignUpMock = jest.fn(() => new Promise<UserCredential>((resolve, r
 
 const useUser_LogoutMock = jest.fn(() => new Promise<void>((resolve, rejects) => resolve() ))
 
-const useUser_KeepUserLoggedMock = jest.fn(() => new Promise<void>((resolve, rejects) => resolve() ))
+const useUser_KeepUserLoggedMock = jest.fn(() => {})
 
 export const useUserMock = () => { return {
     login: useUser_LoginMock,
     logout: useUser_LogoutMock,
     signUp: useUser_SignUpMock,
-    keepUserStateUpdated: useUser_KeepUserLoggedMock,
+    keepUserLogged: useUser_KeepUserLoggedMock,
     loading: loadingResponseMock,
     error: errorResponseMock
 }}

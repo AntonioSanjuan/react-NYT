@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
 import { useAppDispatch, useAppSelector } from "../state/appStateHook";
-import { getUserStoredArticles } from "../../services/firebaseStore/firebaseStore.service";
 import { selectUser } from "../../state/user/user.selectors";
 import { FirebaseStoredArticleDto, FirebaseStoredArticleInternal } from "../../models/dtos/firebaseStore/firebaseStoredArticle.model";
 import { UserState } from "../../state/user/models/appUser.state";
-import { setUserStoredArticles } from "../../state/user/user.actions";
+import { setUserStoredArticlesAction } from "../../state/user/user.actions";
+import { getUserStoredArticles } from "../../services/firebaseStore/storedArticles/storedArticles.service";
 
 export function useFetchStoredArticles () {
     const dispatch = useAppDispatch();
@@ -25,7 +25,7 @@ export function useFetchStoredArticles () {
                         firebaseDocId: doc.id,
                     } as FirebaseStoredArticleInternal)
             })
-            dispatch(setUserStoredArticles(userStoredArticles))
+            dispatch(setUserStoredArticlesAction(userStoredArticles))
             setLoading(false);
             setError(false);
 

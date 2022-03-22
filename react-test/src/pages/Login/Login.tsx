@@ -13,7 +13,7 @@ interface LoginFormModel {
 
 function LoginPage() {
   
-  const { login, loading, error } = useUser()
+  const { login, signUp, loading, error } = useUser()
   const navigate = useNavigate();
 
   const formik: FormikProps<LoginFormModel> = useFormik<LoginFormModel>({
@@ -34,6 +34,21 @@ function LoginPage() {
   const handleSubmit = (async (form: LoginFormModel) => {
     await login({ username: form.username, password: form.password })
     navigate('/')
+  });
+
+  const handleSignUp = (async () => {
+    try {
+      await formik.validateForm();
+      const signUpResponse = await signUp({ 
+        username: formik.values.username, 
+        password: formik.values.password 
+      })
+      navigate('/')    
+    } catch (error) {
+      console.error(error);
+    }
+
+    
   });
 
   return (
@@ -89,6 +104,13 @@ function LoginPage() {
               className="btn btn-primary w-100" 
               type="submit">
                   Login
+              </button>
+              <button 
+              disabled={!formik.dirty || !formik.isValid} 
+              className="btn btn-secondary  w-100" 
+              type="button"
+              onClick={handleSignUp}>
+                  Sign Up
               </button>
           </div>
         </form>

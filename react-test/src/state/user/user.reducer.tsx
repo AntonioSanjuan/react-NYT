@@ -11,11 +11,17 @@ const userReducer = (state: UserState = userInitialState, action: any ) => {
         userData: action.payload,
         userStoredArticles: undefined
       }
+    case UserActions.setUserSettings:
+      return {
+        ...state,
+        userSettings: action.payload,
+      }
     case UserActions.unsetUser:
       return {
         ...state,
         isLogged: false,
         userData: undefined,
+        userSettings: undefined,
         userStoredArticles: undefined
       }
     case UserActions.setStoredArticles:
