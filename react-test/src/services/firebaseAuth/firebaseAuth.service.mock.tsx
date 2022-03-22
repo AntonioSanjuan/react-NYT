@@ -6,4 +6,5 @@ const firebaseLoginResponseMock = {
 
 
 export const firebaseLoginMock = new Promise<UserCredential>((resolve, rejects) => resolve(firebaseLoginResponseMock))
+export const firebaseSignUpMock = new Promise<UserCredential>((resolve, rejects) => resolve(firebaseLoginResponseMock))
 export const firebaseLogoutMock = new Promise<void>((resolve, rejects) => resolve()).then(() => {});
