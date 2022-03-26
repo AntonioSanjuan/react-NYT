@@ -5,6 +5,7 @@ import { selectData } from "../../state/data/data.selectors";
 import { DataState } from "../../state/data/models/appData.state";
 import { PeriodOfTimes } from "../../models/internal/types/PeriodOfTimeEnum.model";
 import { setMostPopularViewedArticlesAction, unsetMostPopularViewedArticlesAction } from "../../state/data/data.actions";
+import { MostPopularViewedArticlesResponseDto } from "../../models/dtos/mostPopularViewedArticles/mostPopularViewedArticlesResponseDto.model";
 
 export function useMostPopularArticles ({periodOfTime}: {periodOfTime: PeriodOfTimes}) {
     const dispatch = useAppDispatch();
@@ -12,7 +13,7 @@ export function useMostPopularArticles ({periodOfTime}: {periodOfTime: PeriodOfT
 
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
-    const [mostPopularArticles, setMostPopularArticles] = useState(storedData.mostPopularViewedArticles)
+    const [mostPopularArticles, setMostPopularArticles] = useState<MostPopularViewedArticlesResponseDto|undefined>(storedData.mostPopularViewedArticles)
     
     useEffect(() => {
         if(!storedData.mostPopularViewedArticles || storedData.mostPopularViewedArticlesRequestedPage !== periodOfTime) {

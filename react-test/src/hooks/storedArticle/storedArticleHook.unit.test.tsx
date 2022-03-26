@@ -1,4 +1,4 @@
-import { renderHook} from '@testing-library/react-hooks'
+import { act, renderHook} from '@testing-library/react-hooks'
 import { Dispatch } from '@reduxjs/toolkit';
 
 import { useStoredArticle } from './storedArticleHook';
@@ -22,7 +22,12 @@ describe('<useFetchStoredArticles />', () => {
         jest.spyOn(hooks, 'useAppDispatch')
         .mockReturnValue(useAppDispatchMockResponse);
 
+        firebaseStoreServiceMock.initializeMock();
     });
+
+    afterEach(() => {
+        firebaseStoreServiceMock.reset();
+    })
 
     it('should create',() => {
         const {result} = renderHook(() => useStoredArticle(), { wrapper })
@@ -31,11 +36,14 @@ describe('<useFetchStoredArticles />', () => {
     })
 
     it('addStoredArticle() must request to addUserStoredArticle service function', async() => {
-        expect(firebaseStoreServiceMock.addUserStoredArticleMock).not.toHaveBeenCalled()
+        expect(firebaseStoreServiceMock.addUserStoredArticleSpy).not.toHaveBeenCalled()
 
+        const inputArticle = {id: 123} as MostPopularViewedArticlesResponseContentDto
         const {result} = renderHook(() => useStoredArticle(), { wrapper })
 
-        result.current.addStoredArticle({} as MostPopularViewedArticlesResponseContentDto)
-        expect(firebaseStoreServiceMock.addUserStoredArticleMock).toHaveBeenCalled()
+        await act(async () => {
+            await result.current.addStoredArticle(inputArticle);
+        });
+        expect(firebaseStoreServiceMock.addUserStoredArticleSpy).toHaveBeenCalled()
     })
 })

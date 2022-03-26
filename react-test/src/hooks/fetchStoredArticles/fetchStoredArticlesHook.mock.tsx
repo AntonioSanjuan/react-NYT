@@ -1,6 +1,6 @@
-import { MostPopularViewedArticlesResponseContentDto } from "../../models/dtos/mostPopularViewedArticles/mostPopularViewedArticlesResponseDto.model";
+import { FirebaseStoredArticleInternal } from "../../models/dtos/firebaseStore/firebaseStoredArticle.model";
 
-let storedArticlesMock: MostPopularViewedArticlesResponseContentDto;
+let storedArticlesMock: FirebaseStoredArticleInternal[] | undefined;
 let loadingResponseMock: boolean;
 let errorResponseMock: boolean;
 

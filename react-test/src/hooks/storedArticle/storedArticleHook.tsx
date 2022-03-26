@@ -15,8 +15,8 @@ export function useStoredArticle () {
         await firebaseStoreService.addUserStoredArticle(request);
     }, [])
 
-    const deleteStoredArticle = useCallback(async(): Promise<void> => {
-
+    const deleteStoredArticle = useCallback(async(firebaseStoredArticle: FirebaseStoredArticleDto): Promise<void> => {
+        await firebaseStoreService.deleteUserStoredArticle(firebaseStoredArticle);
     }, [])
 
     return {

@@ -7,6 +7,7 @@ import HomePage from './Home'
 
 import * as mostPopularArticlesHooks from "../../hooks/mostPopularArticles/mostPopularArticlesHook"
 import { createTestStore } from '../../utils/testsUtils/createTestStore.util';
+import { useMostPopularArticlesMock } from '../../hooks/mostPopularArticles/mostPopularArticlesHook.mock';
 
 describe('HomePage', () => {
     let homeStore: any;
@@ -18,9 +19,9 @@ describe('HomePage', () => {
         homeStore = createTestStore();
         history = createMemoryHistory();
 
-        // useMostPopularArticlesMock
         useMostPopularArticlesSpy = jest.spyOn(mostPopularArticlesHooks, 'useMostPopularArticles')
-        .mockReturnValue({mostPopularArticles: undefined} as any);
+        .mockImplementation(useMostPopularArticlesMock)
+        
     });
 
     it('should create', () => {

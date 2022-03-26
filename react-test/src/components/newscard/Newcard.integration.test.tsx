@@ -25,7 +25,13 @@ describe('Newcard', () => {
 
         jest.spyOn(storedArticlesHook, 'useStoredArticle')
         .mockImplementation(useStoredArticleMock)
+
+
     });
+
+    afterEach(() => {
+
+    })
 
     it('should create', () => {
         const { container } = render(

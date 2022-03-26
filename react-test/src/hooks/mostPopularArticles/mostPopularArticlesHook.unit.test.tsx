@@ -5,7 +5,7 @@ import { useMostPopularArticles } from './mostPopularArticlesHook';
 import { MostPopularViewedArticlesResponseDto } from '../../models/dtos/mostPopularViewedArticles/mostPopularViewedArticlesResponseDto.model';
 
 import * as hooks from '../../hooks/state/appStateHook' 
-import * as nyt_service from '../../services/NYTdataSupplier/mostPopular/nytMostPupular.service'
+import * as nytServiceMock from './../../services/NYTdataSupplier/mostPopular/nytMostPopular.service.mock'
 import { PeriodOfTimes } from '../../models/internal/types/PeriodOfTimeEnum.model';
 import { Provider } from 'react-redux';
 import { setMostPopularViewedArticlesAction, unsetMostPopularViewedArticlesAction } from '../../state/data/data.actions';
@@ -16,7 +16,6 @@ describe('<useMostPopularArticles />', () => {
     let wrapper: any;
 
     const useAppDispatchMockResponse = jest.fn((action) => {}) as Dispatch<any>
-    let service_getMostPopularViewedArticlesSpy: any;
 
     beforeEach(() => {
         useMostPopularArticlesStore = createTestStore();
@@ -25,11 +24,11 @@ describe('<useMostPopularArticles />', () => {
         jest.spyOn(hooks, 'useAppDispatch')
         .mockReturnValue(useAppDispatchMockResponse);
 
-        service_getMostPopularViewedArticlesSpy = jest.spyOn(nyt_service, 'getMostPopularViewedArticles').mockResolvedValue({} as MostPopularViewedArticlesResponseDto)
+        nytServiceMock.initializeMock()   
     });
 
     afterEach(() => {
-        
+        nytServiceMock.initializeMock();
     })
 
     it('should create', async() => {
@@ -42,18 +41,18 @@ describe('<useMostPopularArticles />', () => {
 
     it('initially should request getMostPopularViewedArticles', async() => {
         const input = PeriodOfTimes.Daily
-        expect(service_getMostPopularViewedArticlesSpy).not.toHaveBeenCalled()
+        expect(nytServiceMock.getMostPopularViewedArticlesSpy).not.toHaveBeenCalled()
 
         const { waitForNextUpdate } = renderHook(() => useMostPopularArticles({ periodOfTime: input}), { wrapper })
         
         await waitForNextUpdate();
-        expect(service_getMostPopularViewedArticlesSpy).toHaveBeenCalledWith({periodOfTime: input})
+        expect(nytServiceMock.getMostPopularViewedArticlesSpy).toHaveBeenCalledWith({periodOfTime: input})
     })
 
     
     it('if response data has been previously fetched (same requestedPage) should not fetch again', async() => {
         const input = PeriodOfTimes.Daily
-        expect(service_getMostPopularViewedArticlesSpy).not.toHaveBeenCalled()
+        expect(nytServiceMock.getMostPopularViewedArticlesSpy).not.toHaveBeenCalled()
 
         await act(async() => {
             useMostPopularArticlesStore.dispatch(setMostPopularViewedArticlesAction({} as MostPopularViewedArticlesResponseDto, input))
@@ -61,13 +60,13 @@ describe('<useMostPopularArticles />', () => {
 
         renderHook(() => useMostPopularArticles({ periodOfTime: input}), { wrapper })
 
-        expect(service_getMostPopularViewedArticlesSpy).toHaveBeenCalledTimes(0)
+        expect(nytServiceMock.getMostPopularViewedArticlesSpy).toHaveBeenCalledTimes(0)
     })
 
     it('initially should request getMostPopularViewedArticles if success...', async () => {
         const input = PeriodOfTimes.Daily
         const response = { results: [ {}]} as MostPopularViewedArticlesResponseDto
-        service_getMostPopularViewedArticlesSpy = jest.spyOn(nyt_service, 'getMostPopularViewedArticles').mockResolvedValue(response);        
+        nytServiceMock.getMostPopularViewedArticlesSpy.mockResolvedValue(response);        
             
         const {result, waitForNextUpdate} = renderHook(() => useMostPopularArticles({ periodOfTime: input}), { wrapper })
         await waitForNextUpdate();
@@ -80,7 +79,7 @@ describe('<useMostPopularArticles />', () => {
     })
 
     it('initially should request getMostPopularViewedArticles if error...', async() => {
-        service_getMostPopularViewedArticlesSpy = jest.spyOn(nyt_service, 'getMostPopularViewedArticles').mockRejectedValue({});        
+        nytServiceMock.getMostPopularViewedArticlesSpy.mockRejectedValue({});
             
         const {result, waitForNextUpdate} = renderHook(() => useMostPopularArticles({ periodOfTime: 8}), { wrapper })
         await waitForNextUpdate();

@@ -19,6 +19,7 @@ describe('<useAnimationByStateTransition />', () => {
 
         expect(result.current.stateTransition).toBe(true)
     })
+    
     it('initially stateTransition should be false with input false', () => {
         const input = false
         const {result} = renderHook(() => useAnimationByStateTransition(input))
