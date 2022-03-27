@@ -6,7 +6,7 @@ export function firebaseSignUp(user: string, password: string): Promise<UserCred
 }
 
 export function firebaseLogin(user: string, password: string): Promise<UserCredential> {
-    return signInWithEmailAndPassword(auth, user, password )
+    return signInWithEmailAndPassword(auth, user, password)
 }
 
 export function firebaseLogout(): Promise<void> {

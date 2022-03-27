@@ -7,18 +7,21 @@ import { auth } from "../../utils/firebase.util";
 export function useStoredArticle () {
 
     const addStoredArticle = useCallback(async(article: MostPopularViewedArticlesResponseContentDto): Promise<void> => {
-        const request: FirebaseStoredArticleDto = {
+        await firebaseStoreService.addUserStoredArticle(getArticleRef(article));
+    }, [])
+
+    const deleteStoredArticle = useCallback(async(article: MostPopularViewedArticlesResponseContentDto): Promise<void> => {
+        await firebaseStoreService.deleteUserStoredArticle(getArticleRef(article));
+    }, [])
+
+    const getArticleRef = (article: MostPopularViewedArticlesResponseContentDto) => {
+        return {
             userUid: auth.currentUser?.uid as string,
             articleId: article.id.toString(),
             articleStringify: JSON.stringify(article)
-        }
-        await firebaseStoreService.addUserStoredArticle(request);
-    }, [])
-
-    const deleteStoredArticle = useCallback(async(firebaseStoredArticle: FirebaseStoredArticleDto): Promise<void> => {
-        await firebaseStoreService.deleteUserStoredArticle(firebaseStoredArticle);
-    }, [])
-
+        } as FirebaseStoredArticleDto;
+    }
+    
     return {
         addStoredArticle,
         deleteStoredArticle

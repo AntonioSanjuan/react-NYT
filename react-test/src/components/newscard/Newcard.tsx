@@ -75,7 +75,7 @@ function Newscard({article, isStored}: {article: MostPopularViewedArticlesRespon
                         </button>
                     </div>
                     <div className='NewsCard_Rightcontainer'>
-                        <button type="button" style={{visibility: isStored ? 'visible': 'hidden'}} className="btn btn-dark" aria-label="remove from stored articles" onClick={() => deleteStoredArticle()}>
+                        <button type="button" style={{visibility: isStored ? 'visible': 'hidden'}} className="btn btn-dark" aria-label="remove from stored articles" onClick={() => deleteStoredArticle(article)}>
                             <i className="bi bi-trash-fill"></i>
                         </button>
                     </div>
