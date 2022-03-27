@@ -101,6 +101,6 @@ describe('Newcard', () => {
 
         expect(useStoredArticleMock().deleteStoredArticle).not.toHaveBeenCalled()
         fireEvent.click(screen.getByLabelText("remove from stored articles"))
-        expect(useStoredArticleMock().deleteStoredArticle).toHaveBeenCalledWith()
+        expect(useStoredArticleMock().deleteStoredArticle).toHaveBeenCalledWith(inputArticle)
     });
 });
