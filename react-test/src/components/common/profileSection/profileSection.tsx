@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+import { useSidenavLayer } from '../../../hooks/sidenav/sidenavHook';
 import { useAppSelector } from '../../../hooks/state/appStateHook';
 import { UserState } from '../../../state/user/models/appUser.state';
 import { selectUser } from '../../../state/user/user.selectors';
@@ -5,6 +7,13 @@ import './profileSection.scss'
 
 function ProfileSection() {
     const user = useAppSelector<UserState>(selectUser);
+    const { switchSidenavStatus } = useSidenavLayer()
+    const navigate = useNavigate();
+    
+    const goToProfile = () => {
+        navigate('/Profile')
+        switchSidenavStatus();
+    }
 
     return (
         <>
@@ -21,7 +30,7 @@ function ProfileSection() {
                         </div>
                         <div className="ProfileSection_DataContainer">
                             <p className="app_font_l">Hi <span>{user.userData?.email}</span></p>
-                            <p className="app_font_s">Profile</p>
+                            <button  type="button" className="btn btn-link app_font_s"  onClick={() => goToProfile()}>Profile</button>
                         </div>
                     </> 
                     :
