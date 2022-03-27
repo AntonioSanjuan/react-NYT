@@ -10,6 +10,7 @@ const Home = React.lazy(() => import("./pages/Home/Home"));
 const Login = React.lazy(() => import("./pages/Login/Login"));
 const Contact = React.lazy(() => import("./pages/Contact/Contact"));
 const StoredArticles = React.lazy(() => import("./pages/StoredArticles/StoredArticles"));
+const Profile = React.lazy(() => import('./pages/Profile/Profile'));
 
 function App() {
   const {keepUserStateUpdated} = useUser();
@@ -44,6 +45,16 @@ function App() {
               <AuthRouteGuard>
                 <React.Suspense fallback={<>...</>}>
                   <StoredArticles />
+                </React.Suspense>
+              </AuthRouteGuard>
+            }
+          />
+      <Route
+            path="profile"
+            element={
+              <AuthRouteGuard>
+                <React.Suspense fallback={<>...</>}>
+                  <Profile />
                 </React.Suspense>
               </AuthRouteGuard>
             }
