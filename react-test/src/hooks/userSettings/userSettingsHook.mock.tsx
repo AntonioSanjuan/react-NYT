@@ -1,23 +1,23 @@
-import { UserCredential } from "firebase/auth"
+import { DocumentData, DocumentSnapshot } from "firebase/firestore";
 
-let loginResponseMock = {} as UserCredential;
+let getUserSettingsResponseObj = {} as DocumentSnapshot<DocumentData>;
 let loadingResponseMock: boolean;
 let errorResponseMock: boolean;
 
-const useUser_LoginMock = jest.fn(() => new Promise<UserCredential>((resolve, rejects) => resolve({} as UserCredential)).then(
-    () => loginResponseMock
+const useUserSettings_GetUserSettings = jest.fn(() => new Promise<DocumentSnapshot<DocumentData>>((resolve, rejects) => resolve({} as DocumentSnapshot<DocumentData>)).then(
+    () => getUserSettingsResponseObj
 ));
-const useUser_SignUpMock = jest.fn(() => new Promise<UserCredential>((resolve, rejects) => resolve({} as UserCredential)).then(
-    () => loginResponseMock
+const useUserSettings_SetUserSettings = jest.fn(() => new Promise<any>((resolve, rejects) => resolve({})).then(
+    () => getUserSettingsResponseObj
 ));
-const useUser_LogoutMock = jest.fn(() => new Promise<void>((resolve, rejects) => resolve() ))
-const useUser_KeepUserLoggedMock = jest.fn(() => {})
+const useUserSettings_UpdateUserSettings = jest.fn(() => new Promise<any>((resolve, rejects) => resolve({})).then(
+    () => getUserSettingsResponseObj
+));
 
-export const useUserMock = () => { return {
-    login: useUser_LoginMock,
-    logout: useUser_LogoutMock,
-    signUp: useUser_SignUpMock,
-    keepUserLogged: useUser_KeepUserLoggedMock,
-    loading: loadingResponseMock,
-    error: errorResponseMock
+export const useUserSettingsMock = () => { return {
+    getUserSettings: useUserSettings_GetUserSettings,
+    setUserSettings: useUserSettings_SetUserSettings,
+    updateUserSettings: useUserSettings_UpdateUserSettings,
+    loading: loadingResponseMock, 
+    error: errorResponseMock,
 }}

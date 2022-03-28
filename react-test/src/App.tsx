@@ -23,14 +23,8 @@ function App() {
 
   return (
     <Routes>
-    <Route path="/" element={
+    <Route path="" element={
     <Layout />}>
-      <Route index element={
-        <React.Suspense fallback={<>...</>}>
-          <Home />
-        </React.Suspense>
-      } 
-      />
       <Route
             path="contact"
             element={
@@ -59,6 +53,12 @@ function App() {
               </AuthRouteGuard>
             }
           />
+      <Route index element={
+        <React.Suspense fallback={<>...</>}>
+          <Home />
+        </React.Suspense>
+      } 
+      />
     </Route>
     <Route path="login" 
     element={

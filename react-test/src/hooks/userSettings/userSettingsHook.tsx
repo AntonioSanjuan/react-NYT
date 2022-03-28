@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react"
+import { useState } from "react"
 import { useAppDispatch } from "../state/appStateHook";
 import * as userSettingsService from "../../services/firebaseStore/userSettings/userSettings.service";
 import { FirebaseUserSettingsDto } from "../../models/dtos/firebaseStore/firebaseUserSettings.model";
@@ -26,24 +26,46 @@ export function useUserSettings () {
         })
     }
 
-    const setUserSettings = useCallback(async (): Promise<any> => {
-        return userSettingsService.setUserSettings(
-            { darkMode: false, 
-                lang: "es", 
-                userName: 'testName'
-            } as FirebaseUserSettingsDto
-        )
-    }, [])
+    const setUserSettings = async (): Promise<any> => {
+        setLoading(true);
+        const defaultSettings = getDefaultUserSettings()
+        return userSettingsService.setUserSettings(defaultSettings).then(() => {
+            dispatch(setUserSettingsAction(defaultSettings))
+            setLoading(false);
+            setError(false);
+            return defaultSettings;
+        }).catch((e) => {
+            setLoading(false);
+            setError(true)
+            throw e;
+        })
+    }
 
-    const updateUserSettings = useCallback(async (settings: FirebaseUserSettingsDto): Promise<any> => {
+    const updateUserSettings = async (settings: FirebaseUserSettingsDto): Promise<any> => {
         setLoading(true);
         return userSettingsService.updateUserSettings(settings)
-    }, [])
+        .then(() => {
+            dispatch(setUserSettingsAction(settings))
+            setLoading(false);
+            setError(false);
+        }).catch((e) => {
+            setLoading(false);
+            setError(true)
+            throw e;
+        });
+    }
+
+    const getDefaultUserSettings = (): FirebaseUserSettingsDto => {
+        return { 
+            darkMode: false, 
+            lang: "es", 
+        } as FirebaseUserSettingsDto
+    }
 
     return {
         getUserSettings,
         setUserSettings,
-        update: updateUserSettings,
+        updateUserSettings,
         loading, 
         error
     }

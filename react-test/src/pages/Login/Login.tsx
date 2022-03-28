@@ -39,7 +39,7 @@ function LoginPage() {
   const handleSignUp = (async () => {
     try {
       await formik.validateForm();
-      const signUpResponse = await signUp({ 
+      await signUp({ 
         username: formik.values.username, 
         password: formik.values.password 
       })
