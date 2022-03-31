@@ -20,3 +20,26 @@
 --normal-fontColor: #545454;
 --error-fontColor: var(--app-error-color);
 }
+
+[data-theme='dark'] {
+    --font-color: #0000;
+
+    --app-main-color: #f29102;
+    --app-hight-contract: #0000;
+    --app-content-background-color: #080808;
+    --app-card-background-color: #151308;
+    --app-card-background-hover-color: #433E20;
+    
+    --app-sidenav-background-color: #151308;
+    --app-sidenav-section-hover-color: #2F2C1B;
+    
+    --app-error-color: #dd1f1f;
+    --app-topnav-mobile-background: #ffff;
+    
+    
+    /*fonts*/
+    --big-fontColor: #D4D4D4;
+    --small-fontColor: #777777;
+    --normal-fontColor: #ABABAB;
+    --error-fontColor: var(--app-error-color);
+  }
