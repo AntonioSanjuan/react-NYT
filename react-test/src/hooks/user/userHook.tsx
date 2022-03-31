@@ -10,6 +10,7 @@ export function useUser () {
     const dispatch = useAppDispatch();
     // const navigate = useNavigate();
 
+    const [startUpLoading, setStartUpLoading] = useState(true);
     const [loading, setLoading] = useState<boolean>(false)
     const [error, setError] = useState<boolean>(false)
     const {getUserSettings, setUserSettings} = useUserSettings()
@@ -32,7 +33,7 @@ export function useUser () {
     const signUp = useCallback(async ({username, password}): Promise<UserCredential> => {
         setLoading(true);
         return firebaseSignUp(username, password)
-        .then((resp) => {
+        .then(async (resp) => {
             return setUserSettings().then(() => {
                 setLoading(false);
                 setError(false);
@@ -55,6 +56,9 @@ export function useUser () {
             (auth.currentUser) ?
                 await updateUser(): 
                 dispatch(unsetUserAction())
+            
+                setStartUpLoading(false);
+            
         });
     }
 
@@ -69,6 +73,7 @@ export function useUser () {
         signUp,
         keepUserStateUpdated,
         loading, 
+        startUpLoading,
         error
     }
 }

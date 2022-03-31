@@ -4,11 +4,12 @@ import { useAppSelector } from '../../../../hooks/state/appStateHook';
 import { useUserSettings } from '../../../../hooks/userSettings/userSettingsHook';
 import { FirebaseUserSettingsDto } from '../../../../models/dtos/firebaseStore/firebaseUserSettings.model';
 import { selectUserSettings } from '../../../../state/user/user.selectors';
+import { Loading } from '../../../../components/common/loading/loading';
 
 
 function ProfileSettings() {
     const userSettings = useAppSelector<FirebaseUserSettingsDto | undefined>(selectUserSettings);
-    const { updateUserSettings } = useUserSettings()
+    const { updateUserSettings, loading } = useUserSettings()
 
     const formik: FormikProps<FirebaseUserSettingsDto> = useFormik<FirebaseUserSettingsDto>({
         initialValues: userSettings as FirebaseUserSettingsDto,
@@ -31,6 +32,11 @@ function ProfileSettings() {
 
     return (
         <>
+        { loading &&
+            <>
+                <Loading/>
+            </>
+        }
         <div className='ProfileSettings_MainContainer'>
             <form onChange={formik.handleSubmit}>
                 <div className='ProfileSettings_Settings'>
@@ -45,7 +51,7 @@ function ProfileSettings() {
                                 name="darkMode"         
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
-                                defaultChecked={formik.values.darkMode}
+                                checked={formik.values.darkMode}
                             />
                         </div>
                     </div>

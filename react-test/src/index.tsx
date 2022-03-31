@@ -1,7 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
-import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
@@ -9,12 +8,15 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './state/rootState';
+import { StartUp } from './StartUp';
 
 
 ReactDOM.render(
   <BrowserRouter>
       <Provider store={store}>
-        <App />
+        <StartUp>
+          <App />
+        </StartUp>
       </Provider>
   </BrowserRouter>,
   document.getElementById('root')

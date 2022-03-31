@@ -2,6 +2,7 @@ import { UserCredential } from "firebase/auth"
 
 let loginResponseMock = {} as UserCredential;
 let loadingResponseMock: boolean;
+let startUpLoadingResponseMock: boolean;
 let errorResponseMock: boolean;
 
 const useUser_LoginMock = jest.fn(() => new Promise<UserCredential>((resolve, rejects) => resolve(loginResponseMock as UserCredential)).then(
@@ -19,5 +20,6 @@ export const useUserMock = () => { return {
     signUp: useUser_SignUpMock,
     keepUserStateUpdated: useUser_KeepUserLoggedMock,
     loading: loadingResponseMock,
+    startUpLoading: startUpLoadingResponseMock,
     error: errorResponseMock
 }}
