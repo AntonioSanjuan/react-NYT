@@ -26,6 +26,7 @@
     align-items: center;
   
     min-height: calc(100vh - #{var(--app-topnav-desktop-height)});
+    background-color: var(--app-content-background-color);
 }
   
   /* Smartphones (portrait and landscape) ----------- */
