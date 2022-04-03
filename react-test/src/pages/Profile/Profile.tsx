@@ -12,9 +12,9 @@ function ProfilePage() {
                 <p className="app_font_l">User Settings</p>
                 <ProfileSettings />
                 <p className='app_font_m'> 
-                    {t('welcome')}
                 </p>
             </div>
+            {t('welcome')}
         </div>
     </>
     )
