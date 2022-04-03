@@ -1,4 +1,6 @@
+import { Language } from "../../internal/types/LanguageEnum.model";
+
 export interface FirebaseUserSettingsDto {
-    lang: string;
+    lang: Language;
     darkMode: boolean;
 }

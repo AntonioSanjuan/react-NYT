@@ -1,19 +1,14 @@
 import { useEffect } from "react";
 import { Loading } from "./components/common/loading/loading";
-import { useStartUp } from "./hooks/startUp/startUpHook";
+import { useApp } from "./hooks/app/appHook";
 
 export const StartUp = ({ children }: {children: any}) => {
-    const {theme, loading} = useStartUp()
+    const {loading} = useApp()
 
   useEffect(() => {
       console.log("App initialize")
       // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-    useEffect(() => {
-      document.body.setAttribute('data-theme', theme);
-  }, [theme]);
-
+  
       return loading ? <Loading /> : children;
 }
-
