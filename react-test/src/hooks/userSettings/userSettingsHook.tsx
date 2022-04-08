@@ -4,6 +4,7 @@ import * as userSettingsService from "../../services/firebaseStore/userSettings/
 import { FirebaseUserSettingsDto } from "../../models/dtos/firebaseStore/firebaseUserSettings.model";
 import { DocumentData, DocumentSnapshot } from "firebase/firestore";
 import { setUserSettingsAction } from "../../state/user/user.actions";
+import { Language } from "../../models/internal/types/LanguageEnum.model";
 
 export function useUserSettings () {
     const dispatch = useAppDispatch();
@@ -62,9 +63,17 @@ export function useUserSettings () {
         } as FirebaseUserSettingsDto
     }
 
+    const setAnonymousSettings = (lang: Language, darkMode: boolean) => {
+        dispatch(setUserSettingsAction({
+            darkMode: darkMode, 
+            lang: lang, 
+        } as FirebaseUserSettingsDto))
+    }
+
     return {
         getUserSettings,
         setUserSettings,
+        setAnonymousSettings,
         updateUserSettings,
         loading, 
         error

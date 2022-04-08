@@ -19,7 +19,14 @@ const getBrowserTheme = (): Theme => {
 }
 
 const getBrowserLanguage = (): Language => {
-    return Language.Spanish;
+    const browserLanguage = window.navigator.language;
+    console.log("browserLanguage", browserLanguage)
+    console.log("Object.values(Language).includes(browserLanguage as Language)", Object.values(Language))
+    return (browserLanguage && browserLanguage.length >= 2 && Object.values(Language).includes(browserLanguage as Language)) ?
+        browserLanguage.substring(0, 2) as Language
+    :
+        Language.English
+
 }
 
 const changeTheme = (theme: Theme): void => {
@@ -33,7 +40,7 @@ const changeLanguage = (lang: Language) => {
 
 export function useApp () {
     const dispatch = useAppDispatch();
-    const {getUserSettings} = useUserSettings();
+    const {getUserSettings, setAnonymousSettings} = useUserSettings();
 
     const userSettings = useAppSelector<FirebaseUserSettingsDto | undefined>(selectUserSettings)
 
@@ -42,9 +49,14 @@ export function useApp () {
     const [language, setLanguage] = useState<Language>(getBrowserLanguage());
 
 
-    const initializeUser = async () => {
+    const initializeAthenticateUser = async () => {
         dispatch(setUserAction(auth.currentUser))
         await getUserSettings()
+    }
+
+    const initializeAnonymousUser = () => {
+        dispatch(unsetUserAction())
+        setAnonymousSettings(getBrowserLanguage(), (getBrowserTheme() === Theme.Dark) )
     }
 
     const initializeLanguage = () => {
@@ -78,9 +90,9 @@ export function useApp () {
         auth.onAuthStateChanged(async user => {
             setLoading(true);
             (auth.currentUser) ?
-                await initializeUser()
+                await initializeAthenticateUser()
                 : 
-                dispatch(unsetUserAction())
+                initializeAnonymousUser()
             setLoading(false);
         });
     // eslint-disable-next-line react-hooks/exhaustive-deps

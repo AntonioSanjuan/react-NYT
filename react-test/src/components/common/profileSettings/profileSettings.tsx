@@ -10,9 +10,9 @@ import { Loading } from '../loading/loading';
 function ProfileSettings() {
     const userSettings = useAppSelector<FirebaseUserSettingsDto | undefined>(selectUserSettings);
     const { updateUserSettings, loading } = useUserSettings()
-
     const formik: FormikProps<FirebaseUserSettingsDto> = useFormik<FirebaseUserSettingsDto>({
         initialValues: userSettings as FirebaseUserSettingsDto,
+        // initialValues: userSettings as FirebaseUserSettingsDto ?? {},
         onSubmit: async () => {
           await updateSettings()
         }

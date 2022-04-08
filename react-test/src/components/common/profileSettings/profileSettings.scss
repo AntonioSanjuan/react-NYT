@@ -22,9 +22,13 @@
     place-content: center;
     align-items: center; 
 
-    width: 40%;
+    width: 100%;
+    padding: 0px 10px;
 
-    .form-check, .form-select{
+    .form-check {
         width: fit-content;
+    }
+    .form-select {
+        width: 180px;
     }
 }
