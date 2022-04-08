@@ -1,3 +1,4 @@
+import './Sidenav.scss';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../../hooks/user/userHook';
 import { useSidenavLayer } from '../../hooks/sidenav/sidenavHook';
@@ -6,15 +7,17 @@ import { selectUserIsLogged } from '../../state/user/user.selectors';
 import { ProfileSection } from '../common/profileSection/profileSection';
 import { Search } from '../common/search/search';
 import { Section } from '../common/section/section';
-import './Sidenav.scss'
+import { useAlert } from '../../hooks/alert/alertHook';
+import { DynamicModalTypes } from '../../models/internal/types/DynamicModalEnum.model';
 
 function Sidenav() {
     const isLoggedIn = useAppSelector<boolean>(selectUserIsLogged);
     const navigate = useNavigate();
 
     const { logout } = useUser()
+    const { openAlert } = useAlert();
     const { switchSidenavStatus } = useSidenavLayer()
-    
+
     const handleNavigation = (dest: string) => {
         navigate(dest)
         switchSidenavStatus();
@@ -22,6 +25,11 @@ function Sidenav() {
 
     const handleSearch = (searchInput: string) => {
         handleNavigation('/')
+    }
+
+    const handleOpenSettings = () => {
+        switchSidenavStatus();
+        openAlert(DynamicModalTypes.ProfileSettings)
     }
 
     return (
@@ -34,7 +42,8 @@ function Sidenav() {
                         <div className="sidenav_Search">
                             <p className="app_font_m">Search content</p>
                             <Search 
-                            searchOutput={handleSearch}/>
+                                searchOutput={handleSearch}
+                            />
                         </div>
                         <div className="sidenav_Section" onClick={() => {handleNavigation('/')}}>
                             <Section 
@@ -55,6 +64,12 @@ function Sidenav() {
                         </div>
                     </div>
                 <div className="sidenav_FooterSection">
+                    <div className="sidenav_Section" onClick={() => {handleOpenSettings()}}>
+                        <Section 
+                            sectionName={"Settings"}>
+                            <i className="bi bi-gear-fill"></i>
+                        </Section>
+                    </div>
                     <div className="sidenav_Section" onClick={() => {handleNavigation('/contact')}}>
                         <Section 
                             sectionName={"Contact"}>

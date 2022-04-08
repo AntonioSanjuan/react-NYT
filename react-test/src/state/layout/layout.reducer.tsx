@@ -9,6 +9,23 @@ const layoutReducer = (state: LayoutState = layoutInitialState, action: any ) =>
         ...state,
         isSidenavOpened: !state.isSidenavOpened
       }
+    case LayoutActions.openAlert:
+      return {
+        ...state,
+        alert: {
+          ...state.alert,
+          isAlertOpened: true,
+          alertContent: action.payload
+        }
+      }
+    case LayoutActions.closeAlert:
+      return {
+        ...state,
+        alert: {
+          ...state.alert,
+          isAlertOpened: false,
+          alertContent: undefined
+        }      }
     default: 
       return state;
   }

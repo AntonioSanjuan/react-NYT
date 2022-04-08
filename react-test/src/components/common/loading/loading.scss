@@ -22,11 +22,7 @@
     place-content: center;
     align-items: center;
 
-    width: var(--app-loading-desktop-width);
-    height: var(--app-loading-desktop-height);
     background-color: var(--app-hight-contract);
-    border-radius: 10px;
-    padding: 20px;
 }
 
 .lds-dual-ring {
@@ -53,12 +49,4 @@ animation: lds-dual-ring 1.2s linear infinite;
 100% {
     transform: rotate(360deg);
 }
-}
-
-
-@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
-    .Loading_SubContainer {
-        width: var(--app-loading-mobile-width);
-        height: var(--app-loading-mobile-height);
-    }
 }

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Loading } from "../../components/common/loading/loading";
-import { Newscard } from "../../components/newscard/Newcard";
+import { Newscard } from "../../components/Newscard/Newcard";
 import { useFetchStoredArticles } from '../../hooks/fetchStoredArticles/fetchStoredArticlesHook';
 import "./StoredArticles.scss";
 
@@ -14,7 +14,7 @@ function StoredArticlesPage() {
     <>
     { loading &&
       <>
-      <Loading/>
+      <Loading />
       </>
     }
     <div className="StoredArticles_MainContainer">

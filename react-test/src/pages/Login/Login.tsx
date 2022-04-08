@@ -55,7 +55,7 @@ function LoginPage() {
     <>
     { loading &&
       <>
-      <Loading/>
+      <Loading />
       </>
     }
     <div className="Login_MainContainer">

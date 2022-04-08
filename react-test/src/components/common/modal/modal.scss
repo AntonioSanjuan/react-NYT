@@ -1,0 +1,55 @@
+.Modal_MainContainer {
+    position: absolute;
+    top:0;
+    left: 0;
+    z-index: 9999;
+
+    flex-direction: column;
+    box-sizing: border-box;
+    display: flex;
+    place-content: center;
+    align-items: center;
+
+    height: 100%;
+    width: 100%;
+    backdrop-filter: blur(10px);
+}
+
+.Modal_SubContainer {
+    flex-direction: column;
+    box-sizing: border-box;
+    display: flex;
+    place-content: flex-start;
+    align-items: center;
+
+    width: var(--app-modal-desktop-width);
+    // height: var(--app-modal-desktop-height);
+    background-color: var(--app-hight-contract);
+    border-radius: 10px;
+}
+
+.Modal_HeaderContainer {
+    flex-direction: column;
+    box-sizing: border-box;
+    display: flex;
+    place-content: center;
+    align-items: flex-end;
+}
+
+.Modal_ContentContainer {
+    flex-direction: column;
+    box-sizing: border-box;
+    display: flex;
+    place-content: center;
+    align-items: center;
+
+    padding: 20px;
+}
+
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    .Modal_SubContainer {
+        width: var(--app-modal-mobile-width);
+        // height: var(--app-modal-mobile-height);
+    }
+}

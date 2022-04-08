@@ -1,10 +1,10 @@
 import './profileSettings.scss';
 import { FormikProps, useFormik } from 'formik';
-import { useAppSelector } from '../../../../hooks/state/appStateHook';
-import { useUserSettings } from '../../../../hooks/userSettings/userSettingsHook';
-import { FirebaseUserSettingsDto } from '../../../../models/dtos/firebaseStore/firebaseUserSettings.model';
-import { selectUserSettings } from '../../../../state/user/user.selectors';
-import { Loading } from '../../../../components/common/loading/loading';
+import { useAppSelector } from '../../../hooks/state/appStateHook';
+import { useUserSettings } from '../../../hooks/userSettings/userSettingsHook';
+import { FirebaseUserSettingsDto } from '../../../models/dtos/firebaseStore/firebaseUserSettings.model';
+import { selectUserSettings } from '../../../state/user/user.selectors';
+import { Loading } from '../loading/loading';
 
 
 function ProfileSettings() {
@@ -34,7 +34,7 @@ function ProfileSettings() {
         <>
         { loading &&
             <>
-                <Loading/>
+                <Loading />
             </>
         }
         <div className='ProfileSettings_MainContainer'>

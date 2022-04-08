@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import ProfileSettings from './components/profileSettings/profileSettings';
+import ProfileSettings from '../../components/common/profileSettings/profileSettings';
 import './Profile.scss';
 
 function ProfilePage() {

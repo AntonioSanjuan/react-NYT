@@ -1,5 +1,5 @@
 import { useMostPopularArticles } from "../../hooks/mostPopularArticles/mostPopularArticlesHook";
-import { Newscard } from "../../components/newscard/Newcard"
+import { Newscard } from "../../components/Newscard/Newcard"
 import { useEffect, useState } from "react";
 import { PeriodOfTimes } from "../../models/internal/types/PeriodOfTimeEnum.model";
 import './Home.scss'
@@ -26,7 +26,7 @@ function HomePage() {
       <>
         { loading &&
           <>
-          <Loading/>
+          <Loading />
           </>
         }
         <div className="MostPopularArticles_MainContainer">

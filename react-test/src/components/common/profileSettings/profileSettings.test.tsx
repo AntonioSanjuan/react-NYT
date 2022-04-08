@@ -3,11 +3,11 @@ import { Provider } from 'react-redux';
 import {createMemoryHistory} from 'history'
 import { Router } from 'react-router-dom';
 import ProfileSettings from './profileSettings';
-import { createTestStore } from '../../../../utils/testsUtils/createTestStore.util';
-import { setUserSettingsAction } from '../../../../state/user/user.actions';
-import { FirebaseUserSettingsDto } from '../../../../models/dtos/firebaseStore/firebaseUserSettings.model';
-import * as useUserSettings from './../../../../hooks/userSettings/userSettingsHook'
-import {useUserSettingsMock} from './../../../../hooks/userSettings/userSettingsHook.mock'
+import { createTestStore } from '../../../utils/testsUtils/createTestStore.util';
+import { setUserSettingsAction } from '../../../state/user/user.actions';
+import { FirebaseUserSettingsDto } from '../../../models/dtos/firebaseStore/firebaseUserSettings.model';
+import * as useUserSettings from '../../../hooks/userSettings/userSettingsHook'
+import {useUserSettingsMock} from '../../../hooks/userSettings/userSettingsHook.mock'
 describe('ProfileSettings', () => {
     let profileSettingsStore: any;
     let history: any;
