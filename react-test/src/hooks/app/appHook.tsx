@@ -20,8 +20,6 @@ const getBrowserTheme = (): Theme => {
 
 const getBrowserLanguage = (): Language => {
     const browserLanguage = window.navigator.language;
-    console.log("browserLanguage", browserLanguage)
-    console.log("Object.values(Language).includes(browserLanguage as Language)", Object.values(Language))
     return (browserLanguage && browserLanguage.length >= 2 && Object.values(Language).includes(browserLanguage as Language)) ?
         browserLanguage.substring(0, 2) as Language
     :
@@ -40,7 +38,7 @@ const changeLanguage = (lang: Language) => {
 
 export function useApp () {
     const dispatch = useAppDispatch();
-    const {getUserSettings, setAnonymousSettings} = useUserSettings();
+    const {getUserSettings, setAnonymousUserSettings} = useUserSettings();
 
     const userSettings = useAppSelector<FirebaseUserSettingsDto | undefined>(selectUserSettings)
 
@@ -56,7 +54,7 @@ export function useApp () {
 
     const initializeAnonymousUser = () => {
         dispatch(unsetUserAction())
-        setAnonymousSettings(getBrowserLanguage(), (getBrowserTheme() === Theme.Dark) )
+        setAnonymousUserSettings(getBrowserLanguage(), (getBrowserTheme() === Theme.Dark) )
     }
 
     const initializeLanguage = () => {

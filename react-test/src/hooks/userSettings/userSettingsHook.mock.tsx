@@ -13,13 +13,13 @@ const useUserSettings_SetUserSettings = jest.fn(() => new Promise<any>((resolve,
 const useUserSettings_UpdateUserSettings = jest.fn(() => new Promise<any>((resolve, rejects) => resolve({})).then(
     () => getUserSettingsResponseObj
 ));
-const useUserSettings_SetAnonymousSettings = jest.fn(() => {})
+const useUserSettings_SetAnonymousUserSettings = jest.fn(() => {})
 
 export const useUserSettingsMock = () => { return {
     getUserSettings: useUserSettings_GetUserSettings,
     setUserSettings: useUserSettings_SetUserSettings,
     updateUserSettings: useUserSettings_UpdateUserSettings,
-    setAnonymousSettings: useUserSettings_SetAnonymousSettings,
+    setAnonymousUserSettings: useUserSettings_SetAnonymousUserSettings,
     loading: loadingResponseMock, 
     error: errorResponseMock,
 }}

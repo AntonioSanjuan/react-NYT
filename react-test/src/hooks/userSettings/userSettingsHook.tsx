@@ -5,6 +5,7 @@ import { FirebaseUserSettingsDto } from "../../models/dtos/firebaseStore/firebas
 import { DocumentData, DocumentSnapshot } from "firebase/firestore";
 import { setUserSettingsAction } from "../../state/user/user.actions";
 import { Language } from "../../models/internal/types/LanguageEnum.model";
+import { auth } from "../../utils/firebase.util";
 
 export function useUserSettings () {
     const dispatch = useAppDispatch();
@@ -27,14 +28,13 @@ export function useUserSettings () {
         })
     }
 
-    const setUserSettings = async (): Promise<any> => {
+    const setUserSettings = async (userSettings: FirebaseUserSettingsDto): Promise<any> => {
         setLoading(true);
-        const defaultSettings = getDefaultUserSettings()
-        return userSettingsService.setUserSettings(defaultSettings).then(() => {
-            dispatch(setUserSettingsAction(defaultSettings))
+        return userSettingsService.setUserSettings(userSettings).then(() => {
+            dispatch(setUserSettingsAction(userSettings))
             setLoading(false);
             setError(false);
-            return defaultSettings;
+            return userSettings;
         }).catch((e) => {
             setLoading(false);
             setError(true)
@@ -44,26 +44,25 @@ export function useUserSettings () {
 
     const updateUserSettings = async (settings: FirebaseUserSettingsDto): Promise<any> => {
         setLoading(true);
-        return userSettingsService.updateUserSettings(settings)
-        .then(() => {
+        console.log("auth?", auth.currentUser)
+        if(auth.currentUser) {
+            return userSettingsService.updateUserSettings(settings)
+            .then(() => {
+                dispatch(setUserSettingsAction(settings))
+                setLoading(false);
+                setError(false);
+            }).catch((e) => {
+                setLoading(false);
+                setError(true)
+                throw e;
+            });
+        } else {
             dispatch(setUserSettingsAction(settings))
             setLoading(false);
-            setError(false);
-        }).catch((e) => {
-            setLoading(false);
-            setError(true)
-            throw e;
-        });
+        }
     }
 
-    const getDefaultUserSettings = (): FirebaseUserSettingsDto => {
-        return { 
-            darkMode: false, 
-            lang: "es", 
-        } as FirebaseUserSettingsDto
-    }
-
-    const setAnonymousSettings = (lang: Language, darkMode: boolean) => {
+    const setAnonymousUserSettings = (lang: Language, darkMode: boolean) => {
         dispatch(setUserSettingsAction({
             darkMode: darkMode, 
             lang: lang, 
@@ -73,7 +72,7 @@ export function useUserSettings () {
     return {
         getUserSettings,
         setUserSettings,
-        setAnonymousSettings,
+        setAnonymousUserSettings,
         updateUserSettings,
         loading, 
         error
