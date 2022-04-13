@@ -43,8 +43,8 @@ export function useUserSettings () {
     }
 
     const updateUserSettings = async (settings: FirebaseUserSettingsDto): Promise<any> => {
+        setLoading(true);
         if(auth.currentUser) {
-            setLoading(true);
             return userSettingsService.updateUserSettings(settings)
             .then(() => {
                 dispatch(setUserSettingsAction(settings))
@@ -56,6 +56,7 @@ export function useUserSettings () {
                 throw e;
             });
         } else {
+            setLoading(false);
             dispatch(setUserSettingsAction(settings))
         }
     }
