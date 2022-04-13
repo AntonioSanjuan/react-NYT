@@ -24,7 +24,6 @@ const getBrowserLanguage = (): Language => {
         browserLanguage.substring(0, 2) as Language
     :
         Language.English
-
 }
 
 const changeTheme = (theme: Theme): void => {
@@ -82,7 +81,6 @@ export function useApp () {
     }
 
     useEffect(() => {
-        console.log("app hook initialize")
         initializeLanguage();
         initializeTheme();
         auth.onAuthStateChanged(async user => {

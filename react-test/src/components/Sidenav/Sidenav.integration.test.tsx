@@ -6,13 +6,19 @@ import {createMemoryHistory} from 'history'
 import { Router } from 'react-router-dom';
 import * as sidenavHooks from '../../hooks/sidenav/sidenavHook' 
 import * as userHooks from '../../hooks/user/userHook' 
+import * as alertHooks from '../../hooks/alert/alertHook'
 import { createTestStore } from '../../utils/testsUtils/createTestStore.util';
 import {useUserMock} from "../../hooks/user/userHook.mock"
 import { useSidenavMock } from '../../hooks/sidenav/sidenavHook.mock';
+import { Dispatch } from 'react';
+import { useAlertMock } from '../../hooks/alert/alertHook.mock';
+import { DynamicModalTypes } from '../../models/internal/types/DynamicModalEnum.model';
 
 describe('Sidenav', () => {
     let sidenavStore: any;
     let history: any;
+
+    const useAppDispatchMockResponse = jest.fn((action) => {}) as Dispatch<any>
 
     beforeEach(() => {
         sidenavStore = createTestStore();
@@ -23,6 +29,9 @@ describe('Sidenav', () => {
 
         jest.spyOn(userHooks, 'useUser')
         .mockImplementation(useUserMock)
+
+        jest.spyOn(alertHooks, 'useAlert')
+        .mockImplementation(useAlertMock)
     });
 
     it('should create', () => {
@@ -73,6 +82,25 @@ describe('Sidenav', () => {
 
         expect(history.location.pathname).toEqual('/storedArticles')
         expect(useSidenavMock().switchSidenavStatus).toHaveBeenCalled()
+    });
+
+    it('Sidenav `openSettingsModal` secction should trigger openAlert with DynamicModalTypes.ProfileSettings', () => {
+        render(
+            <Provider store={sidenavStore}>
+                <Router location={history.location} navigator={history}>
+                    <Sidenav/>
+                </Router>
+            </Provider>
+        );
+        
+        expect(useSidenavMock().switchSidenavStatus).not.toHaveBeenCalled()
+
+        fireEvent.click(
+            screen.getByText('Settings')
+        )
+
+        expect(useAlertMock().openAlert).toHaveBeenCalledWith(DynamicModalTypes.ProfileSettings)
+        expect(useSidenavMock().switchSidenavStatus).toHaveBeenCalledWith()
     });
 
     it('Sidenav `navigateToContactAction` secction should trigger navigation to contact', () => {

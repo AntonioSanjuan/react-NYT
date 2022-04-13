@@ -20,7 +20,10 @@ export function useAlert () {
                 break;
         }
 
-        return React.createElement(MyComponent, {})
+        return MyComponent ? 
+            React.createElement(MyComponent, {})
+            :
+            undefined
     }
 
     const openAlert = (alert: DynamicModalTypes) => {

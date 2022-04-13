@@ -25,7 +25,6 @@ function ProfileSettings() {
                 lang: formik.values.lang,
                 darkMode: formik.values.darkMode
             };
-            console.log("setting")
             await updateUserSettings(newSettings);
         }
     }

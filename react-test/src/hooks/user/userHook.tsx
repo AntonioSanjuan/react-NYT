@@ -12,7 +12,6 @@ export function useUser () {
     const {setUserSettings} = useUserSettings()
     
     const userSettings = useAppSelector<FirebaseUserSettingsDto | undefined>(selectUserSettings);
-   
 
     const login = useCallback(async ({username, password}): Promise<UserCredential> => {
         setLoading(true);
@@ -33,12 +32,10 @@ export function useUser () {
         setLoading(true);
         return firebaseSignUp(username, password)
         .then(async (resp) => {
-            return setUserSettings(userSettings as FirebaseUserSettingsDto).then(() => {
-                setLoading(false);
-                setError(false);
-                return resp;
-            })
-
+            await setUserSettings(userSettings as FirebaseUserSettingsDto)
+            setLoading(false);
+            setError(false);
+            return resp;
         }).catch((e) => {
             setLoading(false);
             setError(true)

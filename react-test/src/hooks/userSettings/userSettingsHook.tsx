@@ -30,7 +30,7 @@ export function useUserSettings () {
 
     const setUserSettings = async (userSettings: FirebaseUserSettingsDto): Promise<any> => {
         setLoading(true);
-        return userSettingsService.setUserSettings(userSettings).then(() => {
+        return userSettingsService.setUserSettings(userSettings).then((resp) => {
             dispatch(setUserSettingsAction(userSettings))
             setLoading(false);
             setError(false);
@@ -43,9 +43,8 @@ export function useUserSettings () {
     }
 
     const updateUserSettings = async (settings: FirebaseUserSettingsDto): Promise<any> => {
-        setLoading(true);
-        console.log("auth?", auth.currentUser)
         if(auth.currentUser) {
+            setLoading(true);
             return userSettingsService.updateUserSettings(settings)
             .then(() => {
                 dispatch(setUserSettingsAction(settings))
@@ -58,7 +57,6 @@ export function useUserSettings () {
             });
         } else {
             dispatch(setUserSettingsAction(settings))
-            setLoading(false);
         }
     }
 
