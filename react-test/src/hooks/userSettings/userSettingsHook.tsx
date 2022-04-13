@@ -57,6 +57,7 @@ export function useUserSettings () {
             });
         } else {
             setLoading(false);
+            setError(false);
             dispatch(setUserSettingsAction(settings))
         }
     }
