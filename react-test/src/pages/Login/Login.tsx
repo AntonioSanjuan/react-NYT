@@ -25,16 +25,17 @@ function LoginPage() {
       username: Yup.string().required().email(),
       password: Yup.string().required(),
     }),
-    onSubmit: async (values, { resetForm }) => {
+    onSubmit: (values, { resetForm }) => {
       resetForm();
-      await handleSubmit(values)
+      handleSubmit(values).then(() => {
+        navigate('/')
+      })
     }
   });
 
-  const handleSubmit = (async (form: LoginFormModel) => {
+  const handleSubmit = async (form: LoginFormModel) => {
     await login({ username: form.username, password: form.password })
-    navigate('/')
-  });
+  };
 
   const handleSignUp = (async () => {
     try {
