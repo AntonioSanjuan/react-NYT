@@ -36,15 +36,13 @@ describe('<useApp />', () => {
     });
 
     it('should create', async () => {
-        const {result, waitForNextUpdate} = renderHook(() => useApp(), { wrapper })
-        await waitForNextUpdate();
+        const {result} = renderHook(() => useApp(), { wrapper })
         expect(result).toBeDefined()
     })
 
     it('should set userSettings if redux userSettings change to defined value', async () => {
         const inputUserSettings = { darkMode: true, lang: Language.French} as FirebaseUserSettingsDto;
-        const {result, waitForNextUpdate} = renderHook(() => useApp(), { wrapper })
-        await waitForNextUpdate();
+        const {result} = renderHook(() => useApp(), { wrapper })
 
         await act(async () => {
             useAppStore.dispatch(setUserSettingsAction(inputUserSettings));
@@ -66,8 +64,7 @@ describe('<useApp />', () => {
             })
         })
 
-        const {result, waitForNextUpdate} = renderHook(() => useApp(), { wrapper })
-        await waitForNextUpdate();
+        const {result} = renderHook(() => useApp(), { wrapper })
 
         await act(async () => {
             useAppStore.dispatch(unsetUserAction());

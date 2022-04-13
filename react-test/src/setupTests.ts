@@ -5,6 +5,7 @@
 import '@testing-library/jest-dom';
 
 jest.mock('react-i18next', () => ({
+    ...jest.requireActual('react-i18next'),
     useTranslation: () => {
       return {
         t: (str: any) => str,
@@ -13,4 +14,19 @@ jest.mock('react-i18next', () => ({
         },
       };
     },
-  }));
+}));
+
+jest.mock('firebase/auth', () => ({
+    ...jest.requireActual('react-i18next'),
+    getAuth: () => {
+        return {
+            onAuthStateChanged: jest.fn()
+        }
+    },
+    getFirestore: () => {
+        return {
+
+        }
+    },
+    setPersistence: () => {}
+}))
