@@ -31,6 +31,7 @@
     position: sticky;
     top: calc(var(--app-topnav-desktop-height) + 30px);
     background-color: var(--app-card-background-color);
+    border-radius: 10px;
 }
 
 .CV_SummaryEle {

@@ -76,9 +76,10 @@ function Sidenav() {
                             <i className="bi bi-chat-left-dots-fill"></i>
                         </Section>
                     </div>
-                    <div style={{visibility: isLoggedIn ? 'visible': 'hidden'}} onClick={logout} className="sidenav_Section" id="exitSection">
+                    <div style={{visibility: isLoggedIn ? 'visible': 'hidden'}} onClick={logout} className="sidenav_Section">
                         <Section 
-                            sectionName={"Exit"}>
+                            sectionName={"Exit"}
+                            color={'var(--app-error-color)'}>
                             <i className="bi bi-box-arrow-right"></i>
                         </Section>
                     </div>
