@@ -9,15 +9,15 @@ import { setUserSettingsAction } from '../../state/user/user.actions';
 import { FirebaseUserSettingsDto } from '../../models/dtos/firebaseStore/firebaseUserSettings.model';
 
 jest.mock('react-i18next', () => ({
-    useTranslation: () => {
-      return {
-        t: (str: any) => str,
-        i18n: {
-          changeLanguage: () => new Promise(() => {}),
-        },
-      };
-    },
-  }));
+  useTranslation: () => {
+    return {
+      t: (str: any) => str,
+      i18n: {
+        changeLanguage: () => new Promise(() => {}),
+      },
+    };
+  },
+}));
 
 describe('Profile', () => {
     let profileStore: any;

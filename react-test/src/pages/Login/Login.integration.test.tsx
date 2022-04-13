@@ -68,20 +68,20 @@ describe('Login', () => {
                 </Router>
             </Provider>
         );
-
-        expect(useUserMock().login).not.toHaveBeenCalled()
         const usernameInput = screen.getByPlaceholderText(/name@example.com/i);
+        fireEvent.change(usernameInput, {target: {value: username}})
+
+        const loginButton = screen.getByRole('button', { name: /Login/i });
 
         // eslint-disable-next-line testing-library/no-unnecessary-act
         await act(async () => {
-            fireEvent.change(usernameInput, {target: {value: username}})
+            fireEvent.click(loginButton);
         })
 
-        const loginButton = screen.getByRole('button', { name: /Login/i });
         expect(loginButton).toBeDisabled();
     });
 
-    it('Login on submit should not be possible if username is not in email format', async () => {
+    it('Login signUp should not be possible if username is not in email format', async () => {
         const username = 'myUser'
         const password = 'password'
         render(
@@ -92,7 +92,7 @@ describe('Login', () => {
             </Provider>
         );
 
-        expect(useUserMock().login).not.toHaveBeenCalled()
+        expect(useUserMock().signUp).not.toHaveBeenCalled()
         const usernameInput = screen.getByPlaceholderText(/name@example.com/i);
         const passwordInput = screen.getByPlaceholderText('****');
 
@@ -102,7 +102,38 @@ describe('Login', () => {
             fireEvent.change(passwordInput, {target: {value: password}})
         })
 
-        const loginButton = screen.getByRole('button', { name: /Login/i });
-        expect(loginButton).toBeDisabled();
+        const registerButton = screen.getByRole('button', { name: /Sign Up/i });
+        expect(registerButton).toBeDisabled();
+    });
+
+    
+    it('Login signUp should request to signUp useUser function', async () => {
+        const username = 'myUser@asdas.com'
+        const password = 'password'
+        
+        render(
+            <Provider store={loginStore}>
+                <Router location={history.location} navigator={history}>
+                    <Login/>
+                </Router>
+            </Provider>
+        );
+
+        expect(useUserMock().signUp).not.toHaveBeenCalled()
+        const usernameInput = screen.getByPlaceholderText(/name@example.com/i);
+        const passwordInput = screen.getByPlaceholderText('****');
+        fireEvent.change(usernameInput, {target: {value: username}})
+        fireEvent.change(passwordInput, {target: {value: password}})
+
+        const registerButton = screen.getByRole('button', { name: /Sign Up/i });
+        
+        expect(registerButton).not.toBeDisabled();
+
+        // eslint-disable-next-line testing-library/no-unnecessary-act
+        await act(async () => {
+            fireEvent.click(registerButton);
+        })
+
+        expect(useUserMock().signUp).toHaveBeenCalledWith({username: username, password: password})
     });
 });
