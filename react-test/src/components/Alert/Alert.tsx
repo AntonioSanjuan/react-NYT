@@ -1,23 +1,24 @@
-import { useAlert } from "../../hooks/alert/alertHook";
-import { useAppSelector } from "../../hooks/state/appStateHook";
-import { selectLayoutIsAlertOpened } from "../../state/layout/layout.selectors";
-import Modal from "../common/modal/modal";
+import { useAlert } from '../../hooks/alert/alertHook';
+import { useAppSelector } from '../../hooks/state/appStateHook';
+import { selectLayoutIsAlertOpened } from '../../state/layout/layout.selectors';
+import Modal from '../common/modal/modal';
 
-const Alert = () => {
-    const { getAlertContent } = useAlert();
-    const isModalOpened = useAppSelector<boolean>(selectLayoutIsAlertOpened);
+function Alert() {
+  const { getAlertContent } = useAlert();
+  const isModalOpened = useAppSelector<boolean>(selectLayoutIsAlertOpened);
 
-    return (
-        <>
-            { isModalOpened && 
+  return (
+    <>
+      { isModalOpened
+                && (
                 <Modal
-                showHeader
+                  showHeader
                 >
-                   {getAlertContent()}
+                  {getAlertContent()}
                 </Modal>
-            }
-        </>
-    )
+                )}
+    </>
+  );
 }
 
-export default Alert
+export default Alert;
