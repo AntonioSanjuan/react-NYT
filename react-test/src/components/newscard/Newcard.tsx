@@ -12,7 +12,7 @@ function Newscard({ article, isStored }: {article: MostPopularViewedArticlesResp
   const hasImage = useCallback(() => !!article?.media[0], [article]);
 
   const getImage = useCallback(() => {
-    const mediaMetadataIndex = article?.media[0]['media-metadata'].length - 1;
+    const mediaMetadataIndex = article?.media[0]['media-metadata'].length ?? 0 - 1;
 
     return article?.media[0]['media-metadata'][mediaMetadataIndex].url;
   }, [article]);
