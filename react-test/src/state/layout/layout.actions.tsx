@@ -1,4 +1,4 @@
-import { DynamicModalTypes } from "../../models/internal/types/DynamicModalEnum.model"
+import { DynamicModalTypes } from '../../models/internal/types/DynamicModalEnum.model';
 
 export enum LayoutActions {
     switchSidenavStatus = '@action/switchSidenavStatus',
@@ -7,14 +7,14 @@ export enum LayoutActions {
 }
 
 export const switchSidenavStatusAction = () => ({
-    type: LayoutActions.switchSidenavStatus
-})
+  type: LayoutActions.switchSidenavStatus,
+});
 
 export const openAlertAction = (alert: DynamicModalTypes) => ({
-    type: LayoutActions.openAlert,
-    payload: alert
-})
+  type: LayoutActions.openAlert,
+  payload: alert,
+});
 
 export const closeAlertAction = () => ({
-    type: LayoutActions.closeAlert
-})
+  type: LayoutActions.closeAlert,
+});

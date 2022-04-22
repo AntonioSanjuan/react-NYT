@@ -1,9 +1,9 @@
-import { createStore } from "@reduxjs/toolkit";
-import { combinedReducers } from "../../state/rootState";
+import { createStore } from '@reduxjs/toolkit';
+import { combinedReducers } from '../../state/rootState';
 
 export function createTestStore() {
-    const testStore = createStore(
-        combinedReducers,
-      )
-    return testStore;
-  }
+  const testStore = createStore(
+    combinedReducers,
+  );
+  return testStore;
+}

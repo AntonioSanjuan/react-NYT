@@ -4,7 +4,10 @@ import { useAppDispatch, useAppSelector } from '../state/appStateHook';
 import { selectData } from '../../state/data/data.selectors';
 import { DataState } from '../../state/data/models/appData.state';
 import { PeriodOfTimes } from '../../models/internal/types/PeriodOfTimeEnum.model';
-import { setMostPopularViewedArticlesAction, unsetMostPopularViewedArticlesAction } from '../../state/data/data.actions';
+import {
+  setMostPopularViewedArticlesAction,
+  unsetMostPopularViewedArticlesAction,
+} from '../../state/data/data.actions';
 import { MostPopularViewedArticlesResponseDto } from '../../models/dtos/mostPopularViewedArticles/mostPopularViewedArticlesResponseDto.model';
 
 export function useMostPopularArticles({ periodOfTime }: {periodOfTime: PeriodOfTimes}) {
@@ -25,7 +28,7 @@ export function useMostPopularArticles({ periodOfTime }: {periodOfTime: PeriodOf
           setLoading(false);
           setMostPopularArticles(mostPopularArticles);
           dispatch(setMostPopularViewedArticlesAction(mostPopularArticles, periodOfTime));
-        }).catch((e) => {
+        }).catch(() => {
           setError(true);
           setLoading(false);
           setMostPopularArticles(undefined);

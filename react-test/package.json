@@ -37,7 +37,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test --detectOpenHandles",
     "test:coverage": "react-scripts test --watchAll=false --coverage",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint src/** --quiet",
+    "lint:fix": "eslint src/** --fix"
+
   },
   "browserslist": {
     "production": [

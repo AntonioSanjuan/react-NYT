@@ -1,4 +1,4 @@
-import { MostPopularViewedArticlesResponseContentDto } from "../mostPopularViewedArticles/mostPopularViewedArticlesResponseDto.model";
+import { MostPopularViewedArticlesResponseContentDto } from '../mostPopularViewedArticles/mostPopularViewedArticlesResponseDto.model';
 
 export interface FirebaseStoredArticleInternal {
     firebaseDocId: string;

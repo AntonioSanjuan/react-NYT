@@ -1,6 +1,6 @@
-import { User } from "firebase/auth"
-import { FirebaseStoredArticleInternal } from "../../models/dtos/firebaseStore/firebaseStoredArticle.model"
-import { FirebaseUserSettingsDto } from "../../models/dtos/firebaseStore/firebaseUserSettings.model"
+import { User } from 'firebase/auth';
+import { FirebaseStoredArticleInternal } from '../../models/dtos/firebaseStore/firebaseStoredArticle.model';
+import { FirebaseUserSettingsDto } from '../../models/dtos/firebaseStore/firebaseUserSettings.model';
 
 export enum UserActions {
     setUser = '@action/setUSer',
@@ -10,20 +10,20 @@ export enum UserActions {
 }
 
 export const setUserSettingsAction = (userSettings: FirebaseUserSettingsDto) => ({
-    type: UserActions.setUserSettings,
-    payload: userSettings
-})
+  type: UserActions.setUserSettings,
+  payload: userSettings,
+});
 
 export const setUserStoredArticlesAction = (userStoredArticles: FirebaseStoredArticleInternal[]) => ({
-    type: UserActions.setStoredArticles,
-    payload: userStoredArticles
-})
+  type: UserActions.setStoredArticles,
+  payload: userStoredArticles,
+});
 
 export const setUserAction = (userData: User|null) => ({
-    type: UserActions.setUser,
-    payload: userData
-})
+  type: UserActions.setUser,
+  payload: userData,
+});
 
 export const unsetUserAction = () => ({
-    type: UserActions.unsetUser
-})
+  type: UserActions.unsetUser,
+});

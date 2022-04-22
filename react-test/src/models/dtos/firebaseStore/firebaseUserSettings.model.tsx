@@ -1,4 +1,4 @@
-import { Language } from "../../internal/types/LanguageEnum.model";
+import { Language } from '../../internal/types/LanguageEnum.model';
 
 export interface FirebaseUserSettingsDto {
     lang: Language;

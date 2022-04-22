@@ -5,5 +5,5 @@ export const userInitialState: UserState = {
   isLogged: false,
   userSettings: undefined,
   userData: auth.currentUser,
-  userStoredArticles: undefined
+  userStoredArticles: undefined,
 };

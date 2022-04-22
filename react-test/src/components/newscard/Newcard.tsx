@@ -3,6 +3,7 @@ import { useStoredArticle } from '../../hooks/storedArticle/storedArticleHook';
 import { useAppSelector } from '../../hooks/state/appStateHook';
 import { MostPopularViewedArticlesResponseContentDto } from '../../models/dtos/mostPopularViewedArticles/mostPopularViewedArticlesResponseDto.model';
 import { selectUserIsLogged } from '../../state/user/user.selectors';
+import noImage from '../../assets/images/NoImage.png';
 import './Newcard.scss';
 
 function Newscard({ article, isStored }: {article: MostPopularViewedArticlesResponseContentDto, isStored?: boolean}) {
@@ -12,7 +13,7 @@ function Newscard({ article, isStored }: {article: MostPopularViewedArticlesResp
   const hasImage = useCallback(() => !!article?.media[0], [article]);
 
   const getImage = useCallback(() => {
-    const mediaMetadataIndex = article?.media[0]['media-metadata'].length ?? 0 - 1;
+    const mediaMetadataIndex = (article?.media[0]['media-metadata'].length ?? 0) - 1;
 
     return article?.media[0]['media-metadata'][mediaMetadataIndex].url;
   }, [article]);
@@ -32,7 +33,7 @@ function Newscard({ article, isStored }: {article: MostPopularViewedArticlesResp
             <img
               alt="default resource"
               className="NewsCard_Image"
-              src={require('../../assets/images/NoImage.png')}
+              src={noImage}
             />
           )}
       </div>
@@ -60,15 +61,32 @@ function Newscard({ article, isStored }: {article: MostPopularViewedArticlesResp
       </div>
       <div className="NewsCard_ActionContainer">
         <div className="NewsCard_Leftcontainer">
-          <button type="button" style={{ display: userIsLogged && !isStored ? 'inherit' : 'none' }} className="btn btn-dark" aria-label="add from stored articles" onClick={() => addStoredArticle(article)}>
+          <button
+            type="button"
+            style={{ display: userIsLogged && !isStored ? 'inherit' : 'none' }}
+            className="btn btn-dark"
+            aria-label="add from stored articles"
+            onClick={() => addStoredArticle(article)}
+          >
             <i className="bi bi-save2-fill" />
           </button>
-          <button type="button" className="btn btn-dark" aria-label="go to see full information" onClick={() => window.open(article.url, '_blank')?.focus()}>
+          <button
+            type="button"
+            className="btn btn-dark"
+            aria-label="go to see full information"
+            onClick={() => window.open(article.url, '_blank')?.focus()}
+          >
             <i className="bi bi-globe" />
           </button>
         </div>
         <div className="NewsCard_Rightcontainer">
-          <button type="button" style={{ visibility: isStored ? 'visible' : 'hidden' }} className="btn btn-dark" aria-label="remove from stored articles" onClick={() => deleteStoredArticle(article)}>
+          <button
+            type="button"
+            style={{ visibility: isStored ? 'visible' : 'hidden' }}
+            className="btn btn-dark"
+            aria-label="remove from stored articles"
+            onClick={() => deleteStoredArticle(article)}
+          >
             <i className="bi bi-trash-fill" />
           </button>
         </div>

@@ -1,4 +1,4 @@
-import { AppRootState } from "../rootState";
+import { AppRootState } from '../rootState';
 
 export const selectLayout = (state: AppRootState) => state.layout;
 

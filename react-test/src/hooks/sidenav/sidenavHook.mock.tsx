@@ -1,5 +1,5 @@
-const useSidenavSwitchSidenavStatusMock = jest.fn(() => {})
+const useSidenavSwitchSidenavStatusMock = jest.fn(() => {});
 
-export const useSidenavMock = () => { return {
-    switchSidenavStatus: useSidenavSwitchSidenavStatusMock,
-}}
+export const useSidenavMock = () => ({
+  switchSidenavStatus: useSidenavSwitchSidenavStatusMock,
+});

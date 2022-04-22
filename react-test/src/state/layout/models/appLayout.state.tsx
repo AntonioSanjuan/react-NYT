@@ -1,4 +1,4 @@
-import { DynamicModalTypes } from "../../../models/internal/types/DynamicModalEnum.model"
+import { DynamicModalTypes } from '../../../models/internal/types/DynamicModalEnum.model';
 
 export interface LayoutState {
   isSidenavOpened: boolean,
