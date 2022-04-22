@@ -53,7 +53,8 @@ function CV() {
                 integrating our own widgets in several sell points.
               </p>
               <p className="app_font_s">
-                In addition, a portal application was developed to offered easy management and control of finances to merchants.
+                In addition, a portal application was developed to offered easy
+                management and control of finances to merchants.
               </p>
               <ul>
                 <li>

@@ -19,8 +19,6 @@ jest.mock('firebase/auth', () => ({
   getAuth: () => ({
     onAuthStateChanged: jest.fn(),
   }),
-  getFirestore: () => ({
-
-  }),
-  setPersistence: () => {},
+  getFirestore: () => ({}),
+  setPersistence: () => ({}),
 }));
