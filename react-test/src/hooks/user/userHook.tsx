@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { UserCredential } from '@firebase/auth';
 import { firebaseLogin, firebaseLogout, firebaseSignUp } from '../../services/firebaseAuth/firebaseAuth.service';
 import { useUserSettings } from '../userSettings/userSettingsHook';
@@ -40,7 +41,6 @@ export function useUser() {
         setError(true);
         throw e;
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userSettings]);
 
   const logout = useCallback(async (): Promise<void> => {

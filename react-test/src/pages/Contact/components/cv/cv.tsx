@@ -125,10 +125,42 @@ function CV() {
         </div>
       </div>
       <div className="CV_Summary">
-        <div className="CV_SummaryEle app_font_m" onClick={() => scroolTo(aboutMeRef)}>About Me</div>
-        <div className="CV_SummaryEle app_font_m" onClick={() => scroolTo(workExperienceRef)}>Work Experience</div>
-        <div className="CV_SummaryEle app_font_m" onClick={() => scroolTo(educationRef)}>Education</div>
-        <div className="CV_SummaryEle app_font_m" onClick={() => scroolTo(skillsRef)}>Skills</div>
+        <div
+          role="button"
+          tabIndex={0}
+          className="CV_SummaryEle app_font_m"
+          onClick={() => scroolTo(aboutMeRef)}
+        >
+          About Me
+
+        </div>
+        <div
+          role="button"
+          tabIndex={0}
+          className="CV_SummaryEle app_font_m"
+          onClick={() => scroolTo(workExperienceRef)}
+        >
+          Work Experience
+
+        </div>
+        <div
+          role="button"
+          tabIndex={0}
+          className="CV_SummaryEle app_font_m"
+          onClick={() => scroolTo(educationRef)}
+        >
+          Education
+
+        </div>
+        <div
+          role="button"
+          tabIndex={0}
+          className="CV_SummaryEle app_font_m"
+          onClick={() => scroolTo(skillsRef)}
+        >
+          Skills
+
+        </div>
       </div>
     </div>
   );

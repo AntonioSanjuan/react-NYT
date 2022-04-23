@@ -16,8 +16,6 @@ export function useAnimationByStateTransition(newAnimationState: boolean|undefin
       setStateTransition(true);
     }
     setCurrentAnimationState(newAnimationState);
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentAnimationState, newAnimationState]);
 
   return { stateTransition };

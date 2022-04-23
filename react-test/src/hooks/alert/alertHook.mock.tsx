@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable camelcase */
+/* eslint-disable no-promise-executor-return */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 const getAlertContentResponseObj = {} as any;
 
 const useAlert_GetAlertContent = jest.fn(() => getAlertContentResponseObj);

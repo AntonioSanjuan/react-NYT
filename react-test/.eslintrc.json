@@ -28,6 +28,18 @@
         }
     },
     "rules": {
+        "no-unused-expressions": [
+            "warn",
+            {
+                "allowTernary": true
+            }
+        ],
+        "camelcase": [
+            "warn",
+            {
+                "ignoreImports": true
+            }
+        ],
         "react/require-default-props": [
             "warn", 
             { 

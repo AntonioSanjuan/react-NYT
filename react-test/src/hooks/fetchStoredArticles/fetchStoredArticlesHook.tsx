@@ -28,11 +28,10 @@ export function useFetchStoredArticles() {
         dispatch(setUserStoredArticlesAction(userStoredArticles));
         setLoading(false);
         setError(false);
-      }).catch((e) => {
+      }).catch(() => {
         setLoading(false);
         setError(true);
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, user.userData]);
 
   return {

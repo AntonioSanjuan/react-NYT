@@ -14,11 +14,13 @@ import { TRANSLATIONS_EN } from '../../locales/en';
 import { TRANSLATIONS_ES } from '../../locales/es';
 import { TRANSLATIONS_FR } from '../../locales/fr';
 
-const getBrowserTheme = (): Theme => (window.matchMedia('(prefers-color-scheme: dark)').matches ? Theme.Dark : Theme.Light);
+const getBrowserTheme = (): Theme => (window
+  .matchMedia('(prefers-color-scheme: dark)').matches ? Theme.Dark : Theme.Light);
 
 const getBrowserLanguage = (): Language => {
   const browserLanguage = window.navigator.language;
-  return (browserLanguage && browserLanguage.length >= 2 && Object.values(Language).includes(browserLanguage as Language))
+  return (browserLanguage && browserLanguage.length >= 2
+    && Object.values(Language).includes(browserLanguage as Language))
     ? browserLanguage.substring(0, 2) as Language
     : Language.English;
 };
@@ -78,14 +80,13 @@ export function useApp() {
   useEffect(() => {
     initializeLanguage();
     initializeTheme();
-    auth.onAuthStateChanged(async (user) => {
+    auth.onAuthStateChanged(async () => {
       setLoading(true);
       (auth.currentUser)
         ? await initializeAthenticateUser()
         : initializeAnonymousUser();
       setLoading(false);
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

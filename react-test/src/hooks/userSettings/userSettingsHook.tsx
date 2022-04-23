@@ -30,7 +30,7 @@ export function useUserSettings() {
 
   const setUserSettings = async (userSettings: FirebaseUserSettingsDto): Promise<any> => {
     setLoading(true);
-    return userSettingsService.setUserSettings(userSettings).then((resp) => {
+    return userSettingsService.setUserSettings(userSettings).then(() => {
       dispatch(setUserSettingsAction(userSettings));
       setLoading(false);
       setError(false);
@@ -59,6 +59,7 @@ export function useUserSettings() {
     setLoading(false);
     setError(false);
     dispatch(setUserSettingsAction(settings));
+    return {};
   };
 
   const setAnonymousUserSettings = (lang: Language, darkMode: boolean) => {
