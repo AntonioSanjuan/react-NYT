@@ -2,18 +2,19 @@
   width: 100%
 }
 .NewsCard_MainContainer {
-    flex-direction: column;
-    box-sizing: border-box;
-    display: flex;
-    place-content: flex-start;
-    align-items: center;
+  flex-direction: column;
+  box-sizing: border-box;
+  display: flex;
+  place-content: flex-start;
+  align-items: center;
 
   background-color: var(--app-card-background-color);
   border-radius: 5px;
   padding: 15px;
 
   overflow: hidden;
-  
+  box-shadow: var(--app-low-contrast) 0px 3px 8px;
+
   &:hover {
     background-color: var(--app-card-background-hover-color);
   }
@@ -53,6 +54,7 @@
   width: 100%;
   object-fit: cover;
   object-position: center;
+  aspect-ratio: 1;
 }
 
 .NewsCard_TitleContainer {
@@ -70,7 +72,7 @@
   place-content: space-between;
   align-items: center;
 
-  height: 50px;
+  padding-top: 15px;
   border-top: 1px solid var(--app-low-contrast);
 }
 

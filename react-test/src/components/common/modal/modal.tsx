@@ -9,7 +9,7 @@ function Modal({ children, showHeader }: {children: any, showHeader?: boolean}) 
         {
             showHeader && (
             <div className="Modal_HeaderContainer">
-              <button type="button" className="btn btn-link" onClick={() => closeAlert()}>
+              <button type="button" className="btn btn-link app_font_l" onClick={() => closeAlert()}>
                 <i className="bi bi-x" />
               </button>
             </div>

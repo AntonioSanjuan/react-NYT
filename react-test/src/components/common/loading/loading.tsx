@@ -6,7 +6,7 @@ function Loading() {
     <Modal>
       <div className="Loading_SubContainer">
         <div className="lds-dual-ring" />
-        <p>LOADING</p>
+        <p className="app_font_m">LOADING</p>
       </div>
     </Modal>
   );

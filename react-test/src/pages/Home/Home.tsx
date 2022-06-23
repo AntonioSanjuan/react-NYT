@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useMostPopularArticles } from '../../hooks/mostPopularArticles/mostPopularArticlesHook';
 import { Newscard } from '../../components/Newscard/Newcard';
 import { PeriodOfTimes } from '../../models/internal/types/PeriodOfTimeEnum.model';
@@ -11,16 +11,16 @@ import { Loading } from '../../components/common/loading/loading';
 function HomePage() {
   const { mostPopularViewedArticlesRequestedPage } = useAppSelector<DataState>(selectData);
 
-  const [selectedPeriodOfTime, setSelectedPeriodOfTime] = useState<PeriodOfTimes>(mostPopularViewedArticlesRequestedPage);
+  const [selectedPeriodOfTime, setSelectedPeriodOfTime] = useState<PeriodOfTimes>(
+    mostPopularViewedArticlesRequestedPage,
+  );
   const periodOfTimes = PeriodOfTimes;
 
   const { mostPopularArticles, loading, error } = useMostPopularArticles({ periodOfTime: selectedPeriodOfTime });
-  const setOption = (selectedOption: any) => {
-    setSelectedPeriodOfTime(Number.parseInt(selectedOption.target.value));
-  };
 
-  useEffect(() => {
-  }, [selectedPeriodOfTime]);
+  const setOption = (selectedOption: any) => {
+    setSelectedPeriodOfTime(Number.parseInt(selectedOption.target.value, 10));
+  };
 
   return (
     <>

@@ -29,8 +29,9 @@ function ProfileSection() {
               </div>
               <div className="ProfileSection_DataContainer">
                 <p className="app_font_l">
-                  Hi
-                  <span>{user.userData?.email}</span>
+                  <span>
+                    {user.userData?.email}
+                  </span>
                 </p>
                 <button type="button" className="btn btn-link app_font_s" onClick={() => goToProfile()}>Profile</button>
               </div>

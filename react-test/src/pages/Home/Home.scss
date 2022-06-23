@@ -24,6 +24,7 @@
 
 .MostPopularArticles_Filter {
   max-width: 300px;
+  box-shadow: var(--app-low-contrast) 0px 0px 1px;
 }
 
 .MostPopularArticles_News {
@@ -68,6 +69,7 @@
   
     .MostPopularArticles_News {
       padding: 5%;
+      gap: 15px;
     }
   
     .MostPopularArticles_New {

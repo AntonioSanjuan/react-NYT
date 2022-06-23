@@ -45,14 +45,27 @@ function Sidenav() {
               searchOutput={handleSearch}
             />
           </div>
-          <div className="sidenav_Section" onClick={() => { handleNavigation('/'); }}>
+          <div
+            role="button"
+            tabIndex={0}
+            className="sidenav_Section"
+            onKeyPress={() => { handleNavigation('/'); }}
+            onClick={() => { handleNavigation('/'); }}
+          >
             <Section
               sectionName="Popular Articles"
             >
               <i className="bi bi-book-fill" />
             </Section>
           </div>
-          <div className="sidenav_Section" style={{ display: isLoggedIn ? 'inherit' : 'none' }} onClick={() => { handleNavigation('/storedArticles'); }}>
+          <div
+            role="button"
+            tabIndex={-1}
+            className="sidenav_Section"
+            style={{ display: isLoggedIn ? 'inherit' : 'none' }}
+            onKeyPress={() => { handleNavigation('/storedArticles'); }}
+            onClick={() => { handleNavigation('/storedArticles'); }}
+          >
             <Section
               sectionName="Stored Articles"
             >
@@ -66,21 +79,40 @@ function Sidenav() {
           </div>
         </div>
         <div className="sidenav_FooterSection">
-          <div className="sidenav_Section" onClick={() => { handleOpenSettings(); }}>
+          <div
+            role="button"
+            tabIndex={-2}
+            className="sidenav_Section"
+            onKeyPress={() => { handleOpenSettings(); }}
+            onClick={() => { handleOpenSettings(); }}
+          >
             <Section
               sectionName="Settings"
             >
               <i className="bi bi-gear-fill" />
             </Section>
           </div>
-          <div className="sidenav_Section" onClick={() => { handleNavigation('/contact'); }}>
+          <div
+            role="button"
+            tabIndex={-4}
+            className="sidenav_Section"
+            onKeyPress={() => { handleNavigation('/contact'); }}
+            onClick={() => { handleNavigation('/contact'); }}
+          >
             <Section
               sectionName="Contact"
             >
               <i className="bi bi-chat-left-dots-fill" />
             </Section>
           </div>
-          <div style={{ visibility: isLoggedIn ? 'visible' : 'hidden' }} onClick={logout} className="sidenav_Section">
+          <div
+            role="button"
+            tabIndex={-5}
+            style={{ display: isLoggedIn ? 'inherit' : 'none' }}
+            onKeyPress={logout}
+            onClick={logout}
+            className="sidenav_Section"
+          >
             <Section
               sectionName="Exit"
               color="var(--app-error-color)"

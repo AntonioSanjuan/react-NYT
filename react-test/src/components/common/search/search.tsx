@@ -18,10 +18,19 @@ function Search({ searchOutput } : {searchOutput: any}) {
   return (
     <>
       <div className="searchInput_MainContainer">
-        <button onClick={() => { setSearchOpenedNewStatus(!searchOpened); }} type="button" className="btn btn-dark">
+        <button
+          onClick={() => { setSearchOpenedNewStatus(!searchOpened); }}
+          type="button"
+          className="btn btn-dark"
+        >
           <i className="bi bi-search" />
         </button>
-        <div className="form-group" style={useAnimation.stateTransition ? (searchOpened ? openSearchAnimation : closeSearchAnimation) : undefined}>
+        <div
+          className="form-group"
+          style={useAnimation.stateTransition && searchOpened
+            ? openSearchAnimation
+            : closeSearchAnimation}
+        >
           <form onSubmit={searchInput}>
             <input
               type="text"
@@ -33,7 +42,15 @@ function Search({ searchOutput } : {searchOutput: any}) {
           </form>
         </div>
       </div>
-      <button type="button" onClick={searchInput} style={{ visibility: searchInputValue ? 'visible' : 'hidden' }} className="btn btn-dark searchInput_MobileButton">search</button>
+      <button
+        type="button"
+        onClick={searchInput}
+        style={{ visibility: searchInputValue ? 'visible' : 'hidden' }}
+        className="btn btn-dark searchInput_MobileButton app_font_s"
+      >
+        search
+
+      </button>
     </>
   );
 }

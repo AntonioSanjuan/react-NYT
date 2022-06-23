@@ -11,13 +11,13 @@ function Alert() {
     // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
       { isModalOpened
-                && (
-                <Modal
-                  showHeader
-                >
-                  {getAlertContent()}
-                </Modal>
-                )}
+        && (
+        <Modal
+          showHeader
+        >
+          {getAlertContent()}
+        </Modal>
+        )}
     </>
   );
 }
