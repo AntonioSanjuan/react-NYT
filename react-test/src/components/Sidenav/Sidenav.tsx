@@ -60,7 +60,7 @@ function Sidenav() {
           </div>
           <div
             role="button"
-            tabIndex={-1}
+            tabIndex={0}
             className="sidenav_Section"
             style={{ display: isLoggedIn ? 'inherit' : 'none' }}
             onKeyPress={() => { handleNavigation('/storedArticles'); }}
@@ -81,7 +81,7 @@ function Sidenav() {
         <div className="sidenav_FooterSection">
           <div
             role="button"
-            tabIndex={-2}
+            tabIndex={0}
             className="sidenav_Section"
             onKeyPress={() => { handleOpenSettings(); }}
             onClick={() => { handleOpenSettings(); }}
@@ -94,7 +94,7 @@ function Sidenav() {
           </div>
           <div
             role="button"
-            tabIndex={-4}
+            tabIndex={0}
             className="sidenav_Section"
             onKeyPress={() => { handleNavigation('/contact'); }}
             onClick={() => { handleNavigation('/contact'); }}
@@ -107,7 +107,7 @@ function Sidenav() {
           </div>
           <div
             role="button"
-            tabIndex={-5}
+            tabIndex={0}
             style={{ display: isLoggedIn ? 'inherit' : 'none' }}
             onKeyPress={logout}
             onClick={logout}
