@@ -6,9 +6,12 @@ export enum DataActions {
     unsetMostPopularViewedArticles = '@action/unsetMostPopularViewedArticles'
 }
 
-export const setMostPopularViewedArticlesAction = (mostPopularViewedArticles: MostPopularViewedArticlesResponseDto, mostPopularViewedArticlesRequestedPage: PeriodOfTimes) => ({
+export const setMostPopularViewedArticlesAction = (
+  mostPopularViewedArticles: MostPopularViewedArticlesResponseDto,
+  requestedPeriod: PeriodOfTimes,
+) => ({
   type: DataActions.setMostPopularViewedArticles,
-  payload: { mostPopularViewedArticles, mostPopularViewedArticlesRequestedPage },
+  payload: { mostPopularViewedArticles, requestedPeriod },
 });
 
 export const unsetMostPopularViewedArticlesAction = () => ({

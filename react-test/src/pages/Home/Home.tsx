@@ -4,15 +4,15 @@ import { Newscard } from '../../components/Newscard/Newcard';
 import { PeriodOfTimes } from '../../models/internal/types/PeriodOfTimeEnum.model';
 import './Home.scss';
 import { useAppSelector } from '../../hooks/state/appStateHook';
-import { DataState } from '../../state/data/models/appData.state';
-import { selectData } from '../../state/data/data.selectors';
+import { MostPopularViewedArticlesState } from '../../state/data/models/appData.state';
+import { selectMostPopularViewedArticles } from '../../state/data/data.selectors';
 import { Loading } from '../../components/common/loading/loading';
 
 function HomePage() {
-  const { mostPopularViewedArticlesRequestedPage } = useAppSelector<DataState>(selectData);
+  const { requestedPeriod } = useAppSelector<MostPopularViewedArticlesState>(selectMostPopularViewedArticles);
 
   const [selectedPeriodOfTime, setSelectedPeriodOfTime] = useState<PeriodOfTimes>(
-    mostPopularViewedArticlesRequestedPage,
+    requestedPeriod,
   );
   const periodOfTimes = PeriodOfTimes;
 

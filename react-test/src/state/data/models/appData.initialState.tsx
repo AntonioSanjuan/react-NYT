@@ -2,6 +2,12 @@ import { PeriodOfTimes } from '../../../models/internal/types/PeriodOfTimeEnum.m
 import { DataState } from './appData.state';
 
 export const dataInitialState: DataState = {
-  mostPopularViewedArticles: undefined,
-  mostPopularViewedArticlesRequestedPage: PeriodOfTimes.Daily,
+  mostPopularViewedArticles: {
+    articles: undefined,
+    requestedPeriod: PeriodOfTimes.Daily,
+  },
+  searchArticles: {
+    articles: undefined,
+    search: '',
+  },
 };
