@@ -16,6 +16,7 @@
   
     min-height: var(--app-topnav-desktop-height);
     height: var(--app-topnav-desktop-height);
+    z-index: 3;
 }
   
 .LoginLayout_ContentContainer {

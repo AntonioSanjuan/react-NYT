@@ -23,7 +23,7 @@
     min-height: var(--app-topnav-desktop-height);
     height: var(--app-topnav-desktop-height);
   
-    z-index: 9999;
+    z-index: 3;
 }
   
 .Layout_ContentContainer {
@@ -45,6 +45,7 @@
   /*basic behaviour of slide status*/
   transform: translateX(-100%);
   margin-left: -200px;
+  z-index: 5;
 }
 
 .Layout_Content {
@@ -66,7 +67,7 @@
     // overflow-x: hidden;
   }
   .Layout_HeaderContainer {
-    order: 2;
+    // order: 2;
 
     position: fixed;
     top: auto;
@@ -74,10 +75,11 @@
 
     min-height: var(--app-topnav-mobile-height);
     height: var(--app-topnav-mobile-height);
-
+    // z-index: 7;
   }
   .Layout_ContentContainer {
-    order: 1;
+    // order: 1;
+    height: calc(100vh - var(--app-topnav-mobile-height));
     margin-top: 0;
     margin-bottom: var(--app-topnav-mobile-height);
   }

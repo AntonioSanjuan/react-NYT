@@ -2,6 +2,7 @@ import { userInitialState } from './models/appUser.initialState';
 import { UserState } from './models/appUser.state';
 import { UserActions } from './user.actions';
 
+// eslint-disable-next-line default-param-last
 const userReducer = (state: UserState = userInitialState, action: any) => {
   switch (action.type) {
     case UserActions.setUser:

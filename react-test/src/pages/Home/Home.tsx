@@ -45,7 +45,7 @@ function HomePage() {
           <div className="MostPopularArticles_News">
             {
             error
-              ? <p>No Data</p>
+              ? <p className="app_font_m">No Data</p>
               : mostPopularArticles?.results.map((article) => (
                 <div className="MostPopularArticles_New" key={article.id}>
                   <Newscard article={article} />

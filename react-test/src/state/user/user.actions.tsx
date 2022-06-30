@@ -5,7 +5,7 @@ import { FirebaseUserSettingsDto } from '../../models/dtos/firebaseStore/firebas
 export enum UserActions {
     setUser = '@action/setUSer',
     setUserSettings = '@action/setUserSettings',
-    unsetUser = '@action/unsetUSer',
+    unsetUser = '@action/unsetUser',
     setStoredArticles = '@action/setUserStoredArticles'
 }
 
