@@ -15,3 +15,18 @@ export function getMostPopularViewedArticles(
       return res.json();
     });
 }
+
+export function getSearchedArticles(
+  { search }:
+  { search: string},
+): Promise<any> {
+  const apiURL = `${API_BASE_URL}svc/search/v2/articlesearch.json?fq=${search}&api-key=${NYT_API_key}`;
+
+  return fetch(apiURL, {
+    method: 'GET',
+  })
+    .then((res) => {
+      if (!res.ok) throw new Error('Response NOT VALID');
+      return res.json();
+    });
+}
