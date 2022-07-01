@@ -25,6 +25,7 @@ export function useSearchedArticles({ search }: {search: string}) {
       setLoading(true);
       setError(false);
       // console.log('searchedArticlesResp', search);
+      console.log('search', search);
 
       getSearchedArticles({ search })
         .then((searchedArticlesResp) => {
