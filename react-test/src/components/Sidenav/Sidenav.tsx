@@ -42,7 +42,7 @@ function Sidenav() {
           <div className="sidenav_Search">
             <p className="app_font_m">Search content</p>
             <SearchInput
-              searchOutput={handleSearch}
+              onSearch={handleSearch}
             />
           </div>
           <div

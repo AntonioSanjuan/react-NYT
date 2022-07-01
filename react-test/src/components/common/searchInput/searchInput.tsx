@@ -4,7 +4,7 @@ import { closeSearchAnimation, openSearchAnimation } from '../../../animations/s
 import { useAnimationByStateTransition } from '../../../hooks/animation/animationHook';
 import './searchInput.scss';
 
-function SearchInput({ searchOutput } : {searchOutput: any}) {
+function SearchInput({ onSearch } : {onSearch: any}) {
   const [opened, setOpened] = useState<boolean>(false);
   const [value, setValue] = useState<string|undefined>(undefined);
 
@@ -20,7 +20,7 @@ function SearchInput({ searchOutput } : {searchOutput: any}) {
     e.preventDefault();
     if (value) {
       clear();
-      searchOutput(value);
+      onSearch(value);
       navigate(`/search?filterText=${value}`);
     }
   };

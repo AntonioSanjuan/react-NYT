@@ -37,7 +37,7 @@ function Topnav({ displayLoginButton, hideSidenavButton, hideSearchButton } :
             <i className="bi bi-list" />
           </button>
           <div className="TopNav_Search" style={{ visibility: hideSearchButton ? 'hidden' : 'visible' }}>
-            <SearchInput searchOutput={searchHandler} />
+            <SearchInput onSearch={searchHandler} />
           </div>
         </div>
         <div className="TopNav_Centercontainer">
