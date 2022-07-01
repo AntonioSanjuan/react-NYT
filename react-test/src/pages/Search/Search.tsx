@@ -6,7 +6,7 @@ import { useSearchedArticles } from '../../hooks/searchedArticles/searchedArticl
 function SearchPage() {
   const [searchParams, setSearchPArams] = useSearchParams();
 
-  const [inputSearch, setInputSearch] = useState('');
+  const [inputTextField, setInputTextFilter] = useState('');
   const [selectedSearch, setSelectedSearch] = useState<string>(
     searchParams.get('filterText') || '',
   );
@@ -25,13 +25,13 @@ function SearchPage() {
         type="text"
         className="form-control"
         placeholder="Search..."
-        onChange={(e) => setInputSearch(e.target.value)}
-        value={inputSearch || ''}
+        onChange={(e) => setInputTextFilter(e.target.value)}
+        value={inputTextField || ''}
       />
       <button
         type="button"
         onClick={() => {
-          setSelectedSearch(inputSearch);
+          setSelectedSearch(inputTextField);
         }}
       >
         Search
