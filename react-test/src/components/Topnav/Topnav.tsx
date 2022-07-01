@@ -5,7 +5,7 @@ import { useAppSelector } from '../../hooks/state/appStateHook';
 import { selectUserIsLogged } from '../../state/user/user.selectors';
 import { useSidenavLayer } from '../../hooks/sidenav/sidenavHook';
 import './Topnav.scss';
-import { Search } from '../common/search/search';
+import { SearchInput } from '../common/searchInput/searchInput';
 
 function Topnav({ displayLoginButton, hideSidenavButton, hideSearchButton } :
   {displayLoginButton: boolean | undefined, hideSidenavButton?: boolean, hideSearchButton?: boolean}) {
@@ -37,7 +37,7 @@ function Topnav({ displayLoginButton, hideSidenavButton, hideSearchButton } :
             <i className="bi bi-list" />
           </button>
           <div className="TopNav_Search" style={{ visibility: hideSearchButton ? 'hidden' : 'visible' }}>
-            <Search searchOutput={searchHandler} />
+            <SearchInput searchOutput={searchHandler} />
           </div>
         </div>
         <div className="TopNav_Centercontainer">

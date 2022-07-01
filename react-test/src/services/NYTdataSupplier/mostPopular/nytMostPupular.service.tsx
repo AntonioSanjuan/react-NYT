@@ -1,5 +1,6 @@
 import { API_BASE_URL, NYT_API_key } from '../../../environment/environment';
 import { MostPopularViewedArticlesResponseDto } from '../../../models/dtos/mostPopularViewedArticles/mostPopularViewedArticlesResponseDto.model';
+import { SearchedrticlesResponseDto } from '../../../models/dtos/searchedArticles/searchedArticlesResponseDto.model';
 
 export function getMostPopularViewedArticles(
   { periodOfTime }:
@@ -19,7 +20,7 @@ export function getMostPopularViewedArticles(
 export function getSearchedArticles(
   { search }:
   { search: string},
-): Promise<any> {
+): Promise<SearchedrticlesResponseDto> {
   const apiURL = `${API_BASE_URL}svc/search/v2/articlesearch.json?fq=${search}&api-key=${NYT_API_key}`;
 
   return fetch(apiURL, {

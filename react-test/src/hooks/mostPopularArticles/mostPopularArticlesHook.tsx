@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { getMostPopularViewedArticles } from '../../services/NYTdataSupplier/mostPopular/nytMostPupular.service';
 import { useAppDispatch, useAppSelector } from '../state/appStateHook';
-import { selectData } from '../../state/data/data.selectors';
-import { DataState } from '../../state/data/models/appData.state';
+import { selectMostPopularViewedArticles } from '../../state/data/data.selectors';
+import { MostPopularViewedArticlesState } from '../../state/data/models/appData.state';
 import { PeriodOfTimes } from '../../models/internal/types/PeriodOfTimeEnum.model';
 import {
   setMostPopularViewedArticlesAction,
@@ -12,25 +12,25 @@ import { MostPopularViewedArticlesResponseDto } from '../../models/dtos/mostPopu
 
 export function useMostPopularArticles({ periodOfTime }: {periodOfTime: PeriodOfTimes}) {
   const dispatch = useAppDispatch();
-  const storedData = useAppSelector<DataState>(selectData);
+  const mostPopularArticlesState = useAppSelector<MostPopularViewedArticlesState>(selectMostPopularViewedArticles);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [mostPopularArticles, setMostPopularArticles] = useState<MostPopularViewedArticlesResponseDto|undefined>(
-    storedData.mostPopularViewedArticles.articles,
+    mostPopularArticlesState.articles,
   );
 
   useEffect(() => {
-    if (!storedData.mostPopularViewedArticles.articles
-      || storedData.mostPopularViewedArticles.requestedPeriod !== periodOfTime) {
+    if (!mostPopularArticlesState.articles
+      || mostPopularArticlesState.requestedPeriod !== periodOfTime) {
       setLoading(true);
       setError(false);
 
       getMostPopularViewedArticles({ periodOfTime })
-        .then((mostPopularArticles) => {
+        .then((mostPopularArticlesResp) => {
           setLoading(false);
-          setMostPopularArticles(mostPopularArticles);
-          dispatch(setMostPopularViewedArticlesAction(mostPopularArticles, periodOfTime));
+          setMostPopularArticles(mostPopularArticlesResp);
+          dispatch(setMostPopularViewedArticlesAction(mostPopularArticlesResp, periodOfTime));
         }).catch(() => {
           setError(true);
           setLoading(false);
@@ -38,7 +38,7 @@ export function useMostPopularArticles({ periodOfTime }: {periodOfTime: PeriodOf
           dispatch(unsetMostPopularViewedArticlesAction());
         });
     }
-  }, [dispatch, periodOfTime, storedData]);
+  }, [dispatch, periodOfTime, mostPopularArticlesState]);
 
   return { loading, error, mostPopularArticles };
 }

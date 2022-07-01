@@ -21,6 +21,21 @@ const dataReducer = (state: DataState = dataInitialState, action: any): DataStat
           ...dataInitialState.mostPopularViewedArticles,
         },
       };
+    case DataActions.setSearchedArticles:
+      return {
+        ...state,
+        searchedArticles: {
+          articles: action.payload.searchedArticles,
+          search: action.payload.search,
+        },
+      };
+    case DataActions.unsetSearchedArticles:
+      return {
+        ...state,
+        searchedArticles: {
+          ...dataInitialState.searchedArticles,
+        },
+      };
     default:
       return state;
   }

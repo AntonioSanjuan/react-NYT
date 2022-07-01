@@ -4,6 +4,7 @@ import { Layout } from './layouts/BaseLayout/BaseLayout';
 import { LoginLayout } from './layouts/LoginLayout/LoginLayout';
 import { AuthRouteGuard } from './guards/authGuard/auth.guard';
 import Alert from './components/Alert/Alert';
+import SearchPage from './pages/Search/Search';
 
 const Home = React.lazy(() => import('./pages/Home/Home'));
 const Login = React.lazy(() => import('./pages/Login/Login'));
@@ -48,6 +49,14 @@ function App() {
                   <Profile />
                 </React.Suspense>
               </AuthRouteGuard>
+                )}
+          />
+          <Route
+            path="search"
+            element={(
+              <React.Suspense fallback={<>...</>}>
+                <SearchPage />
+              </React.Suspense>
                 )}
           />
           <Route

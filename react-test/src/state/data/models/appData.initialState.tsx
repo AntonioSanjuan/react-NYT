@@ -6,7 +6,7 @@ export const dataInitialState: DataState = {
     articles: undefined,
     requestedPeriod: PeriodOfTimes.Daily,
   },
-  searchArticles: {
+  searchedArticles: {
     articles: undefined,
     search: '',
   },

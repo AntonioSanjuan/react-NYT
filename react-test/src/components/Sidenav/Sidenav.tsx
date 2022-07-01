@@ -5,7 +5,7 @@ import { useSidenavLayer } from '../../hooks/sidenav/sidenavHook';
 import { useAppSelector } from '../../hooks/state/appStateHook';
 import { selectUserIsLogged } from '../../state/user/user.selectors';
 import { ProfileSection } from '../common/profileSection/profileSection';
-import { Search } from '../common/search/search';
+import { SearchInput } from '../common/searchInput/searchInput';
 import { Section } from '../common/section/section';
 import { useAlert } from '../../hooks/alert/alertHook';
 import { DynamicModalTypes } from '../../models/internal/types/DynamicModalEnum.model';
@@ -23,8 +23,8 @@ function Sidenav() {
     switchSidenavStatus();
   };
 
-  const handleSearch = (searchInput: string) => {
-    handleNavigation('/');
+  const handleSearch = () => {
+    switchSidenavStatus();
   };
 
   const handleOpenSettings = () => {
@@ -41,7 +41,7 @@ function Sidenav() {
           </div>
           <div className="sidenav_Search">
             <p className="app_font_m">Search content</p>
-            <Search
+            <SearchInput
               searchOutput={handleSearch}
             />
           </div>

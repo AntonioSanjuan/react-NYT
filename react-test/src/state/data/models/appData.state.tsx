@@ -1,4 +1,5 @@
 import { MostPopularViewedArticlesResponseDto } from '../../../models/dtos/mostPopularViewedArticles/mostPopularViewedArticlesResponseDto.model';
+import { SearchedrticlesResponseDto } from '../../../models/dtos/searchedArticles/searchedArticlesResponseDto.model';
 import { PeriodOfTimes } from '../../../models/internal/types/PeriodOfTimeEnum.model';
 
 export interface MostPopularViewedArticlesState {
@@ -8,10 +9,10 @@ export interface MostPopularViewedArticlesState {
 
 export interface SearchArticlesState {
   search: string;
-  articles: MostPopularViewedArticlesResponseDto | undefined;
+  articles: SearchedrticlesResponseDto | undefined;
 }
 
 export interface DataState {
   mostPopularViewedArticles: MostPopularViewedArticlesState;
-  searchArticles: SearchArticlesState;
+  searchedArticles: SearchArticlesState;
 }
