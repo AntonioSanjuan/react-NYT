@@ -25,7 +25,7 @@ function Topnav({ displayLoginButton, hideSidenavButton, hideSearchButton } :
     switchSidenavStatus();
   };
 
-  const searchHandler = (searchValue: string) => {
+  const handleSearch = (searchValue: string) => {
     console.log('searching!!!!!...', searchValue);
   };
 
@@ -37,7 +37,7 @@ function Topnav({ displayLoginButton, hideSidenavButton, hideSearchButton } :
             <i className="bi bi-list" />
           </button>
           <div className="TopNav_Search" style={{ visibility: hideSearchButton ? 'hidden' : 'visible' }}>
-            <SearchInput onSearch={searchHandler} />
+            <SearchInput onSearch={handleSearch} />
           </div>
         </div>
         <div className="TopNav_Centercontainer">
