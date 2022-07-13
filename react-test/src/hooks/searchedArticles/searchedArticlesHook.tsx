@@ -9,7 +9,7 @@ import {
 } from '../../state/data/data.actions';
 import { SearchedrticlesResponseDto } from '../../models/dtos/searchedArticles/searchedArticlesResponseDto.model';
 
-export function useSearchedArticles({ search }: {search: string}) {
+export function useSearchedArticles({ search, page }: {search: string, page: number}) {
   const dispatch = useAppDispatch();
   const searchedArticlesState = useAppSelector<SearchArticlesState>(selectSearchedArticles);
 
@@ -20,16 +20,16 @@ export function useSearchedArticles({ search }: {search: string}) {
   );
 
   useEffect(() => {
-    if (!searchedArticlesState.articles
-      || searchedArticlesState.search !== search) {
+    if (
+      search
+      && (!searchedArticlesState.articles
+      || searchedArticlesState.search !== search)) {
       setLoading(true);
       setError(false);
-      // console.log('searchedArticlesResp', search);
-      console.log('search', search);
 
-      getSearchedArticles({ search })
+      getSearchedArticles({ search, page })
         .then((searchedArticlesResp) => {
-          console.log('searchedArticlesResp', search);
+          console.log('🚀 ~ file: searchedArticlesHook.tsx ~ line 32 ~ .then ~ searchedArticlesResp', searchedArticlesResp);
           setLoading(false);
           setSearchedArticles(searchedArticlesResp);
           dispatch(setSearchedArticlesAction(searchedArticlesResp, search));

@@ -1,21 +1,26 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Loading } from '../../components/common/loading/loading';
 import { useSearchedArticles } from '../../hooks/searchedArticles/searchedArticlesHook';
 
 function SearchPage() {
-  const [searchParams, setSearchPArams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [page, setPage] = useState<number>(1);
+  const [selectedSearch, setSelectedSearch] = useState<string>('');
+  const [inputTextField, setInputTextFilter] = useState<string>('');
 
-  const [inputTextField, setInputTextFilter] = useState('');
-  const [selectedSearch, setSelectedSearch] = useState<string>(
-    searchParams.get('filterText') || '',
-  );
+  const { searchedArticles, loading, error } = useSearchedArticles({ search: selectedSearch, page });
 
-  const { searchedArticles, loading, error } = useSearchedArticles({ search: selectedSearch });
+  const handleNewSearch = () => {
+    setSelectedSearch(inputTextField);
+    setSearchParams(inputTextField);
+  };
 
-  // TO-DO
-  // useEffect destroyer with the cleaning of the SearchState of redux,
-  // in this way we are allowed to disabled the search inputs to avoid user confusion
+  useEffect(() => {
+    const newQuerySearch: string = searchParams.get('filterText') || '';
+    setSelectedSearch(newQuerySearch);
+    setInputTextFilter(newQuerySearch);
+  }, [searchParams]);
 
   return (
     <>
@@ -30,9 +35,9 @@ function SearchPage() {
       />
       <button
         type="button"
-        onClick={() => {
-          setSelectedSearch(inputTextField);
-        }}
+        onClick={
+          handleNewSearch
+        }
       >
         Search
       </button>
