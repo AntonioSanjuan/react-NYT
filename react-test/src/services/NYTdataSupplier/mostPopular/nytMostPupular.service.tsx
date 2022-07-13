@@ -21,7 +21,7 @@ export function getSearchedArticles(
   { search, page }:
   { search: string, page: number},
 ): Promise<SearchedrticlesResponseDto> {
-  const apiURL = `${API_BASE_URL}svc/search/v2/articlesearch.json?fq=${search}&page=${page.toString()}&api-key=${NYT_API_key}`;
+  const apiURL = `${API_BASE_URL}svc/search/v2/articlesearch.json?fq=${search}&page=${page}&api-key=${NYT_API_key}`;
 
   return fetch(apiURL, {
     method: 'GET',
